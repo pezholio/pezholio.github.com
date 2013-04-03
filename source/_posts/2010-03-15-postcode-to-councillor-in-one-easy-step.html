@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Postcode to Councillor in One Easy Step!"
+date: 2010-03-15T16:58:34+00:00
+comments: true
+categories:
+ - Open Data
+ - stuff
+---
+
+<div class='post'>
+<p>Finding out who your councillor is isn&#x2019;t always easy is it? Even if you know which council provides your services, wards often have odd sounding names, and council websites don&#x2019;t always have an easy postcode search. With this in mind, and now the <a href="http://neighbourhood.statistics.gov.uk/dissemination/Info.do?page=NDE.htm">Office of National Statistics have released a brand new API</a> and because I&#x2019;ve got a day off looking after <a href="http://twitter.com/dotty_dog">my new puppy</a>, I decided to have a play and see if I could make it easier.</p>
+
+<p>First I <a href="http://neighbourhood.statistics.gov.uk/HTMLDocs/downloads/QuickStart-Guide-V2.0.pdf">trawled through the documentation</a> to find the best API methods for my needs, it turns out that this URL did what I needed:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/SearchSByAByPostcode?LevelTypeId=14Postcode;=**{POSTCODE}**</code></p>
+
+<p>This basically asks the NeSS Data Exchange to return the details of a ward (which in Office of National Statistics language is level type ID 14) which a particular postcode is in. Helpfully, I don&#x2019;t get the SNAC ID straight away (you&#x2019;ll see why I need this later), so I have to get the ONS internal ID, and make another API call:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/GetAreaDetail?AreaId=**{AREA ID}**</code></p>
+
+<p>This gives a whole bunch of extra info about the area, including the SNAC ID (which is called the ExtCode). Once I have that, I can then move across to OpenlyLocal, where I can get the councillor&#x2019;s information:</p>
+
+<p><code>http://openlylocal.com/wards/snac_id/**SNAC ID**.xml</code></p>
+
+<p>Once I&#x2019;ve got this info, I can then display it all, <a href="http://pezholio.co.uk/councillor.php?postcode=ws14+9sq">like so</a>! Obviously if the council isn&#x2019;t on OpenlyLocal, then we can&#x2019;t show their details, but we can say who their council is and what ward they&#x2019;re in, and then, with a bit more jiggery pokery on the OpenlyLocal side, we can direct them to their local authority&#x2019;s website, <a href="http://pezholio.co.uk/councillor.php?postcode=b463ld">like so</a>!</p>
+
+<p><a href="http://pezholio.co.uk/councillor.php">Give it a try yourself</a>, and let me know any feedback in the ol&#x2019; comments below. Obviously, this only shows your district council if you&#x2019;re in a two tier council, but I&#x2019;m working on getting county council info later :)</p>
+
+<p>Oooh, it&#x2019;s worth pointing out that you need a <a href="http://www.opsi.gov.uk/click-use/index.htm">PSI click-use licence </a> to publish the Data Exchange data on your own website, but it&#x2019;s a doddle to apply for and goes live instantly!</p>
+
+<p><strong>Update:</strong> I&#x2019;ve published the code on <a href="http://github.com/pezholio/Who-is-my-councillor">Github</a> in case you want to see how I did it!</p>
+</div>

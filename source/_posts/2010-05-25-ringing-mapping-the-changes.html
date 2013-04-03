@@ -1,0 +1,34 @@
+---
+layout: post
+title: "Ringing Mapping the Changes"
+date: 2010-05-25T10:21:44+01:00
+comments: true
+categories:
+ - Open Data
+---
+
+<div class='post'>
+<p>Some people would say we&#x2019;re mad, but last Saturday, on the hottest day of the year so far, a group of people eschewed barbecues and beer in the garden for a whole day spent working with mapping data and other bits of open data to help people understand the benefits of open data at <a href="http://mapitude.eventbrite.com/">Mapitude</a>, an event aimed at developing understanding and practical collaboration between web developers and mappers.</p>
+
+<p>As well as unconference style talks and discussions, there was also a hack day, where a group of us got together to try and solve practical problems using open data in just one day. The brief we decided on was to map a council ward, add some statistical information to it, and then compare it with a neigbouring ward.</p>
+
+<p>As <a href="http://twitter.com/danslee">Dan Slee</a> from Walsall Council was in attendance, he was keen that we map <a href="http://openlylocal.com/wards/1959-St-Matthews">St. Matthew&#x2019;s ward</a> in Walsall, a deprived ward in the centre of Walsall, and compare it with <a href="http://openlylocal.com/wards/1944-Aldridge-Central-and-South">Aldridge Central and South</a>, a neighbouring, but significantly less deprived area.</p>
+
+<p>Once the brief was written up, I got together with <a href="http://twitter.com/countculture">Chris Taggart</a> of <a href="http://www.openlylocal.com">OpenlyLocal</a> to identify some data sources. The first thing we noticed was that OpenlyLocal didn&#x2019;t have much information about the wards and councillors in Walsall - however, after a bit of trawling Walsall&#x2019;s website and adapting an existing screen scraper, OpenlyLocal had Walsall&#x2019;s data up, this made it easier to get the councillors for each ward.</p>
+
+<p>The next challenge was getting the ward boundaries. Now, a few months ago, this would have been nigh on impossible without either breaking the law, or physically walking the boundaries with a GPS tracker (which, even then, might have been dodgy). However, thanks the the release of <a href="http://www.ordnancesurvey.co.uk/oswebsite/opendata/">Ordnance Survey data</a>, this is now significantly easier.</p>
+
+<p>However, even with Open Data, this was still not an easy task. The boundary data comes in <a href="http://en.wikipedia.org/wiki/Shapefile">ESRI shapefile format</a>, which, on it&#x2019;s own isn&#x2019;t a particularly friendly format for web developers, as it&#x2019;s designed for desktop GIS software, so the first task was converting the Shapefiles to something we can easily work with online.</p>
+
+<p>Thankfully, I&#x2019;d been doing some research a few days prior, and chanced upon <a href="http://kartoweb.itc.nl/RIMapper/">this bit of work</a>, which includes a program that converts ESRI Shapefiles to MySQL tables, a format that is much kinder to web developers. Once that was done, we then had to convert the boundaries themselves from <a href="http://www.ordnancesurvey.co.uk/oswebsite/freefun/geofacts/geo0667.html">Ordnance Survey National Grid References</a> to latitude and longitude, which was easily done by <a href="http://www.jstott.me.uk/phpcoord/">this PHP script</a>.</p>
+
+<p>We now had councillors and shapefiles, and already time was against us. The group who put together the brief had decided on population, families claiming child benefit, average income, and number of unpaid carers. This could be retrieved from the <a href="http://www.neighbourhood.statistics.gov.uk/dissemination/Info.do?page=NDE.htm">National Statistics Data Exchange</a>, but we ran out of time, so ended up simply copying and pasting the data. However, given enough time, we knew we could&#x2019;ve done it.</p>
+
+<p><a href="http://mapitude.pezholio.co.uk/">You can see the results of our work here</a>, and some of the comparisons are quite stark. We would&#x2019;ve liked to add crime data from the <a href="http://policeapi.rkh.co.uk/">Police API</a>, but again, pressures of time meant we didn&#x2019;t get round to it. However, if you look at the crime stats for <a href="http://openlylocal.com/areas/search?postcode=WS1+1PL&amp;submit=Search+by+postcode">St Matthew&#x2019;s</a> and <a href="http://openlylocal.com/areas/search?postcode=WS9+0BG+&amp;submit=Search+by+postcode">Aldridge Central and South</a>, you can see there&#x2019;s quite a difference, with crime in St Matthew&#x2019;s being much much higher. However, this may be slightly skewed by the fact that St Matthew&#x2019;s takes in much of Walsall town centre where there are a lot of pubs and bars, so fights etc at chucking out time are, sadly, common.</p>
+
+<h3>Where next?</h3>
+
+<p>So, was it all worth it? Well, I know Chris Taggart will be adding similar functionality to OpenlyLocal in the future, so in that respect it was useful. It also helped me get a handle on how to work with the OS boundary data, and yesterday, I released the Lichfield portion in a much more usable format on the <a href="http://www.lichfielddc.gov.uk/data">Lichfield District Council open data section</a>.</p>
+
+<p>The most important aspect though, I think, is serving as an example of what can be done with open data. For too long, us open data folks have been banging on about how great open data is and everyone should do it. However, the people who have the power to really open stuff up aren&#x2019;t always convinced, they might be wary, or not understand the issues. With examples like this, we can start with a problem, and in less than a day, have a solution. It&#x2019;s these solutions which open people&#x2019;s eyes to the power of data, and convince them that this is the future.</p>
+</div>

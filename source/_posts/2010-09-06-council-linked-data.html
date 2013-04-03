@@ -1,0 +1,78 @@
+---
+layout: post
+title: "First Steps to Councils Publishing Their Own Linked Data"
+date: 2010-09-06T12:17:33+01:00
+comments: true
+categories:
+ - Council Stuff
+ - Open Data
+---
+
+<div class='post'>
+<p>On Friday, I toddled along to London for a bit of a chat about local spending data, organised by <a href="http://www.legsb.gov.uk/Home.aspx">LeGSB</a>, the local government e-Standards body. In particular we looked at how councils can publish their spending data in a linked data format. It was an interesting day, and much of the work seems to have already been done by folks much cleverer than myself.</p>
+
+<p>However, at the end of the day, Paul Davidson (the Director of Standards at LeGSB) raised an interesting topic. At the moment, much of the <em>describing</em> of councils in the linked data world seems to be done by external bodies, such as <a href="http://statistics.data.gov.uk">The Office for National Statistics</a> and <a href="http://data.ordnancesurvey.co.uk">Ordnance Survey</a>, and often, this isn&#x2019;t always the best fit, with the data referring to geographical regions, rather than councils themselves.</p>
+
+<p>Paul then made the point that really, it should be the councils themselves that describe who they are, rather than some arbitrary body, after all, there is no one better placed to know about the council than the council themselves! We then talked very briefly about the possibility of councils minting their own URIs and publishing some RDF with some information about themselves (such as contact details etc). Other organisations and people can then use these URIs to refer to the councils in their data.</p>
+
+<p>I&#x2019;ve been mulling this over over the weekend, and I fired off an email this morning suggesting that, rather than publishing a page of RDF, people simply add data to their council homepages, either as RDFa or metadata (although I&#x2019;m not sure how you&#x2019;d do the latter!). People could then use their council homepage URLs as URIs (perhaps with #id at the end of the URI, to make the URI for the council different to the one for the page).</p>
+
+<p>With this in mind I&#x2019;ve knocked up a sample dataset for Lichfield District Council using various ontologies from around the linked data web (including FOAF, vCard, Chris Taggart&#x2019;s Openly Local ontology and a bit of the <a href="http://www.epimorphics.com/public/vocabulary/org.html">Organizational (sic) Ontology</a>). I&#x2019;ve also <a href="http://sameas.org/">sameAs</a>ed to the <a href="http://statistics.data.gov.uk/">National Statistics Dataset</a>, <a href="http://openlylocal.com/">Openly Local</a> and <a href="http://openlylocal.com/">DBpedia</a>:</p>
+
+<p>`
+?xml version=&#x201D;1.0&#x201D;?&gt;
+rdf:RDF xmlns:rdf=&#x201D;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#x201D;
+  xmlns:skos=&#x201D;http://www.w3.org/2004/02/skos/core#&#x201D;
+  xmlns:rdfs=&#x201D;http://www.w3.org/2000/01/rdf-schema#&#x201D;
+  xmlns:owl=&#x201D;http://www.w3.org/2002/07/owl#&#x201D;
+  xmlns:foaf=&#x201D;http://xmlns.com/foaf/0.1/&#x201D;
+  xmlns:dct=&#x201D;http://purl.org/dc/terms/&#x201D;
+  xmlns:vcard=&#x201D;http://www.w3.org/2006/vcard/ns#&#x201D;
+  xmlns:administrative-geography=&#x201D;http://statistics.data.gov.uk/def/administrative-geography/&#x201D;
+  xmlns:openlylocal=&#x201D;http://openlylocal.com/info/vocab#&#x201D;
+  xmlns:org=&#x201D;http://www.w3.org/ns/org#&#x201D;&gt;
+rdf:Description rdf:about=&#x201D;http://www.lichfielddc.gov.uk/#id&#x201D;&gt;</p>
+
+<pre><code>    rdfs:labelLichfield District Council/rdfs:label 
+    vcard:organisation-nameLichfield District Council/vcard:organisation-name 
+    rdf:type rdf:resource="http://openlylocal.com/info/vocab#DistrictAuthority"/ 
+    rdf:type rdf:resource="http://www.w3.org/ns/org#FormalOrganization"/ 
+    skos:notation rdf:datatype="http://statistics.data.gov.uk/def/administrative-geography//StandardCode"41UD/skos:notation
+    foaf:mboxmailto:enquiries@lichfielddc.gov.uk/foaf:mbox 
+    foaf:homepage rdf:resource="http://www.lichfielddc.gov.uk"/ 
+    foaf:phone rdf:resource="tel:+44-1543-308999"/ 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://twitter.com/Lichfield_DC" 
+    foaf:accountServiceHomepage rdf:resource="http://twitter.com/"/ 
+    foaf:accountNameLichfield_DC/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://www.facebook.com/lichfielddc" 
+    foaf:accountServiceHomepage rdf:resource="http://www.facebook.com/"/ 
+    foaf:accountNameLichfield District Council/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+vcard:ADR rdf:parseType="Resource" 
+  vcard:ExtaddDistrict Council House, Frog Lane, Lichfield WS13 6YY/vcard:Extadd 
+  vcard:CountryEngland/vcard:Country 
+  vcard:postal-code rdf:resource="http://www.uk-postcodes.com/postcode/WS136YY.rdf" / 
+/vcard:ADR 
+    administrative-geography:coverage rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000014797"/ 
+    owl:sameAs rdf:resource="http://statistics.data.gov.uk/doc/local-authority/41UD"/ 
+    owl:sameAs rdf:resource="http://openlylocal.com/councils/156.rdf"/ 
+    owl:sameAs rdf:resource="http://dbpedia.org/resource/Lichfield_%28district%29"/ 
+</code></pre>
+
+<p>/rdf:Description&gt;
+/rdf:RDF&gt;
+`</p>
+
+<p>It&#x2019;s not perfect, but it&#x2019;s a start, there&#x2019;s 24 triples there and I&#x2019;m sure there could be more. Only problem is, I&#x2019;m not a linked data expert, so I&#x2019;m looking for a bit of feedback both on what I&#x2019;ve done, but also what I could add - For example, I could add the chief executive and leader of the council - but I&#x2019;m not sure how I&#x2019;d do it!</p>
+
+<p>Feedback from non-linked data experts is welcome too - especially those at the coal face of local gov - if there was a step by step guide to doing this, could you do it? (i.e. have you got access to add metadata to your homepage) and, more importantly, would you do it?</p>
+
+<p><strong>UPDATE</strong> I&#x2019;ve now published the final(ish) version at <a href="http://www.lichfielddc.gov.uk/lichfield.rdf">http://www.lichfielddc.gov.uk/lichfield.rdf</a>, with a rel=&#x2019;alternate&#x2019; meta link on the Lichfield homepage. I&#x2019;ve also reused the reference.data.gov.uk ontology to show the councils CEO, leader etc, together with a bit of FOAF for their contact details.</p>
+
+<p>Thanks to Jeni Tennison, Leigh Dodds and Dave Reynolds for helping me to get this far, and hopefully we can encourage more councils to do the same!</p>
+</div>

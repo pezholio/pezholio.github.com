@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Creating Short URLs With PHP and the TinyURL API"
+date: 2009-03-18T09:45:54+00:00
+comments: true
+categories:
+ - Web Development
+---
+
+<div class='post'>
+<p>With the increasing popularity of Twitter and the like, it&#x2019;s becoming more and more important to keep those characters down with URL shortening services such as <a href="http://is.gd">is.gd</a>, <a href="http://cli.gs">cli.gs</a> and of course, the ubiquitous <a href="http://tinyurl.com">TinyURL</a></p>
+
+<p>A lot of these services offer <a href="http://www.pezholio.co.uk/tag/api/">APIs</a>, taking a long url and returning the short url. But a lot of these are returned in JSON or XML format, meaning that you have to use a lot of extra time and processing power parsing the output to get the URL, and if you want to do that a lot of times, that&#x2019;s a whole lot of extra strain on your server.</p>
+
+<p>However, TinyURL has an ace up it&#x2019;s sleeve, a (as far as I can see) undocumented API, which adheres the the principle of KISS design. It just returns your shortened URL in plain text. The format is as follows:</p>
+
+<p><code>http://tinyurl.com/api-create.php?url=**[URL here]**</code></p>
+
+<p>We can then have a nice simple PHP function that takes our URL as the input and returns the TinyURL like so:</p>
+
+<p><code>
+function tinyurl($url) {
+$url = "http://tinyurl.com/api-create.php?url=" . $url;
+$tinyurl = file_get_contents($url);
+return $tinyurl;
+}
+</code></p>
+
+<p>Simple, n&#x2019;est ce pas?</p>
+
+<h2>Update</h2>
+
+<p>I&#x2019;ve just noticed that is.gd offer a <a href="http://is.gd/api_info.php">similarly simple API</a>, so to get an even shorter URL, simply replace the tinyurl element with:</p>
+
+<p><code>http://is.gd/api.php?longurl=</code></p>
+
+<p>Da da! Your very own is.gd link!</p>
+</div>

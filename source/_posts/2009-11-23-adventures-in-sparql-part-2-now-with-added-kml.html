@@ -1,0 +1,69 @@
+---
+layout: post
+title: "Adventures in SPARQL Part 2 - Now With Added KML!"
+date: 2009-11-23T17:18:28+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Open Data
+---
+
+<div class='post'>
+<p>It&#x2019;s been a few weeks now since I posted my <a href="http://www.pezholio.co.uk/2009/10/adventures-in-sparql/">first foray into the Edubase dataset</a>, and since then, there&#x2019;s been a few changes to the dataset, so I thought I&#x2019;d give it another crack - the end result meaning I might have something exciting for everyone to benefit from!</p>
+
+<p>Since the dataset was published, the most significant thing has been the addition of latitude and longitude, as well as eastings and northings. This means that we can now get location-based data much easier, without a lot of mathematical mucking about with conversions.</p>
+
+<p>To get a list of primary schools, addresses, locations and a latitude and longitude point, I can use the following query on the <a href="http://services.data.gov.uk/education/sparql">SPARQL endpoint</a>:</p>
+
+<p>`
+prefix geo: <a href="http://www.w3.org/2003/01/geo/wgs84_pos#">http://www.w3.org/2003/01/geo/wgs84_pos#</a>
+prefix sch-ont: <a href="http://education.data.gov.uk/def/school/">http://education.data.gov.uk/def/school/</a>
+prefix space: <a href="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/">http://data.ordnancesurvey.co.uk/ontology/spatialrelations/</a>
+SELECT ?name ?lat ?long ?reference ?address1 ?address2 ?town ?postcode WHERE {
+?school a sch-ont:School ; &#x201C;.$open.&#x201D;
+sch-ont:districtAdministrative <a href="http://statistics.data.gov.uk/id/local-authority-district/41UD">http://statistics.data.gov.uk/id/local-authority-district/41UD</a> ;
+sch-ont:phaseOfEducation <a href="http://education.data.gov.uk/def/school/PhaseOfEducation_Primary">http://education.data.gov.uk/def/school/PhaseOfEducation_Primary</a> ;
+sch-ont:establishmentName ?name;
+sch-ont:uniqueReferenceNumber ?reference ;
+geo:lat ?lat;
+geo:long ?long;
+  OPTIONAL {
+   ?school sch-ont:address ?address .
+  ?address sch-ont:address1 ?address1 ;</p>
+
+<pre><code>  sch-ont:address2 ?address2 ;
+  sch-ont:town ?town ;
+  sch-ont:postcode ?postcode .
+</code></pre>
+
+<p>  }
+}
+ORDER BY ?name
+`</p>
+
+<p>This gives me <a href="http://services.data.gov.uk/education/sparql?query=prefix+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E%0D%0Aprefix+sch-ont%3A+%3Chttp%3A%2F%2Feducation.data.gov.uk%2Fdef%2Fschool%2F%3E%0D%0Aprefix+space%3A+%3Chttp%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fontology%2Fspatialrelations%2F%3E%0D%0ASELECT+%3Fname+%3Flat+%3Flong+%3Freference+%3Faddress1+%3Faddress2+%3Ftown+%3Fpostcode+WHERE+%7B%0D%0A%3Fschool+a+sch-ont%3ASchool+%3B%0D%0Asch-ont%3AdistrictAdministrative+%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Flocal-authority-district%2F41UD%3E+%3B%0D%0Asch-ont%3AphaseOfEducation+%3Chttp%3A%2F%2Feducation.data.gov.uk%2Fdef%2Fschool%2FPhaseOfEducation_Primary%3E+%3B%0D%0Asch-ont%3AestablishmentName+%3Fname%3B%0D%0Asch-ont%3AuniqueReferenceNumber+%3Freference+%3B%0D%0Ageo%3Alat+%3Flat%3B%0D%0Ageo%3Along+%3Flong%3B%0D%0A++OPTIONAL+%7B%0D%0A+++%3Fschool+sch-ont%3Aaddress+%3Faddress+.%0D%0A++%3Faddress+sch-ont%3Aaddress1+%3Faddress1+%3B%0D%0A++++++sch-ont%3Aaddress2+%3Faddress2+%3B%0D%0A++++++sch-ont%3Atown+%3Ftown+%3B%0D%0A++++++sch-ont%3Apostcode+%3Fpostcode+.%0D%0A++%7D%0D%0A%7D%0D%0AORDER+BY+%3Fname">this result</a>, which I can easily (with a bit of code wizardry), turn into a KML file, which can then be used with Google Maps, Google Earth and Bing.</p>
+
+<p>I&#x2019;ve generated two KML files for Lichfield District, Primary and Secondary, which I&#x2019;ve used on the (still in development) <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/bingmap.php">&#x2018;ubermap&#x2019; on the Lichfield District Council website</a>.</p>
+
+<p>This was quite easy to replicate for everyone, so, because I&#x2019;m a nice fella, I&#x2019;ve put together a <a href="http://www.pezholio.co.uk/edubasekml.php">script that generates KML files for primary and secondary schools in any council area in the country</a>. All that I ask is that you save the files to your server if you use them, so you don&#x2019;t cane my bandwidth!</p>
+
+<h3>Just in case you&#x2019;re interested&#x2026;</h3>
+
+<p>To get the list of councils for the above script, I did another bit of SPARQLing, this time using the <a href="http://services.data.gov.uk/statistics/sparql">Office of National Statistics SPARQL endpoint</a>. The query I used was as follows:</p>
+
+<p>`
+PREFIX rdfs: <a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a>
+SELECT ?authority ?label
+   WHERE {</p>
+
+<pre><code> ?authority
+   a http://statistics.data.gov.uk/def/administrative-geography/LocalAuthority .
+</code></pre>
+
+<p>?authority rdfs:label ?label ;
+   }
+ORDER BY ?label
+`</p>
+
+<p>This returns the authority label, as well as a unique URI.</p>
+</div>

@@ -1,0 +1,31 @@
+---
+layout: post
+title: "An iPhone App in 5 Days?"
+date: 2009-12-22T12:13:55+00:00
+comments: true
+categories:
+ - Council Stuff
+ - iphone
+---
+
+<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2009/12/ratemyplace-290x300.png" alt="Mockup of Ratemyplace app on an iPhone and iPod touch ">iPhones are ace aren&#x2019;t they? Despite <a href="http://www.electronista.com/articles/07/04/30/ballmer.on.iphone/">howls of derision</a> from some camps, in the space of a few years, it&#x2019;s completely turned the mobile world on its head.</p>
+
+<p>I&#x2019;ve wanted to build an iPhone app for <a href="http://www.ratemyplace.org.uk">Ratemyplace</a> - the food safety ratings website I run at the council on behalf of 8 other councils in Staffordshire for a while, but unfortunately just didn&#x2019;t have time to learn Objective-C, the language that iPhone apps are built in - at the same time, I&#x2019;m also aware that not everyone has an iPhone, so have been scouting around for ways to build apps that can be ported to other platforms quickly and easily.</p>
+
+<p>About 6 months ago, I looked at <a href="http://phonegap.com/">Phonegap</a>, which promised to allow me to build apps quickly using only HTML and Javascript. I beavered away for a few weeks, and finally had an app I was (sort of) pleased with. It used native features such as geolocation, and I used <a href="http://code.google.com/p/iphone-universal/">the UiUi Kit CSS library</a> to make the app look as much like a native app as possible. I was all ready to submit it to the app store. Then the 3.0 firmware upgrade came.</p>
+
+<p>My iPhone app was busted - native geolocation no longer worked, and a little hack I&#x2019;d worked out to get a toolbar at the bottom and a navbar at the top was also kaputt. I tried to fix it for a bit, but other priorities took over, and the project went on hold.</p>
+
+<p>Then, a few weeks ago, I came across <a href="http://www.appcelerator.com/">Appcelerator Titanium</a>, a platform that does pretty much everything Phonegap does, but (in my opinion) much better. While Phonegap uses a portion of the iPhone&#x2019;s API called the webview to display webpages as though they were native apps, Titanium goes one better, it compiles your code into a mixture of web views and native Objective-C code. Like Phonegap, it also works with Android, and a promise of more platforms to come.</p>
+
+<p>This means that you can not only take advantage of many more native iPhone features, your app is much less likely to be rejected (as <a href="http://www.readwriteweb.com/archives/why_is_apple_rejecting_phonegap-built_iphone_apps.php">a lot of phonegap apps were</a>) because of the use of what Apple calls &#x2018;private APIs&#x2019;.</p>
+
+<p>I dusted down my old bits of code, bookmarked the <a href="http://www.codestrong.com/timobile/api/">API documentation</a>, and set to work. In the end, as well as doing my other duties, the app took me 5 days (and one beery evening) to complete. You can see a few screenshots below:</p>
+
+<p>[flickr]http://www.flickr.com/photos/13492966@N06/sets/72157622918161445/,460,460[/flickr]</p>
+
+<p>I submitted it to Apple yesterday, and I&#x2019;m not expecting to hear anything for a good few weeks, if not months (Apple&#x2019;s approvals processes to get an app into the app store are <a href="http://theappleblog.com/2008/09/13/why-apples-app-store-approval-process-is-broken/">notoriously strict</a>) but I&#x2019;m reasonably hopeful. I&#x2019;m now looking at porting my code to Android phones, with a view to looking at Blackberry and Nokia devices too.</p>
+
+<p>Looking forward a few years, with the growing adoption by mobile phone browsers of HTML5 and CSS3, I can see that apps are going to become more browser based, and (hopefully), this will lead to standards being adopted across the industry, but, until then, it seems that platforms like Titanium are going to be the best way to get your apps to as many people as quickly as possible.</p>
+</div>

@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Widgetising Local Government Content"
+date: 2009-06-26T08:47:44+01:00
+comments: true
+categories:
+ - Council Stuff
+ - Web Development
+---
+
+<div class='post'>
+<p><img src="http://pezholio.co.uk/wp-content/uploads/2009/06/JohnSmithsExtraCold-150x150.jpg" alt="John Smith's - because it's got a widget (Not that I'd actually drink the stuff)"></p>
+
+<p>With the recent publication of the <a href="http://digitalbritainforum.org.uk/report/">Digital Britain report</a> and Gordon Brown <a href="http://news.bbc.co.uk/1/hi/technology/8096273.stm">calling on Tim Berners-Lee to help open up access to government data</a>, there&#x2019;s been a lot of talk about public organisations opening up data.</p>
+
+<p>Most of this has focused around APIs and linked data (something I&#x2019;m very passionate about already), but there&#x2019;s much simpler ways to get data out there that might be useful to those people who might have a website, know their way a bit round HTML, but aren&#x2019;t willing to get their hands dirty with XML, JSON or RDF.</p>
+
+<p>I&#x2019;m talking of course, about widgets, these are little bits of (often Javascript) code that people can copy and paste into their own websites. These can then be used by local blogs, newspapers or other websites to publish your content in a quick and easy way.</p>
+
+<p>I&#x2019;ve had a go at doing a few widgets, publishing <a href="http://www.ratemyplace.org.uk/linktous.php">food safety inspections</a> and <a href="http://www.lichfielddc.gov.uk/site/scripts/documents_info.php?documentID=1178">planning applications</a> as widgets and I&#x2019;m looking to do more in the future. Fellow blogger and techy Philip John has even turned one of our widgets into a <a href="http://philipjohn.co.uk/ratemyplace-wordpress-widget">Wordpress-compatible widget</a>, which I&#x2019;m proudly sporting on the right here.</p>
+
+<p>Essentially, what you&#x2019;re doing is pulling information from a database (using PHP or whatever server-side technology you fancy) and outputting it as javascript code, wrapping it all in a document.write function. You can also use inline styling to style your widget, making sure you override any potential styles that might be overridden by the user&#x2019;s stylesheet. A quick and dirty example is below:</p>
+
+<p>`
+?php</p>
+
+<p>$query = &#x201C;SELECT * FROM database&#x201D;;</p>
+
+<p>$result = mysql_query($query) or die(mysql_error());</p>
+
+<p>echo &#x201C;document.write(&#x2018;&#x201D;;</p>
+
+<p>echo &#x201D;<h2></h2>\"font-size: 18px; font-weight: bold;\"&gt;Planning Applications for Foo on Bar Council</p>&#x201D;;</div>

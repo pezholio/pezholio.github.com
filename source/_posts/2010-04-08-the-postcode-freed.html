@@ -1,0 +1,30 @@
+---
+layout: post
+title: "The Postcode - Freed!"
+date: 2010-04-08T10:35:27+01:00
+comments: true
+categories:
+ - Open Data
+---
+
+<div class='post'>
+<p>Well, it&#x2019;s finally happened, Ordnance Survey have gone from being the bad guy of the internet, a big, bumbling behemoth, squishing innovation wherever it goes, to being the darling of the internet, throwing out free data wherever it goes (well, sort of).</p>
+
+<p>As well as lots of mapping data being released, it also release Codepoint Open, which matches every postcode up a geographical location, it&#x2019;s what I, along with the <a href="http://www.ernestmarples.com/">oh-so-clever uber trolling project Ernest Marples</a> have been banging on about for ages. Now, finally, developers can get a user&#x2019;s location details based on one thing that almost everyone in the UK is guaranteed to know, their postcode - this can then be used to get all sorts of useful information, like their nearest school, fire station, police station, cafe, tanning salon (or whatever).</p>
+
+<p>As well as matching postcodes to a physical location, CodePoint Open also matches postcodes to local authority information, something which, in the past, I&#x2019;ve used the <a href="http://www.pezholio.co.uk/2010/03/postcode-to-councillor-in-one-easy-step/">NESS Data Exchange for</a>, but I&#x2019;ll probably migrate to this, &#x2018;cos it&#x2019;s easier.</p>
+
+<p>Anyway, although the data has been released and is out there, it&#x2019;s in a whopping 250mb CSV file, so if anyone wants to use it, they need to download a local copy and import it into a database for their own use. I wanted to do this, but thought, instead of everyone doing this, why don&#x2019;t I make it easier for everyone (myself included) and wrap it in a web service?</p>
+
+<p>That is wot I dun - enter <a href="http://www.uk-postcodes.com">UK Postcodes</a>. Initially I built this over the Easter break, in a few snatched moments between eating easter eggs and making sure my <a href="http://twitter.com/dotty_dog">new puppy</a> didn&#x2019;t wee anywhere. On the surface it&#x2019;s very simple, a request like this:</p>
+
+<p><code>http://www.uk-postcodes.com/postcode/WS136YY.xml</code></p>
+
+<p>will give you all the information about WS13 6YY in XML format, including latitude/longitude, easting/northing, a Geo Hash URI, as well as the county council (if applicable), district council and ward the postcode is in. You can also have JSON, CSV and RDF just by changing the extension (Thanks to <a href="http://www.jenitennison.com/blog/">Jeni Tennison</a> for her help with the latter format!).</p>
+
+<p>After posting the results of my fiddling on the <a href="http://groups.google.com/group/uk-government-data-developers">UK government Data Developers mailing list</a> - I got a lot of helpful people suggesting other ways I could interact with the data, so I know have methods for finding the nearest postcodes to a point, as well as reverse geocoding (going from a lat/lng point to a postcode) - there&#x2019;s more information on the <a href="http://www.uk-postcodes.com/api.php">API page</a>.</p>
+
+<p>That&#x2019;s basically it, I&#x2019;m always happy to hear feedback, so if you&#x2019;ve got any suggestions or feedback (good or bad!), please feel free to comment below!</p>
+
+<p>(Oh, and a massive thanks goes out to <a href="http://twitter.com/adrianshort">Adrian Short</a> (actually it was Adrian who created the torrent of the data - proving that file sharing isn&#x2019;t always used for nefarious purposes :cough:#debill:cough:) <a href="http://twitter.com/dracos">Matthew Somerville</a>, who translated all those Eastings and Northings in the original dataset to Latitude and Longitude - you can download his version from the <a href="http://parlvid.mysociety.org:81/os/">MySociety mirror</a>.)</p>
+</div>

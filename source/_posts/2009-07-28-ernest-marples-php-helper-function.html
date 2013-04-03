@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Ernest Marples PHP Helper Function"
+date: 2009-07-28T18:49:15+01:00
+comments: true
+categories:
+ - Open Data
+ - Web Development
+---
+
+<div class='post'>
+<p>Some of you may have seen my <a href="http://www.pezholio.co.uk/2009/07/the-postcode-freed-well-sort-of/">blog post about the Ernest Marples API</a> a few weeks ago, and since then there&#x2019;s been no slapped wrists from the Post Office and a lot of people voicing their support</p>
+
+<p>There&#x2019;s also been a <a href="http://search.cpan.org/dist/WWW-ErnestMarples/">Perl helper library</a> courtesy of <a href="http://hexten.net/">Andy Armstrong</a> and, as Perl looks a little bit like French to me, I thought I&#x2019;d get my hands dirty and build a little PHP function to add to the mix.</p>
+
+<p><a href="http://www.pezholio.co.uk/ernest_test.php">You can check it out and give it a test here</a> - basically all it does is accept a postcode and then returns an array with the original postcode, together with the latitude and longitude. It&#x2019;s pretty simple, but then again, the API is too, so there&#x2019;s no real point adding to it.</p>
+
+<p>Feel free to nick the code, and use it as you see fit. If you are using it in a live project, it&#x2019;s probably a good idea to let the Ernest Marples guys know, so they can keep you up to date with the latest developments - enjoy!</p>
+
+<p><strong>Update:</strong> The wonderful <a href="http://www.noginn.com/">Tom Graham</a> has made a few changes to this script to utilise the cURL library, which is handy if your server doesn&#x2019;t allow fopen to access external URLs. Check it out on <a href="http://gist.github.com/170266">Github</a>.</p>
+</div>

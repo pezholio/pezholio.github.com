@@ -1,0 +1,34 @@
+---
+layout: post
+title: "Barcode Posters - the Second Coming"
+date: 2009-11-09T17:11:11+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Web Development
+ - stuff
+---
+
+<div class='post'>
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt="">With all this talk of data, and online, we can often lose sight of the real, physical world (as a certified iPhone addict, I know I do - there&#x2019;s been a few times I&#x2019;ve almost walked into a lampost due to me paying more attention to my phone than what&#x2019;s going on in front of me!) - digital is all very well, but how do we link this in with real life?</p>
+
+<p><a href="http://twitter.com/adrianshort">Adrian Short</a> (he of <a href="http://www.mashthestate.org.uk/">Mash the State</a> fame) recently blogged about <a href="http://mashthestate.wordpress.com/2009/09/28/guerilla-noticeboarding-the-council-with-barcode-posters/">his barcode posters site</a>, which allows you to change RSS feeds into printable documents with QR barcodes (those thingies above) attached to each article - people with smartphones that can read barcodes (iPhone, Android etc) can then scan the code and link directly to the article. It&#x2019;s almost like hyperlinks for real life.</p>
+
+<p>I&#x2019;ve had this idea on the back burner for a while now, but after tweeting about seeing the first new style Ratemyplace (a website I run which publishes food safety scores online) poster &#x2018;in the wild&#x2019; - I got this reply:</p>
+
+<p>[tweet url=http://twitter.com/tonypiper/status/5561369295]</p>
+
+<p>This made me think - it&#x2019;s a perfect fit for barcode posters - people can see the inspection certificate and scan the barcode to find more information. You can see an example of what I dun <a href="http://www.pezholio.co.uk/certificate.pdf">here</a></p>
+
+<p>Now, I know what you&#x2019;re thinking - &#x2018;but generating images server side is hard! It&#x2019;ll take me ages fiddling around with various libraries and I&#x2019;ll be pulling my hair out with frustration!&#x2019; - Not so - Thanks to the wonderful people at Google, all you need to do to generate a barcode for a given URL is this:</p>
+
+<p><code>http://chart.apis.google.com/chart?chs=125cht;=qrchl;={url-goes-here}</code></p>
+
+<p>You can then stick it in the src attribute of an IMG tag and display it on a page like so:</p>
+
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt=""></p>
+
+<p>(Make sure you encode the URL of the website either on the server or using this <a href="http://www.albionresearch.com/misc/urlencode.php">handy online url encoder</a>.)</p>
+
+<p>Simple innit? There&#x2019;s more explanation of the whys and wherefores of QR barcodes on the <a href="http://www.barcodeposters.com/">Barcode posters website</a>. Now get out there and barcode!</p>
+</div>

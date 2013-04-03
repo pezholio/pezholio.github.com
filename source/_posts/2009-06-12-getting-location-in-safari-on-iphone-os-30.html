@@ -1,0 +1,106 @@
+---
+layout: post
+title: "Getting Location in Safari on iPhone OS 3.0"
+date: 2009-06-12T11:58:19+01:00
+comments: true
+categories:
+ - Web Development
+---
+
+<div class='post'>
+<p>Well, the Apple Worldwide Developer&#x2019;s Conference is over, the announcements have been made, and version 3.0 of the iPhone software is coming out next week.</p>
+
+<p>If (like me) you&#x2019;re a developer, or you&#x2019;ve managed to :ahem: &#x2018;acquire&#x2019; a copy of the version 3.0, you&#x2019;ll notice that there&#x2019;s a lot of cool new things, like search, voice notes, picture messaging (at last!) and copy and paste. One thing that wasn&#x2019;t really trumpeted was the inclusion of a <a href="http://developer.apple.com/safari/library/documentation/AppleApplications/Reference/SafariWebContent/GettingGeographicalLocations/GettingGeographicalLocations.html#//apple_ref/doc/uid/TP40002051-CH5-SW2">Javascript Geolocation API</a>.</p>
+
+<p>This API now means if (like me) you&#x2019;ve not yet got your hands dirty with Objective C, and are quite comfortable with using Javascript and HTML thank you very much, you will now be able to get a user&#x2019;s location using only those two methods in your web apps. Let&#x2019;s take a peek:</p>
+
+<h2>Taking a peek</h2>
+
+<p>The Geolocation API is a <a href="http://dev.w3.org/geo/api/spec-source.html">W3C specification</a>, which means that (in theory) it will be adopted by other browsers eventually (even desktop browsers!), so even if you&#x2019;re not developing for iPhone, you&#x2019;ll be able to use it!</p>
+
+<p>The main crux of this is the Geolocaton object, which accepts a function to return if the call has been sucessful, a function to return if there&#x2019;s been an error, and a few options. If we call the success function &#x2018;showMap&#x2019; and the error function &#x2018;error&#x2019; and ask the browser to try and get the best accuacy, the code will look something like this:</p>
+
+<p><code>navigator.geolocation.getCurrentPosition(showMap, error, {enableHighAccuracy: true});</code></p>
+
+<p>We then need to build our success function, which gets the position and then shows the user&#x2019;s current location using the <a href="http://code.google.com/apis/maps/documentation/staticmaps/">Google static maps API</a> (using jQuery, &#x2018;cos that&#x2019;s how I roll)</p>
+
+<p>`function showMap(position) {</p>
+
+<p>latitude = position.coords.latitude;</p>
+
+<p>longitude = position.coords.longitude;</p>
+
+<p>$(&#x201C;#map&#x201D;).html(&#x201D;<img src="http://maps.google.com/staticmap?center=%22+%20latitude%20+%22,%22+%20longitude%20+%22=16=320x356=mobile=%22+%20latitude%20+%22,%22+%20longitude%20+%22=ABQIAAAAyUvSDBrAO4ePxVHcqp-K5hQ5esWtNpQWehF-Z9NQeJEFHAWuORRop2dJC86rRc7w8ebZJ0ODn4_-bQ=false">&#x201D;)</p>
+
+<p>}`</p>
+
+<p><em>(Obviously you&#x2019;ll need to generate a new API key for your own site, I&#x2019;ve included mine here)</em></p>
+
+<p>The error function is simply a function that shows an error pop up:</p>
+
+<p>`function error() {</p>
+
+<p>alert(&#x201C;Couldn&#x2019;t get location!&#x201D;);</p>
+
+<p>}`</p>
+
+<p>You can do other stuff, such as showing exactly what went wrong, but I&#x2019;ll leave that up to you. It&#x2019;s all in the API anyway.</p>
+
+<p>That&#x2019;s literally it! All you need to do then is wrap the whole lot in a function and then call it onload. You can <a href="http://pezholio.co.uk/geo.html">see an example here</a> (obviously it won&#x2019;t work if you&#x2019;re not using the new iPhone software)</p>
+
+<p>Hope this has been useful, any questions, check out the <a href="http://dev.w3.org/geo/api/spec-source.html">documentation</a>, or ask in the comments!</p>
+
+<h2>A bit more&#x2026;</h2>
+
+<p>Since writing this post I&#x2019;ve noticed that the accuracy wasn&#x2019;t great, I&#x2019;ve now updated the demo to use <em>watchPosition</em> to try and get the most accurate position. It tries 7 times to get a location accuracy of below 100, if not, an error message shows and the best possible location is shown. The script now looks like this:</p>
+
+<p>`</p>
+
+<p>var count = 0</p>
+
+<p>function getCoords() {</p>
+
+<p>var watch = navigator.geolocation.watchPosition(showMap, error)</p>
+
+<p>function showMap(position) {</p>
+
+<pre><code>count ++;  
+
+latitude = position.coords.latitude;  
+
+longitude = position.coords.longitude;  
+
+accuracy = position.coords.accuracy;  
+
+if (accuracy  100) {  
+
+$("#map").html("img src='http://maps.google.com/staticmap?center="+ latitude +","+ longitude +"zoom=14size=320x356maptype=mobilemarkers="+ latitude +","+ longitude +"key=ABQIAAAAyUvSDBrAO4ePxVHcqp-K5hQ5esWtNpQWehF-Z9NQeJEFHAWuORRop2dJC86rRc7w8ebZJ0ODn4_-bQsensor=false' /")  
+
+navigator.geolocation.clearWatch(watch);  
+
+}   
+
+if (count  7) {  
+
+alert("Couldn't get your exact location, this is the best we could do. Sorry!");  
+
+$("#map").html("img src='http://maps.google.com/staticmap?center="+ latitude +","+ longitude +"zoom=14size=320x356maptype=mobilemarkers="+ latitude +","+ longitude +"key=ABQIAAAAyUvSDBrAO4ePxVHcqp-K5hQ5esWtNpQWehF-Z9NQeJEFHAWuORRop2dJC86rRc7w8ebZJ0ODn4_-bQsensor=false' /")  
+
+navigator.geolocation.clearWatch(watch);  
+
+}  
+</code></pre>
+
+<p>}</p>
+
+<p>function error(error) {</p>
+
+<pre><code>alert("Couldn't get location!");  
+
+}  
+</code></pre>
+
+<p>}</p>
+
+<p>`</p>
+</div>

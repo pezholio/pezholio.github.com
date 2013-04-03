@@ -1,0 +1,188 @@
+---
+layout: post
+title: "A Beginner's Guide to SPARQLing Linked Data (Part 1)"
+date: 2011-01-14T14:00:59+00:00
+comments: true
+categories:
+ - Linked Data
+ - Open Data
+---
+
+<div class='post'>
+<p>Regular readers of this blog will have seen that, over the past 12 months or so, I&#x2019;ve been banging on about linked data and SPARQL quite a bit, posting up example queries and the like, but with not much explanation about why I&#x2019;m doing what I&#x2019;m doing.</p>
+
+<p>Thanks to the good folks at Talis and their offer of a <a href="http://www.talis.com/localgov/pr/">free linked data store for spending data</a>, I&#x2019;ve also got a nice little store of my own, and I thought it was high time I went back to basics and passed on what I&#x2019;ve learnt to other people.</p>
+
+<h3>First, a bit of background</h3>
+
+<p>The web, as most of us know it, is a network of <strong>documents</strong>, with each document having an individual URI to show its location on the web. With linked data, the web becomes an network of <strong>things</strong> with each thing having an individual URI to tell us more about it.</p>
+
+<p>When talking about linked data, we talk about UR<strong>I</strong>s, rather than UR<strong>L</strong>s, as URLs refer the the location of a file, whereas URIs are identifiers for things, which could return any format.</p>
+
+<p>An example of a URI is <a href="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service">http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service</a> - when you access this via a web browser, the web browser asks for HTML and a web page giving information about this particular cost centre is returned. If you request this in any other way (say via the command line) and ask for RDF, you will get an <a href="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service.rdf">RDF representation of information about this cost centre</a> (web browsers filter out some of the XML, so it might be worth right clicking and selecting &#x201C;view source&#x201D; to see everything).</p>
+
+<p>As well as identifying things, URIs also represent categories of things (called properties), the previous example therefore is an expenditure category, represented by the URI <a href="http://reference.data.gov.uk/def/payment#expenditureCategory">http://reference.data.gov.uk/def/payment#expenditureCategory</a>. To get all the properties being used for our spending dataset, we can do the following SPARQL query:</p>
+
+<p><code>
+SELECT DISTINCT ?o WHERE {?s a ?o}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=SELECT+DISTINCT+%3Fo+WHERE+%7B%3Fs+a+%3Fo%7D">See the results of this query</a></p>
+
+<h3>SPARQL queries themselves</h3>
+
+<p>SPARQL stands for <strong>S</strong>PARQL <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage and is a similar sort of idea to SQL (which is used in most databases both on and off the web). The main difference is that while SQL generally allows us read and write from and to a database (and therefore not particularly safe to give everyone access), SPARQL is built for public access, so is non-destructive in nature. SPARQL is, of course, still intended for developers and is just as powerful as SQL for querying datasets.</p>
+
+<p>RDF datastores have a SPARQL endpoint, which is basically a fancy name for a place where you can make SPARQL queries. Our SPARQL endpoint is located at <a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql">http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql</a> and we make SPARQL queries by posting a GET request to this URI in the format http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query={SPARQL query goes here}, or by entering our query on a web-based form that posts to our endpoint. The form we will be using is located <a href="http://spending.lichfielddc.gov.uk/sparql">here</a>.</p>
+
+<p>The first thing we do when writing a SPARQL query is define our prefixes. If you look at <a href="http://spending.lichfielddc.gov.uk/date/dec-2010.rdf">a snapshot of the data we&#x2019;ll be querying</a>, you&#x2019;ll see that most of the XML tags are written in the format prefix:type&gt; (RDF can be written in various formats, but I&#x2019;m using XML, which is not necessarily the best format, but that&#x2019;s a discussion for another day!). If you look at the top of the document (you might need to view source in your web browser) you&#x2019;ll see that all the prefixes are defined at the top as XML namespaces (for example &#x2018;xmlns:payment=&#x201D;http://reference.data.gov.uk/def/payment#&#x201D;&#x2019; means that the prefix &#x201C;payment&#x201D; will be shorthand for &#x201C;http://reference.data.gov.uk/def/payment#&#x201D;, so &#x201C;payment:reference&#x201D; actually refers to a URI, in this case &#x201C;http://reference.data.gov.uk/def/payment#reference&#x201D;). We can do this in a similar way in our SPARQL like so:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+</code></p>
+
+<p>There may be other prefixes too, and we do these a line at a time, for example:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+PREFIX xsd: http://www.w3.org/2001/XMLSchema#
+</code></p>
+
+<p>The next thing to do is choose what data we want to return (in a similar way to an SQL SELECT query)</p>
+
+<p><code>
+SELECT ?payment WHERE {
+</code></p>
+
+<p>Here we&#x2019;re asking for one part of the dataset, which will be the URI which represents a particular payment. At this point, it doesn&#x2019;t matter what we call it, as we need to define this in the next bit of our query:</p>
+
+<p><code>
+?payment a payment:Payment .
+</code></p>
+
+<p>Here we&#x2019;re saying &#x201C;You know that thing I asked for in the SELECT part of the statement? That needs to be a http://reference.data.gov.uk/def/payment#Payment&#x201D;.</p>
+
+<p>We could stop here, but we&#x2019;ll end up getting all the data back, which would take a long time, and probably not be very useful, so let&#x2019;s filter this by only asking for payments made to a particular supplier:</p>
+
+<p><code>
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd
+</code></p>
+
+<p>Let&#x2019;s put it all together:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+SELECT ?Payment WHERE {
+  ?Payment a payment:Payment .
+  ?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0A%0D%0ASELECT+%3FPayment+WHERE+%7B%0D%0A++%3FPayment+a+payment%3APayment+.%0D%0A++%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%7D+">See the results of the query</a>.</p>
+
+<p>The query returns a list of URIs, if you copy and paste these into your browser, you&#x2019;ll see a web page about that payment. The list isn&#x2019;t very useful in itself, so let&#x2019;s ask for a bit more data.</p>
+
+<p>We&#x2019;ll first modify the prefixes:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+</code></p>
+
+<p>Then the rest of the query:</p>
+
+<p><code>
+SELECT ?Payment ?label ?date {
+  ?Payment a payment:Payment .
+  ?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+  ?Payment rdfs:label ?label .
+  ?Payment payment:date ?date
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Flabel+%3Fdate+WHERE+%7B%0D%0A++%3FPayment+a+payment%3APayment+.%0D%0A++%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fbiffa-waste-services-ltd%3E+.%0D%0A++%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A++%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%7D+">See the results of this query</a>.</p>
+
+<p>Hopefully you&#x2019;ll be able to see what&#x2019;s going on here, we&#x2019;re now asking for the label of the payment (rdfs:label) and also the date (Payment:date). In this dataset, the date is returned as a URI (i.e. <a href="http://reference.data.gov.uk/id/day/2010-04-26">http://reference.data.gov.uk/id/day/2010-04-26</a>), but we can also return the date&#x2019;s label in text form by adding the following:</p>
+
+<p><code>
+SELECT ?Payment ?label ?date **?datelabel** {
+</code></p>
+
+<p>&#x2026;snip</p>
+
+<p><code>
+?date rdfs:label ?datelabel .
+</code></p>
+
+<p>Here we&#x2019;re saying &#x201C;You know that date I asked for? I also want to see it&#x2019;s label, and I want to call it datelabel&#x201D;. The query now looks like this:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+SELECT ?Payment ?label ?date ?datelabel {
+?Payment a payment:Payment .
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+?Payment rdfs:label ?label .
+?Payment payment:date ?date .
+?date rdfs:label ?datelabel
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Flabel+%3Fdate+%3Fdatelabel+%7B%0D%0A%3FPayment+a+payment%3APayment+.%0D%0A%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%3Fdate+rdfs%3Alabel+%3Fdatelabel+.%0D%0A%7D">See the results of this query</a>.</p>
+
+<p>This is all well and good, but we don&#x2019;t see any actual figures yet, which isn&#x2019;t very useful. Going back to the <a href="http://spending.lichfielddc.gov.uk/date/dec-2010.rdf">snapshot of data</a> I showed earlier, you can see that each payment has one or more expenditureLines, expressed as:</p>
+
+<p><code>
+payment:expenditureLine rdf:resource="http://spending.lichfielddc.gov.uk/spend/9178363"/
+</code></p>
+
+<p>If you look below each Payment, you&#x2019;ll see the expenditureLine(s) for the payment, e.g:</p>
+
+<p><code>
+payment:ExpenditureLine rdf:about="http://spending.lichfielddc.gov.uk/spend/9178363"
+rdfs:labelPayment number 9178363/rdfs:label
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service"/
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/type/supplies-services"/
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/subjective/compost-disposal-costs"/
+payment:payment rdf:resource="http://spending.lichfielddc.gov.uk/invoice/16148"/
+payment:netAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal"1855.88/payment:netAmount
+qb:dataSet rdf:resource="http://spending.lichfielddc.gov.uk/dataset.rdf#2010-12-v1"/
+/payment:ExpenditureLine
+</code></p>
+
+<p>We can get this information in a similar way to how we got the date labels, so if we want to get a net amount for each payment we can add:</p>
+
+<p><code>
+SELECT ?Payment **?line** ?label ?date ?datelabel **?amount** {
+</code></p>
+
+<p>&#x2026;snip</p>
+
+<p><code>
+?line payment:payment ?Payment .
+?line payment:netAmount ?amount
+</code></p>
+
+<p>Here we&#x2019;re now asking for each line that has a payment that is equal to &#x201C;?Payment&#x201D; (i.e. the Payments we&#x2019;ve originally requested) and asking for their net amounts. The query now looks like this:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+SELECT ?Payment ?line ?label ?date ?datelabel ?amount {
+?Payment a payment:Payment .
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+?Payment rdfs:label ?label .
+?Payment payment:date ?date .
+?date rdfs:label ?datelabel .
+?line payment:payment ?Payment .
+?line payment:netAmount ?amount
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Fline+%3Flabel+%3Fdate+%3Fdatelabel+%3Famount+%7B%0D%0A%3FPayment+a+payment%3APayment+.%0D%0A%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%3Fdate+rdfs%3Alabel+%3Fdatelabel+.%0D%0A%3Fline+payment%3Apayment+%3FPayment+.%0D%0A%3Fline+payment%3AnetAmount+%3Famount+.%0D%0A%7D">See the results of this query</a>.</p>
+
+<p>Which seems like a pretty neat place to leave it now. Feel free to have a play with the stuff I&#x2019;ve gone thorough so far, and ask any questions in the comments. I don&#x2019;t claim to have all the answers, and I may have made some incorrect assumptions, so please feel free to put me right too!</p>
+
+<p>Stay tuned for part 2, where I&#x2019;ll cover filters and other cool things.</p>
+</div>

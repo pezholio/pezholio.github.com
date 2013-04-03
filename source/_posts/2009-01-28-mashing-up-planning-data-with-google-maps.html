@@ -1,0 +1,120 @@
+---
+layout: post
+title: "Mashing Up Planning Data With Google Maps"
+date: 2009-01-28T06:20:52+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Web Development
+---
+
+<div class='post'>
+<p><img src="http://www.pezholio.co.uk/planningalerts.png" alt="Planning Alerts Logo">Ask a council webmaster what service gets used on their site the most, and I&#x2019;ll bet you &#xA3;10 they&#x2019;ll say &#x2018;Planning&#x2019;. Planning is one of the most controversial subjects that councils (particularly shire districts) have to deal with and almost all councils publish planning application data on their websites.</p>
+
+<p>The trouble is, a lot of this is locked away in ugly, unusable systems that the public hate using (See the <a href="http://www.lichfielddc.gov.uk/planningapplications">star rating of our planning search pages</a> for proof of this), so any opportunity to make getting access to planning data has to be welcomed.</p>
+
+<p>Step forward the lovely people at <a href="http://www.planningalerts.com/">Planning Alerts</a>. These guys (a lot of whom are on the <a href="http://www.mysociety.org/">MySociety</a> dev team, responsible for the lovely <a href="http://www.mysociety.org/projects/fixmystreet/">FixMyStreet</a> and <a href="http://www.mysociety.org/projects/theyworkforyou/">TheyWorkForYou</a> sites) have built a system that &#x2018;screen scrapes&#x2019; planning data from <a href="http://www.planningalerts.com/about.php#authorities">over 250 authorities</a> and lets residents sign up for alerts on planning applications in their area.</p>
+
+<p>As well as this, they also have an <a href="http://www.planningalerts.com/apihowto.php">API </a>,which returns the data that they&#x2019;ve lovingly screen-scraped using all manner of clever scripts in a format that anyone can use, you can get data from a single location (be it postcode, latitude / longitude, or even easting and northing) as well as data for an entire authority. It&#x2019;s this data that we&#x2019;re going to use for our mashup.</p>
+
+<p>First, <a href="http://www.planningalerts.com/about.php#authorities">check that your council is covered</a>, if it&#x2019;s not, then <a href="http://www.planningalerts.com/getinvolved.php">get in touch with the Planning Alerts team</a> and there might be someone who can help. If you&#x2019;re particularly technical, you might even want to write your own screen-scraper (which is what I did)</p>
+
+<p>Once, you&#x2019;ve got your council, it&#x2019;s time to grab a feed. Feeds are returned in this format:</p>
+
+<p><code>http://www.planningalerts.com/api.php?**call**=authority**authority**=[some name]</code></p>
+
+<p>So, for example, to get the Scottish Borders data, the feed url is</p>
+
+<p><a href="http://www.planningalerts.com/api.php?call=authority&amp;authority=Scottish%20Borders">http://www.planningalerts.com/api.php?call=authorityauthority=Scottish%20Borders</a></p>
+
+<p>Try it with your council and check it works. Make sure you replace any spaces with &#x2018;%20&#x2019;</p>
+
+<p>If the feed is working, now you can use the Google Maps API to display the latest planning applications on your own site.</p>
+
+<p>Firstly, sign up for a <a href="http://code.google.com/apis/maps/">Google Maps API key</a> (if you haven&#x2019;t done already) and put the relevant code in your header:</p>
+
+<p><code>script src="http://maps.google.com/maps?file=apiv=2key=[your api key here]" type="text/javascript"/script</code></p>
+
+<p>Then, it&#x2019;s a simple case of sticking the following code below (in the <head> section as before):</head>
+
+<p>`<script type="text/javascript"></script>
+
+<p>var map;</p>
+
+<p>var geoXml;</p>
+
+<p>geoXml = new GGeoXml("<strong>Put your GeoRSS url here</strong>");</p>
+
+<p>function initialize() {</p>
+
+<p>if (GBrowserIsCompatible()) {</p>
+
+<p>map = new GMap2(document.getElementById("rss_map"));</p>
+
+<p>map.setCenter(new GLatLng(0, 0), 2);</p>
+
+<p>map.addControl(new GLargeMapControl());</p>
+
+<p>map.addControl(new GLargeMapControl());</p>
+
+<p>map.addOverlay(geoXml);        }</p>
+
+<p>}</p>
+
+<p></p>`</p>
+
+<p>And, ta da! There you have it, <a href="http://www.pezholio.co.uk/planningalerts1.php">a Google Map of planning applications for your council</a>, it really is that simple!</p>
+
+<p>This approch  works for all geoRSS feeds, so if you&#x2019;ve got any more feeds in that format, you can do exactly the same thing (I&#x2019;ve done something similar for food safety scores on the <a href="http://www.ratemyplace.org.uk/newsite/map.php">Ratemyplace site</a>)</p>
+
+<p>There is one teeny problem, often it can take a few seconds to load the data, stay tuned for part 2 and I&#x2019;ll let you know how to combat this!</p>
+</p>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-28T06:20:52+00:00"></time>data-updated="true"&gt;Jan 28<span>th</span>, 2009</p>
+      
+
+<span class="categories">
+  
+    <a class="category" href="/blog/categories/council-stuff/">Council Stuff</a>, <a class="category" href="/blog/categories/web-development/">Web Development</a>
+  
+</span>
+
+
+    </footer>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/01/mashing-up-planning-data-with-google-maps/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/01/mashing-up-planning-data-with-google-maps/">Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/2009/02/mashing-up-planning-data-with-google-maps-part-15/" title="Next Post: Mashing up planning data with Google Maps - Part 1.5">Mashing up planning data with Google Maps - Part 1.5 </a>
+      
+    </p>
+  </div>

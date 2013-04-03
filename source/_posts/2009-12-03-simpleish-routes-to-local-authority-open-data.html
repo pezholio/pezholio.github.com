@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Simple(ish) Routes to Local Authority Open Data?"
+date: 2009-12-03T12:17:13+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Open Data
+---
+
+<div class='post'>
+<p>Now, I&#x2019;ve been banging on about local government open data for a while, I&#x2019;ve been <a href="http://www.lichfielddc.gov.uk/data">opening up various datasets on the Lichfield District Council website</a> and generally evangelising to anyone who will listen (and even to some who won&#x2019;t!)</p>
+
+<p>This JFDI publish-everything-you&#x2019;ve-got-in-a-database-just-because-you-can approach is all well and good if you&#x2019;re a techy like me, but there&#x2019;s three wee problemettes:</p>
+
+<ul>
+<li><p><strong>Problemette Number 1</strong> You need to be a techy to get the data out there - a lot of local authorities don&#x2019;t have the technical resource to do this stuff.</p></li>
+<li><p><strong>Problemette Number 2</strong> It&#x2019;s not sustainable - If I die (God fobid!) or leave the authority - whoever takes on my role might not have the skills or time to keep up my work.</p></li>
+<li><p><strong>Problemette Number 3</strong> It&#x2019;s not in a standard format - generally I&#x2019;ve been making up XML schemas, or releasing in RSS or KML - which, while useful for local developers, doesn&#x2019;t work semantically.</p></li>
+</ul>
+
+
+<p>These issues have been playing on my mind for a while now, especially with central government releasing a whole load of data on data.gov.uk - how can we local authorities, a disperate band of organisations spread across the country with different teams and different ways of doing things do something similar, particularly with the problemettes above in mind?</p>
+
+<p>It was with this running through my head that I chanced up on the <a href="http://coi.gov.uk/guidance.php?page=312">Central Office of Information&#x2019;s guidance on structuring information on the web for reusability</a> - this sets out how organisations (particularly central government) can edit their HTML pages using RDFa - a markup that allows information to be &#x2018;sucked out&#x2019; of web pages and re purposed as RDF data. A robot can then &#x2018;see&#x2019; the pages and republish them on a different site (in this case DirectGov).</p>
+
+<p>Although this is still reasonably technical, anyone with a basic knowledge of HTML should be able to edit their templates and expose this data, much easier than slaving over SQL databases and messing around with XML. Suppliers could also easily modify their systems to add RDFa markup (although, suppliers being suppliers, they&#x2019;ll probably charge an exorbitant fee for this work!).</p>
+
+<p>At Lichfield, we&#x2019;re currently putting together a consultation system, and, following the directions on the COI site, I managed to mark up our consultations in RDFa, and, other than a few issues with validation, <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/voiceitdocs.php?id=146">I managed it pretty quickly</a> - <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=http%3A%2F%2Fwww.lichfielddc.gov.uk%2Fsite%2Fcustom_scripts%2Fvoiceitdocs.php%3Fid%3D146&amp;format=pretty-xml&amp;warnings=false&amp;parser=lax&amp;space-preserve=true&amp;submit=Go!&amp;text=">here&#x2019;s the RDF in all it&#x2019;s glory</a> (you&#x2019;ll need to view the source to see it properly).</p>
+
+<p>The COI are asking central government departments to implement this new format for all their consultations from 1 January 2010, which is no mean feat, but I&#x2019;d like to see a similar dictact (albeit one with a slightly more realistic timeline!) come for local authorities too - we did it with IPSV, so why can&#x2019;t we do this too?</p>
+</div>

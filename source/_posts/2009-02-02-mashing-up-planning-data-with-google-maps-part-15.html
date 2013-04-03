@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Mashing Up Planning Data With Google Maps - Part 1.5"
+date: 2009-02-02T05:57:33+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Web Development
+---
+
+<div class='post'>
+<p><img src="http://www.pezholio.co.uk/planningalerts.png" alt="Planning Alerts Logo"> I will, as promised go into some more advanced coding stuff later on this week, but first, here&#x2019;s a few tips for people who might not be javascript savvy, or for whatever reason might not have code access to their sites (thanks to Andrew Beeken (<a href="http://twitter.com/abeeken">@abeeken</a>) from Lincoln City Council)</p>
+
+<p>Simply follow these steps and get a planning application map <a href="http://www.lincoln.gov.uk/Info_page_two_pic_2_det.asp?art_id=12757">like this</a> on your own site!</p>
+
+<h3>Step 1: Get the your RSS feed</h3>
+
+<p>As detailed in Part 1, feeds are returned in this format:</p>
+
+<p><code>http://www.planningalerts.com/api.php?call=authorityauthority;=**[some name]**</code></p>
+
+<p>Just replace [some name] with the name of your council (without the &#x2018;district / borough council&#x2019; suffix) for example:</p>
+
+<p><a href="http://www.planningalerts.com/api.php?call=authority&amp;authority=Tamworth">http://www.planningalerts.com/api.php?call=authority=Tamworth</a></p>
+
+<p>Once you&#x2019;ve got an address, test it out in your browser and move on</p>
+
+<h3>Step 2: Get your code</h3>
+
+<p>Next we need to get some code, first, with the RSS feed link copied to your clipbboard, go to the <a href="http://maps.google.co.uk">Google Maps Website</a>, paste the feed link into the search box
+and click the &#x2018;Search Maps&#x2019; button. The feed will show up in the map as below:</p>
+
+<p><img src="http://pezholio.co.uk/images/maps1.gif" alt="Screenshot of Google Maps after feed link has been entered"></p>
+
+<p>Once that&#x2019;s done, click on the &#x2018;link&#x2019; link on the right hand side of the screen and a window will appear. Select all the code in the second box (marked &#x2018;Paste HTML to embed in website&#x2019;)</p>
+
+<p><img src="http://pezholio.co.uk/images/maps2.gif" alt="Screenshot of code box to select"></p>
+
+<p>If you want to change the size of the map first, you can click on &#x2018;Customize and preview embedded map&#x2019; and follow the onscreen prompts</p>
+
+<h3>Step 3: Add the code to your site!</h3>
+
+<p>Well, pretty self explanatory really! Armed with the code, go into your CMS and add the code!</p>
+
+<p>Any questions, comments, suggestions etc, please let me know.</p>
+</div>

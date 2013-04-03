@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki"
+date: 2012-09-08T09:05:00+01:00
+comments: true
+---
+
+<div class='post'>
+<p><a href="https://dev.twitter.com/docs/api/1.1/overview">As announced this week</a>, Twitter are continuing their war on developers by killing off RSS feeds.</p>
+
+<p>Add this to the fact that, once the old API is killed off around the middle of next year, all endpoints will require authentication, it&#x2019;s going to be a bit harder to do simple stuff with Twitter (such as display the latest tweets from your Twitter feed).</p>
+
+<p>You could, of course, use <a href="http://twitter.com/about/resources/widgetsShare">Twitter&#x2019;s own widgets</a>, but what if you (quite reasonably) want control over  the look and feel of your own website? You&#x2019;re either screwed, or you have to sign up for a developer account, create an application and use OAuth authentication just to display a couple of tweets, which is possibly overkill.</p>
+
+<p>However, there is a third way, by using Scraperwiki to scrape the tweets from your profile page you can create an RSS feed which will also act as a drop in replacement for any feeds you already use.</p>
+
+<p>It&#x2019;s pretty simple, just <a href="https://scraperwiki.com/scrapers/twitter_scraper_15/">go to my scraper on Scraperwiki</a>, click <code>copy</code>, and change the <code>username</code> to whatever username you want a feed for. Save the scraper and then run it.</p>
+
+<p>Next, copy this URL, replacing <code>YOUR_SCRAPER_NAME</code> with the name of your scraper (this will be in the URL when you save the scraper):</p>
+
+<pre><code>https://views.scraperwiki.com/run/twitter_rss_feed/?scraper=YOUR_SCRAPER_NAME
+</code></pre>
+
+<p>And there you have it! The URL you have will then display an RSS feed of your latest tweets. An added advantage of this approach is that the scraper runs every day and saves the tweets in a database, so you&#x2019;ve also got a daily archive of your tweets.</p>
+
+<p>One disadvantage is, however, as the scraper only runs once a day (unless you upgrade your Scraperwiki account so you can run scrapers every hour), it may not be particularly up to date, but it&#x2019;s better than nothing!</p>
+</div>

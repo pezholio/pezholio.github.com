@@ -1,0 +1,74 @@
+---
+layout: post
+title: "Generating QR Codes Using PHP and the Goo.gl API"
+date: 2011-07-25T13:33:48+01:00
+comments: true
+categories:
+ - Council Stuff
+---
+
+<div class='post'>
+<p>QR codes are all the rage at the mo, after a bit of a slow start, they&#x2019;re popping up everywhere, <a href="http://www.customqrcodes.com/story/31/Home">even appearing in cookery programmes</a>.</p>
+
+<p>I&#x2019;ve decided to take advantage of this, and have started a project to get QR codes on planning notices, so if someone is out and about and they see a planning notice attached to a lampost, they can scan the code with their phone and immediately find out more about the application.</p>
+
+<p>I&#x2019;ve still not finished this, but the first hurdle was actually generating the QR codes themselves. There are plenty of APIs out there, but, the more information you put in a QR code, the more complex it is, making it more difficult it is to scan and more prone to errors.</p>
+
+<p>What I really wanted to do was shorten a URL and then create a QR code from that. If this is going to be automated, I&#x2019;d need a little script to do the legwork for me.</p>
+
+<p>I chose Google&#x2019;s goo.gl url shortener, as it provides an easy option for creating a QR code, just by putting .qr at the end. Here&#x2019;s the code, with comments along the way:</p>
+
+<pre><code>// We're going to be outputting this as an image, rather than as plaintext, to make it easier to include in, for example a webpage
+header("Content-Type: image/png");
+
+// We put the long URL in an array, as we're going to encode our data as JSON for the Goo.gl API 
+$request = array(
+    'longUrl' = $_GET['url']
+);
+
+// As we need to POST the data, we're using cURL
+$ch = curl_init(); 
+
+// This tells cURL to output the result of the request
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// This is the URL of the Goo.gl API
+curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url"); 
+
+// We're setting the content type of our request as JSON
+curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Content-Type: application/json"));
+
+// It's a POST request
+curl_setopt($ch, CURLOPT_POST, true);
+
+// And here is the contents of the request we set earlier, encoded as JSON
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+
+// Now we're getting our data, again, as per the request, it's JSON, so we're using json_decode() to convert to JSON to a PHP object
+$data = json_decode(curl_exec($ch));
+
+// Closing the cURL request 
+curl_close($ch);
+
+/*
+The response is in this format:
+
+{
+ "kind": "urlshortener#url",
+ "id": "http://goo.gl/fbsS",
+ "longUrl": "http://www.google.com/"
+}
+
+and it's 'id' we're intested so:
+*/
+$shorturl = $data-id;
+
+// We now add .qr to the end of the URL and get the raw contents of the resulting QR code
+$image = file_get_contents($shorturl.".qr");
+
+// Now echo the result out! As we've set the header of the document to be a PNG image, the browser (or whatever) knows to display an image, rather than a meaningless string of characters
+echo $image;
+</code></pre>
+
+<p>And there you have it! Any questions, give me a yell in the comments. Next step is getting the codes on the notices, which I&#x2019;m nearly there with - will let you know how I get on.</p>
+</div>

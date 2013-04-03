@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Fixmytweet!"
+date: 2009-12-14T12:24:07+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Web Development
+---
+
+<div class='post'>
+<p>I love <a href="http://www.fixmystreet.com/">Fixmystreet</a> - it&#x2019;s the nearest thing we&#x2019;ve got to a national problem reporting hub, while other council website bury their reporting facilities under pages and pages of navigation, Fixmystreet is simple, quick and direct.</p>
+
+<p>What I also love is its openness, as well as being able to <a href="http://www.fixmystreet.com/alert">pull out reports for problems in your area</a>, you can also <a href="http://www.fixmystreet.com/import">inject problem reports directly into the system</a>, meaning anyone can build their own front end for the system.</p>
+
+<p>I&#x2019;ve been thinking about Fixmystreet a lot recently, after building my own frontend for it via the <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/map.php">Ubermap</a>, I&#x2019;ve also been thinking about repurposing our existing streetscene reporting forms, and getting them to use Fixmystreet.</p>
+
+<p>It was while fiddling about under the hood, that I thought &#x2018;wouldn&#x2019;t it be cool if people could report problems via Twitter?&#x2019;</p>
+
+<p>Twitter is a fast way of communicating, and crucially, it&#x2019;s mobile. There&#x2019;s a plethora of mobile apps and frontends for Twitter, and even if you&#x2019;re only on an aged Nokia 3310, you can send tweets by text message. This means that when you spot a problem, you can report it straight away. You could even add a picture.</p>
+
+<p>I got cracking on it, and, within the space of 24 hours I had a prototype - users sign up with their Twitter username and email address on the <a href="http://fixmytweet.com/">Fixmytweet website</a>, and whenever they spot a problem, they can send a tweet in this format:</p>
+
+<p><code>@fixmytweet {postcode} {description of problem} {twitpic link (optional)}</code></p>
+
+<p>(If you&#x2019;ve got a smartphone with a Twitter app that supports the <a href="http://blog.twitter.com/2009/08/location-location-location.html">geolocation API</a> you don&#x2019;t even need the postcode!)</p>
+
+<p>The system then parses the tweet and sends the necessaries to Fixmystreet. Fixmystreet then sends an email to the user, with a link for them to add more detail and approve the report. It then gets sent directly to the council! (and, if the council is smart, they can even <a href="http://www.mysociety.org/2008/11/12/first-council-lets-fixmystreet-post-straight-to-the-crm/">integrate it with their CRM system</a>)</p>
+
+<p>I&#x2019;m currently testing this out on a test version of Fixmystreet, and it seems to be working well so far. If you&#x2019;re interested in helping test me test it, please <a href="http://fixmytweet.com/">sign up on the Fixmytweet website</a> and send a test tweet.</p>
+
+<p>I&#x2019;ll keep everyone posted on developments on Twitter and this here blog!</p>
+</div>

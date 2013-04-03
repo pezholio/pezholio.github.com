@@ -1,0 +1,57 @@
+---
+layout: post
+title: "Further Adventures in SPARQL"
+date: 2010-07-09T16:18:23+01:00
+comments: true
+categories:
+ - Open Data
+---
+
+<div class='post'>
+<p>It&#x2019;s been a while since my last blog post, and <a href="http://twitter.com/abeeken/status/18123920325">after a request from Twitter</a>, I thought it might be time to dust off Wordpress and do a quick blog post. Since we last spoke, <a href="http://www.uk-postcodes.com/">UK Postcodes</a> (the postcodes webservice I blogged about a few blog posts back) has been plodding along nicely and, as a natural tinkerer, I&#x2019;ve been tinkering ever since.</p>
+
+<p>I&#x2019;ve sped up request times considerably, and wanted to add the ability to get parliamentary constituencies from a Postcode - originally, I was using the <a href="http://www.theyworkforyou.com/api/">TheyWorkForYou API</a>, which, while useful, didn&#x2019;t return a National Statistics or Ordnance Survey URI / ID, so I got to thinking about how I could SPARQL this using the <a href="http://statistics.data.gov.uk/">National Statistics Endpoint</a>, after some exploration, I noticed that district wards were always inside one parliamentary consituency, so thanks to some linked data knowledge (helpfully pumped into my brain at a two-day training course at Talis a few weeks back), I got to writing a SPARQL query, which you can see below (using the SNAC ID for Coleshill South Ward, where I live):</p>
+
+<pre><code>PREFIX rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+PREFIX administrative-geography: http://statistics.data.gov.uk/def/administrative-geography/
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+PREFIX skos: http://www.w3.org/2004/02/skos/core#
+PREFIX electoral-geography: http://statistics.data.gov.uk/def/electoral-geography/
+
+SELECT ?ward ?label ?constituency ?constituencyname
+WHERE {
+?ward
+a http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward .
+?ward skos:notation "44UBGC"^^administrative-geography:StandardCode .
+?ward rdfs:label ?label .
+?ward electoral-geography:parliamentaryConstituency ?constituency .
+?constituency skos:prefLabel ?constituencyname ;
+}
+LIMIT 1
+</code></pre>
+
+<p>This query basically asks for the URI and name of a ward with a specific SNAC ID, as well as the constiuency&#x2019;s URI and name. <a href="http://www.uk-postcodes.com/postcode/B463LD">I&#x2019;ve now added this to UK Postcodes</a>.</p>
+
+<p>But I haven&#x2019;t stopped there, oh no! The next step is to get parishes. Again, ward and parish boundaries don&#x2019;t overlap, so I&#x2019;ve used another (slightly more complex) SPARQL query to find out what parish a ward is inside, this time using the <a href="http://api.talis.com/stores/ordnance-survey/services/sparql">Ordnance Survey Endpoint</a>:</p>
+
+<pre><code>PREFIX rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+PREFIX foaf: http://xmlns.com/foaf/0.1/
+PREFIX spatialrelations: http://data.ordnancesurvey.co.uk/ontology/spatialrelations/
+PREFIX admingeo: http://data.ordnancesurvey.co.uk/ontology/admingeo/
+
+SELECT ?parish ?parishcode ?ward ?label
+WHERE {
+?ward a http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard .
+?ward admingeo:hasCensusCode "44UBGB" .
+?parish a http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish .
+?parish spatialrelations:contains ?ward .
+?parish admingeo:hasCensusCode ?parishcode .
+?parish foaf:name ?label ;
+}
+LIMIT 1
+</code></pre>
+
+<p>This fella here is asking for a parish which contains a given ward<del> - at the moment I&#x2019;m using the OS URI, but I&#x2019;m hoping to figure out a way of using SNAC IDs before I put it onto the live UK Postcodes system</del>.</p>
+
+<p>Hope this gives people a bit of an insight, and if anyone who is cleverer than me wants to point out any problems, or make any suggestions, feel free! :)</p>
+</div>

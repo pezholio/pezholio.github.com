@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Spending Data - Beyond the CSV"
+date: 2011-01-14T10:00:51+00:00
+comments: true
+categories:
+ - Council Stuff
+ - Linked Data
+ - Open Data
+---
+
+<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/01/csv.png" alt="">It&#x2019;s been a while since my <a href="http://www.pezholio.co.uk/2010/08/local-spending-data-a-few-ideas/">last post about local spending data</a>, and, since then, our finance team have been busy beavering away behind the scenes to get our own spending data out of the council&#x2019;s finance systems.</p>
+
+<p>However, from the outset, I was really pleased that both our finance people and our chief exec wanted to go beyond just whacking a CSV (or worse, a PDF) on the internet and show our commitment to transparency by putting the data on the web in an easy, human readable format.</p>
+
+<p>Armed with a few CSVs, a Macbook Pro and some server space, I was put to task, and the <a href="http://spending.lichfielddc.gov.uk/">the results can be seen here</a>. Users can navigate by the various parts of the cost code (called &#x201C;Department&#x201D;, &#x201C;Type&#x201D; and &#x201C;Subject&#x201D;), as well as by month and supplier.</p>
+
+<p>As well as human readable formats, almost every view of the data has an XML, JSON, CSV and RDF equivalent, achieved either by putting the relevant extension on the end, or through <a href="http://en.wikipedia.org/wiki/Content_negotiation">content negotiation</a>.</p>
+
+<p>The user interface had been heavily influenced by <a href="http://openlylocal.com/councils/spending">OpenlyLocal</a> (after all, if it ain&#x2019;t broke, why fix it?) and, as well as feeding our data in to OpenlyLocal, we also take a little bit away. When data is imported into OpenlyLocal, the system does some clever data matching to match company names to real life entities on <a href="http://opencorporates.com/">Open Corporates</a>. We have a batch job that takes that information and puts it on our spending system - <a href="http://spending.lichfielddc.gov.uk/supplier/p-casey-land-reclamation-ltd.html">you can see an example here</a>. This is an example of how open data cuts both ways, by sharing our data, we can improve it.</p>
+
+<p>Also, thanks to the wonderful people at <a href="http://www.talis.com/">Talis</a>, we have our RDF data in a triple store, so it can be queried, both through SPARQL queries and a free text search, making the data even more useful from the off. I&#x2019;m hoping to put together a tutorial in SPARQL soon, both here and on the Lichfield District Council website, which should hopefully demystify the process a bit more.</p>
+
+<p>Finally, I&#x2019;m hoping to open source the code (once it&#x2019;s tidied up a bit), so of you&#x2019;re from a local authority and want to make your spending data a little more clear to Joe Public, then you can benefit from my work too!</p>
+</div>

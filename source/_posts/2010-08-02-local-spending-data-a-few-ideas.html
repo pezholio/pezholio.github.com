@@ -1,0 +1,31 @@
+---
+layout: post
+title: "A Local Spending Data Brain Splurge"
+date: 2010-08-02T14:40:49+01:00
+comments: true
+categories:
+ - Council Stuff
+ - Open Data
+---
+
+<div class='post'>
+<p>Today I was at a &#x2018;quick and dirty&#x2019; local spending data workshop at Birmingham City Council&#x2019;s newly refurbished offices on Lancaster Circus. There&#x2019;ll be more detailed info to come on the <a href="http://www.communities.idea.gov.uk/c/3916997/home.do">Local Open Data Community</a> (login required), but I just wanted to blog a few of my thoughts post the meeting.</p>
+
+<p>There was a lot of talk about what other councils have done (such as Windsor and Maidenhead, Barnet, Islington etc), and it was agreed that there was a lot of difference in how the data was presented, Paul Davidson also talked about some of the work that the <a href="http://www.legsb.gov.uk/">Local eGovernment Standards Body</a> had done regarding getting spending data out there in a linked data format. There did seem to be a bit of resistance to the linked data approach, mainly because agreeing standards seems to be a long, drawn out process, which is counter to the JFDI approach of publishing local data.</p>
+
+<p>However, while I am a fan of the possibilities of linked data, I also recognise that there are difficulties in both publishing the data and also working with it. For example, I think it&#x2019;s unrealistic to expect every local authority to maintain a triple store to publish their spending data. As we learned from the local elections project, often local authorities don&#x2019;t even have people who are competent in HTML, let alone RDF, SPARQL etc.</p>
+
+<p>Therefore, I think the way forward is a centralised approach, with authorities publishing CSVs in a standard format on their website and some kind of system picking up these CSVs (say, on a monthly basis) and converting this data to a linked data format (as well as publishing in vanilla XML, JSON and CSV format).</p>
+
+<p>The great thing about the linked data approach is it will mean that each item of spending can have its own URI - e.g.</p>
+
+<p><code>http://localspending.data.gov.uk/41UD/12345</code></p>
+
+<p>(The first part of the URI would be the SNAC code for the authority, and then the second part of the URI would be the internal reference number)</p>
+
+<p>As well as having a human-readable summary of the data (together with links to the actual data in RDF, XML, CSV and JSON), there would be a comments box (similar to <a href="http://twitter.com/adrianshort">Adrian Short&#x2019;s</a> fantastic <a href="http://armchairauditor.co.uk/">Armchair Auditor</a>), as well as the ability to ask any questions about an item of expenditure - the answers to these questions would then be automatically published next to the item of spend (hopefully helping to cut down on multiple FOI requests).</p>
+
+<p>While this may be a bit of a pie in the sky idea, I do feel that there does need to be some kind of effort on the part of central government to help move this project along, as we&#x2019;ve seen already (naming no names!) some authorities have got it drastically wrong, and while there is definitely mileage in the &#x2018;just get it out there&#x2019; approach, I think if we&#x2019;re going to end up with something <em>really</em> useful (for both members of the public and local authorities), we need to get the data in one place.</p>
+
+<p>Thoughts?</p>
+</div>
