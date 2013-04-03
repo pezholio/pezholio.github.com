@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Automated testing with Cucumber and Phantom.js - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="Since I last spoke to you, I&#8217;ve been very busy. I&#8217;ve recently changed jobs and am now working at the Open Data Institute. It&#8217;s a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Automated Testing With Cucumber and Phantom.js</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T08:39:00+01:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Since I last spoke to you, I&#8217;ve been very busy. I&#8217;ve recently changed jobs and am now working at the <a href="http://theodi.org">Open Data Institute</a>. It&#8217;s a massive change from working at my old place, and one of the many new things I&#8217;ve learnt about is the joys of automated testing.</p>
+
+<p>Working, as I did, on my own, in isolation (almost as a one man <a href="http://blog.pezholio.co.uk/2012/09/local-gds-a-skunkworks-for-local-government/">skunkworks</a>) meant I didn&#8217;t really need to worry about the quality of my code, and, as far as testing went - I could just test it in my browser and it&#8217;d work, right?</p>
+
+<p>Well, yeah, I suppose, but this isn&#8217;t The Right Way of doing things. Also, if I changed a line of code, how could I be sure that what I changed wouldn&#8217;t have unintended consequences in some obscure part of my application without testing the whole application myself? Also, as I would often not have a development environment (at least in my non-Ruby apps), this would mean introducing a whole load of test data into my live environment.</p>
+
+<p>In short, writing code without tests is a Very Bad Idea, and, as we move to the holy grail of <a href="http://en.wikipedia.org/wiki/Continuous_delivery">continuous deployment</a> at the ODI, this would mean that my code will be getting pushed into the live environment regularly by <a href="http://jenkins.theodi.org/">robots</a>, so we need to make sure that any changes made aren&#8217;t going to break anything.</p>
+
+<p>This is where <a href="http://cukes.info">Cucumber</a> comes in. I won&#8217;t go into this too much, but this is where the magic happens. I can write expectations (in a language called <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin</a>), and write code in Ruby that attempts to match these expectations. I can call code that queries the database, spins up browsers and acts like a real user and <a href="https://github.com/vcr/vcr">records HTTP interactions</a>.</p>
+
+<p>This is all well and good, but if I&#8217;m building an app that makes heavy use of JavaScript, then, out of the box, Cucumber (via <a href="http://docs.seleniumhq.org/">Selinium</a>) needs to spin up a real browser (such as Firefox or Chrome). This is OK when developing on my Mac at work, but once the code is being tested remotely in Jenkins before deploy, this isn&#8217;t possible.</p>
+
+<p>However, there does exist a neat tool called <a href="http://phantomjs.org/">Phantom.js</a> - a fully functional WebKit browser (like Chrome), but without one crucial thing, a window. All user interactions are carried out via JavaScript, and you can do everything a normal user would do, but without having to have a GUI. This mean you can automate all sorts of tasks on the command line, screen scraping, filling out forms, and yes, testing.</p>
+
+<p>As Phantom.js is not like other browsers, getting Phantom.js and Cucumber to play nicely together is not, a straightforward task. However, there is a nice tool called <a href="https://github.com/jonleighton/poltergeist">Poltergeist</a>, which allows you to do just that.</p>
+
+<p>Getting Poltergeist set up in a Rails app is easy, but not trivial, and I had to jump through a few hoops to get it sorted, so I thought I&#8217;d document it here for the ages.</p>
+
+<p>I&#8217;m assuming you&#8217;ve got <code>Cucumber-rails</code> set up in your Rails app already, so if you haven&#8217;t, take a look at this <a href="http://railscasts.com/episodes/155-beginning-with-cucumber">Railscast</a> to get you started.</p>
+
+<p>Once you&#8217;re all set up, the first thing to do is install Phantom.js - if you&#8217;re on a Mac and running Homebrew, it&#8217;s as easy as running <code>brew install phantomjs</code> on the command line, otherwise <a href="http://phantomjs.org/download.html">take a look at these instructions</a>.</p>
+
+<p>Next, add <code>poltergeist</code> to your <code>gemfile</code> (probably in your <code>:test</code> group) like so:</p>
+
+<pre><code>gem 'poltergeist'
+</code></pre>
+
+<p>and run <code>bundle install</code></p>
+
+<p>The next thing to do is register Poltergeist as a new browser in Cucumber, and make it run as the default driver for all your JavaScript tests. Open up your <code>features/support/env.rb</code> file and add the following lines:</p>
+
+<pre><code>require 'capybara/poltergeist'
+
+Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, {debug: false})
+end
+
+Capybara.javascript_driver = :poltergeist
+</code></pre>
+
+<p>Then you should be good to go! Crucially, you need to make sure you add the <code>@javascript</code> tag to all your tests, so Capybara knows to use Poltergeist for your tests, but other than that, when you now run your tests, rather than a browser window being fired up, everything happens in the background like magic!</p>
+
+<p>There are a couple of other cool things you can do with Poltergeist that may help you when you&#8217;re writing initial tests, like taking screenshots and executing arbitrary JavaScript (like in the JS Console in Chrome). <a href="https://github.com/jonleighton/poltergeist#whats-supported">Take a look at the docs</a> for more info, and have fun!</p>
+
+<p>One very small gotcha, is that, as Capybara fires up a real browser when running tests, if you&#8217;re recording API interactions with <a href="https://github.com/vcr/vcr">VCR</a>, it will try and record your browser interactions too. To get around this, you&#8217;ll need to make VCR ignore local requests by adding this line to your <code>features/support/vcr.rb</code> file:</p>
+
+<pre><code>VCR.configure do |c|
+    c.ignore_localhost = true
+end
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T08:39:00+01:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/" data-via="pezholio" data-counturl="http://pezholio.github.com/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/" title="Previous Post: Council Websites: Time for a New Approach to Navigation?">&laquo; Council Websites: Time for a New Approach to Navigation?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/';
+        var disqus_url = 'http://pezholio.github.com/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

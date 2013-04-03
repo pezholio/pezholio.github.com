@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Simple(ish) Routes to Local Authority Open Data? - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="Now, I&#x2019;ve been banging on about local government open data for a while, I&#x2019;ve been opening up various datasets on the Lichfield &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2009/12/simpleish-routes-to-local-authority-open-data/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Simple(ish) Routes to Local Authority Open Data?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-03T12:17:13+00:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>Now, I&#x2019;ve been banging on about local government open data for a while, I&#x2019;ve been <a href="http://www.lichfielddc.gov.uk/data">opening up various datasets on the Lichfield District Council website</a> and generally evangelising to anyone who will listen (and even to some who won&#x2019;t!)</p>
+
+<p>This JFDI publish-everything-you&#x2019;ve-got-in-a-database-just-because-you-can approach is all well and good if you&#x2019;re a techy like me, but there&#x2019;s three wee problemettes:</p>
+
+<ul>
+<li><p><strong>Problemette Number 1</strong> You need to be a techy to get the data out there - a lot of local authorities don&#x2019;t have the technical resource to do this stuff.</p></li>
+<li><p><strong>Problemette Number 2</strong> It&#x2019;s not sustainable - If I die (God fobid!) or leave the authority - whoever takes on my role might not have the skills or time to keep up my work.</p></li>
+<li><p><strong>Problemette Number 3</strong> It&#x2019;s not in a standard format - generally I&#x2019;ve been making up XML schemas, or releasing in RSS or KML - which, while useful for local developers, doesn&#x2019;t work semantically.</p></li>
+</ul>
+
+
+<p>These issues have been playing on my mind for a while now, especially with central government releasing a whole load of data on data.gov.uk - how can we local authorities, a disperate band of organisations spread across the country with different teams and different ways of doing things do something similar, particularly with the problemettes above in mind?</p>
+
+<p>It was with this running through my head that I chanced up on the <a href="http://coi.gov.uk/guidance.php?page=312">Central Office of Information&#x2019;s guidance on structuring information on the web for reusability</a> - this sets out how organisations (particularly central government) can edit their HTML pages using RDFa - a markup that allows information to be &#x2018;sucked out&#x2019; of web pages and re purposed as RDF data. A robot can then &#x2018;see&#x2019; the pages and republish them on a different site (in this case DirectGov).</p>
+
+<p>Although this is still reasonably technical, anyone with a basic knowledge of HTML should be able to edit their templates and expose this data, much easier than slaving over SQL databases and messing around with XML. Suppliers could also easily modify their systems to add RDFa markup (although, suppliers being suppliers, they&#x2019;ll probably charge an exorbitant fee for this work!).</p>
+
+<p>At Lichfield, we&#x2019;re currently putting together a consultation system, and, following the directions on the COI site, I managed to mark up our consultations in RDFa, and, other than a few issues with validation, <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/voiceitdocs.php?id=146">I managed it pretty quickly</a> - <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=http%3A%2F%2Fwww.lichfielddc.gov.uk%2Fsite%2Fcustom_scripts%2Fvoiceitdocs.php%3Fid%3D146&amp;format=pretty-xml&amp;warnings=false&amp;parser=lax&amp;space-preserve=true&amp;submit=Go!&amp;text=">here&#x2019;s the RDF in all it&#x2019;s glory</a> (you&#x2019;ll need to view the source to see it properly).</p>
+
+<p>The COI are asking central government departments to implement this new format for all their consultations from 1 January 2010, which is no mean feat, but I&#x2019;d like to see a similar dictact (albeit one with a slightly more realistic timeline!) come for local authorities too - we did it with IPSV, so why can&#x2019;t we do this too?</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-03T12:17:13+00:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/council-stuff/'>Council Stuff</a>, <a class='category' href='/blog/categories/open-data/'>Open Data</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/12/simpleish-routes-to-local-authority-open-data/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/12/simpleish-routes-to-local-authority-open-data/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/11/adventures-in-sparql-part-2-now-with-added-kml/" title="Previous Post: Adventures in SPARQL Part 2 - Now With Added KML!">&laquo; Adventures in SPARQL Part 2 - Now With Added KML!</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/12/twitter-to-rss-or-not-rss/" title="Next Post: Twitter - to RSS or Not RSS?">Twitter - to RSS or Not RSS? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2009/12/simpleish-routes-to-local-authority-open-data/';
+        var disqus_url = 'http://pezholio.github.com/2009/12/simpleish-routes-to-local-authority-open-data/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

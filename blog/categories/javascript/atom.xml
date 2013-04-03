@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript, | Pezholio]]></title>
+  <link href="http://pezholio.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://pezholio.github.com/"/>
+  <updated>2013-04-03T08:40:07+01:00</updated>
+  <id>http://pezholio.github.com/</id>
+  <author>
+    <name><![CDATA[Pezholio]]></name>
+    <email><![CDATA[pezholio@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Take a Screenshot of Any Tweet Using Casper.js]]></title>
+    <link href="http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/"/>
+    <updated>2012-08-29T21:46:00+01:00</updated>
+    <id>http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>While Twitter do offer <a href="https://support.twitter.com/articles/20169559-how-to-embed-a-tweet-on-your-website-or-blog">a way of embedding tweets</a>, there&#x2019;s no guarantee that this feature will stay in its current form, and equally no guarantee that if the tweet is deleted, the embed will continue to work, which is a potential headache for journalists and bloggers.</p>
+
+<p>With this in mind, I&#x2019;ve developed <a href="https://gist.github.com/3518514">a quick solution to the problem</a>,  using the fantastic headless browser <a href="http://phantomjs.org/">Phantom.js</a> and <a href="http://casperjs.org/">Phantom.js utility Casper.js</a>.</p>
+
+<p>Simply put, all the solution does is allow you to take a simple screenshot in png format of any tweet you give the URL for.</p>
+
+<p>To get Phantom.js and Casper.js running, first <a href="http://code.google.com/p/phantomjs/wiki/Installation">install phantom.js</a> and then <a href="http://casperjs.org/installation.html">casper.js</a> (I won&#x2019;t go into the details here).</p>
+
+<p>Next, download the script to your machine by running:</p>
+
+<pre><code>wget https://raw.github.com/gist/3518514/51c87bc6e59040948b7aebe08cb73e500e0783e5/tweetshot.js
+</code></pre>
+
+<p>You will then be able to grab a screenshot by running the command:</p>
+
+<pre><code>casperjs tweetshot.js {tweet permalink} {output filename}
+</code></pre>
+
+<p>Your screenshot will then be saved with the filename you requested (with a .png extension).</p>
+
+<p>And that&#x2019;s it really! Ideally I&#x2019;d like to wrap it in a simple Sinatra app, so you don&#x2019;t have to have any technical knowledge to get a link, but that&#x2019;s something for another day.</p>
+
+<p>If anyone has any improvements to suggest, or would like to build on this, please let me know. I&#x2019;d love to hear what you can do with this.</p>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="iPhones are ace aren&#x2019;t they? Despite howls of derision from some camps, in the space of a few years, it&#x2019;s completely turned the mobile &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/page/3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/an-iphone-app-in-5-days/">An iPhone App in 5 Days?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T12:13:55+00:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        
+         | <a href="/2009/12/an-iphone-app-in-5-days/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2009/12/ratemyplace-290x300.png" alt="Mockup of Ratemyplace app on an iPhone and iPod touch ">iPhones are ace aren&#x2019;t they? Despite <a href="http://www.electronista.com/articles/07/04/30/ballmer.on.iphone/">howls of derision</a> from some camps, in the space of a few years, it&#x2019;s completely turned the mobile world on its head.</p>
+
+<p>I&#x2019;ve wanted to build an iPhone app for <a href="http://www.ratemyplace.org.uk">Ratemyplace</a> - the food safety ratings website I run at the council on behalf of 8 other councils in Staffordshire for a while, but unfortunately just didn&#x2019;t have time to learn Objective-C, the language that iPhone apps are built in - at the same time, I&#x2019;m also aware that not everyone has an iPhone, so have been scouting around for ways to build apps that can be ported to other platforms quickly and easily.</p>
+
+<p>About 6 months ago, I looked at <a href="http://phonegap.com/">Phonegap</a>, which promised to allow me to build apps quickly using only HTML and Javascript. I beavered away for a few weeks, and finally had an app I was (sort of) pleased with. It used native features such as geolocation, and I used <a href="http://code.google.com/p/iphone-universal/">the UiUi Kit CSS library</a> to make the app look as much like a native app as possible. I was all ready to submit it to the app store. Then the 3.0 firmware upgrade came.</p>
+
+<p>My iPhone app was busted - native geolocation no longer worked, and a little hack I&#x2019;d worked out to get a toolbar at the bottom and a navbar at the top was also kaputt. I tried to fix it for a bit, but other priorities took over, and the project went on hold.</p>
+
+<p>Then, a few weeks ago, I came across <a href="http://www.appcelerator.com/">Appcelerator Titanium</a>, a platform that does pretty much everything Phonegap does, but (in my opinion) much better. While Phonegap uses a portion of the iPhone&#x2019;s API called the webview to display webpages as though they were native apps, Titanium goes one better, it compiles your code into a mixture of web views and native Objective-C code. Like Phonegap, it also works with Android, and a promise of more platforms to come.</p>
+
+<p>This means that you can not only take advantage of many more native iPhone features, your app is much less likely to be rejected (as <a href="http://www.readwriteweb.com/archives/why_is_apple_rejecting_phonegap-built_iphone_apps.php">a lot of phonegap apps were</a>) because of the use of what Apple calls &#x2018;private APIs&#x2019;.</p>
+
+<p>I dusted down my old bits of code, bookmarked the <a href="http://www.codestrong.com/timobile/api/">API documentation</a>, and set to work. In the end, as well as doing my other duties, the app took me 5 days (and one beery evening) to complete. You can see a few screenshots below:</p>
+
+<p>[flickr]http://www.flickr.com/photos/13492966@N06/sets/72157622918161445/,460,460[/flickr]</p>
+
+<p>I submitted it to Apple yesterday, and I&#x2019;m not expecting to hear anything for a good few weeks, if not months (Apple&#x2019;s approvals processes to get an app into the app store are <a href="http://theappleblog.com/2008/09/13/why-apples-app-store-approval-process-is-broken/">notoriously strict</a>) but I&#x2019;m reasonably hopeful. I&#x2019;m now looking at porting my code to Android phones, with a view to looking at Blackberry and Nokia devices too.</p>
+
+<p>Looking forward a few years, with the growing adoption by mobile phone browsers of HTML5 and CSS3, I can see that apps are going to become more browser based, and (hopefully), this will lead to standards being adopted across the industry, but, until then, it seems that platforms like Titanium are going to be the best way to get your apps to as many people as quickly as possible.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/fixmytweet/">Fixmytweet!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T12:24:07+00:00" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
+        
+         | <a href="/2009/12/fixmytweet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I love <a href="http://www.fixmystreet.com/">Fixmystreet</a> - it&#x2019;s the nearest thing we&#x2019;ve got to a national problem reporting hub, while other council website bury their reporting facilities under pages and pages of navigation, Fixmystreet is simple, quick and direct.</p>
+
+<p>What I also love is its openness, as well as being able to <a href="http://www.fixmystreet.com/alert">pull out reports for problems in your area</a>, you can also <a href="http://www.fixmystreet.com/import">inject problem reports directly into the system</a>, meaning anyone can build their own front end for the system.</p>
+
+<p>I&#x2019;ve been thinking about Fixmystreet a lot recently, after building my own frontend for it via the <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/map.php">Ubermap</a>, I&#x2019;ve also been thinking about repurposing our existing streetscene reporting forms, and getting them to use Fixmystreet.</p>
+
+<p>It was while fiddling about under the hood, that I thought &#x2018;wouldn&#x2019;t it be cool if people could report problems via Twitter?&#x2019;</p>
+
+<p>Twitter is a fast way of communicating, and crucially, it&#x2019;s mobile. There&#x2019;s a plethora of mobile apps and frontends for Twitter, and even if you&#x2019;re only on an aged Nokia 3310, you can send tweets by text message. This means that when you spot a problem, you can report it straight away. You could even add a picture.</p>
+
+<p>I got cracking on it, and, within the space of 24 hours I had a prototype - users sign up with their Twitter username and email address on the <a href="http://fixmytweet.com/">Fixmytweet website</a>, and whenever they spot a problem, they can send a tweet in this format:</p>
+
+<p><code>@fixmytweet {postcode} {description of problem} {twitpic link (optional)}</code></p>
+
+<p>(If you&#x2019;ve got a smartphone with a Twitter app that supports the <a href="http://blog.twitter.com/2009/08/location-location-location.html">geolocation API</a> you don&#x2019;t even need the postcode!)</p>
+
+<p>The system then parses the tweet and sends the necessaries to Fixmystreet. Fixmystreet then sends an email to the user, with a link for them to add more detail and approve the report. It then gets sent directly to the council! (and, if the council is smart, they can even <a href="http://www.mysociety.org/2008/11/12/first-council-lets-fixmystreet-post-straight-to-the-crm/">integrate it with their CRM system</a>)</p>
+
+<p>I&#x2019;m currently testing this out on a test version of Fixmystreet, and it seems to be working well so far. If you&#x2019;re interested in helping test me test it, please <a href="http://fixmytweet.com/">sign up on the Fixmytweet website</a> and send a test tweet.</p>
+
+<p>I&#x2019;ll keep everyone posted on developments on Twitter and this here blog!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/twitter-to-rss-or-not-rss/">Twitter - to RSS or Not RSS?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-07T16:55:00+00:00" pubdate data-updated="true">Dec 7<span>th</span>, 2009</time>
+        
+         | <a href="/2009/12/twitter-to-rss-or-not-rss/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>It&#x2019;s been a while since I first published my <a href="http://www.pezholio.co.uk/2009/03/a-beginners-guide-to-twitter-in-local-government/">Beginners&#x2019; Guide to Twitter in Local Government</a>, and since then (although, obviously not as a direct result of my blog post!) there&#x2019;s been a plethora of local authorities using Twitter.</p>
+
+<p>However, with a few notable exceptions, most councils seem to prefer the &#x2018;fire and forget&#x2019; method of sticking an RSS feed into <a href="http://twitterfeed.com/">Twitterfeed</a> and leaving it to run. Hell, even I was guilty of it up until recently - even though I was making an effort to monitor and engage, I was still letting the news articles automatically publish via Twitterfeed.</p>
+
+<p>There&#x2019;s been a bit of a discussion recently via Twitter as to the rights and wrongs of this, and I&#x2019;m definitely in the &#x2018;wrong&#x2019; camp now - A few months ago I turned off the RSS feed for <a href="http://www.twitter.com/lichfield_dc">@lichfield_dc</a> press releases and now do them manually. Why? Well, I shall tell you&#x2026;</p>
+
+<h3>You don&#x2019;t talk to a robot</h3>
+
+<p>Twitter is, by and large, a social medium - if all you&#x2019;re doing is chucking out press releases, people will assume you&#x2019;re not interested in engaging or are just going to generate boring content. This means you aren&#x2019;t going to get followed by as many people who might otherwise be interested in you.</p>
+
+<h3>Auto tweets look ugly</h3>
+
+<p>Take <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/newsblog.php?id=204">this press release for example</a>. If I were to use an auto tweeter, here&#x2019;s what it would look like:</p>
+
+<blockquote><p>News: Everyone is invited to get into the festive spirit at this year&#x2019;s Christmas Fayre taking place in the city&#x2026; <a href="http://is.gd/5eZUT">http://is.gd/5eZUT</a></p></blockquote>
+
+<p>Pretty boring huh? Plus the content gets cut short and can often not make sense. However, if I conjour up a manual tweet, I can tailor it much more to the Twitter medium and come up with something a lot more friendly:</p>
+
+<p>[tweet url=&#x201D;http://twitter.com/lichfield_dc/statuses/6432523654&#x201D;]</p>
+
+<p>This means you can get your message across much more easily and in a style that fits in with Twitter&#x2019;s informal approach.</p>
+
+<h3>Stopping information overload</h3>
+
+<p>Sometimes you&#x2019;ll have a press release which, while it might be relevant for the website, might not be suitbale for Twitter. If you&#x2019;re blindly tweeting everything you put out, then people might be much more likely to be turned off by your content and reach for that big button marked &#x2018;unfollow&#x2019;.</p>
+
+<h3>This is all well and good, but&#x2026;</h3>
+
+<p>&#x2026;I can hear the objections already - &#x2018;I don&#x2019;t have time to write manual tweets&#x2019; - but how difficult it it to write a 140 character tweet? If you&#x2019;re going to take online engagement seriously, it&#x2019;s definitely worth just taking 2 minutes to show your followers you care.</p>
+
+<p>If you really must use automated tweets, then make sure you mark your account up as such - call it something like &#x2018;councilx_news&#x2019; and state very clearly that all you&#x2019;re doing is publishing the latest news - then if further down the line you decide to engage a bit more, you can start another account for more human interaction.</p>
+
+<h3>I&#x2019;m a massive hypocrite</h3>
+
+<p>However, after saying all this, I do agree that sometimes, automated tweets have their place. We do still tweet food safety inspections, and <a href="http://twitter.com/ldcplanning">@ldcplanning</a> has been happily tweeting planning applications for a while now. However, it&#x2019;s not really practical to tweet large volume, samey tweets manually, and you don&#x2019;t get the same advantages with tweeting press releases.</p>
+
+<p>In fact, I recently did a straw poll amongst our followers about whether to get rid of the food safety tweets, especially as much of the content is replicated by <a href="http://twitter.com/ratemyplace">@ratemyplace</a>, but the majority seemed to like them. So maybe automated tweets isn&#x2019;t as open and shut a case as I&#x2019;d like it to be?</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/simpleish-routes-to-local-authority-open-data/">Simple(ish) Routes to Local Authority Open Data?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-03T12:17:13+00:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/12/simpleish-routes-to-local-authority-open-data/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Now, I&#x2019;ve been banging on about local government open data for a while, I&#x2019;ve been <a href="http://www.lichfielddc.gov.uk/data">opening up various datasets on the Lichfield District Council website</a> and generally evangelising to anyone who will listen (and even to some who won&#x2019;t!)</p>
+
+<p>This JFDI publish-everything-you&#x2019;ve-got-in-a-database-just-because-you-can approach is all well and good if you&#x2019;re a techy like me, but there&#x2019;s three wee problemettes:</p>
+
+<ul>
+<li><p><strong>Problemette Number 1</strong> You need to be a techy to get the data out there - a lot of local authorities don&#x2019;t have the technical resource to do this stuff.</p></li>
+<li><p><strong>Problemette Number 2</strong> It&#x2019;s not sustainable - If I die (God fobid!) or leave the authority - whoever takes on my role might not have the skills or time to keep up my work.</p></li>
+<li><p><strong>Problemette Number 3</strong> It&#x2019;s not in a standard format - generally I&#x2019;ve been making up XML schemas, or releasing in RSS or KML - which, while useful for local developers, doesn&#x2019;t work semantically.</p></li>
+</ul>
+
+
+<p>These issues have been playing on my mind for a while now, especially with central government releasing a whole load of data on data.gov.uk - how can we local authorities, a disperate band of organisations spread across the country with different teams and different ways of doing things do something similar, particularly with the problemettes above in mind?</p>
+
+<p>It was with this running through my head that I chanced up on the <a href="http://coi.gov.uk/guidance.php?page=312">Central Office of Information&#x2019;s guidance on structuring information on the web for reusability</a> - this sets out how organisations (particularly central government) can edit their HTML pages using RDFa - a markup that allows information to be &#x2018;sucked out&#x2019; of web pages and re purposed as RDF data. A robot can then &#x2018;see&#x2019; the pages and republish them on a different site (in this case DirectGov).</p>
+
+<p>Although this is still reasonably technical, anyone with a basic knowledge of HTML should be able to edit their templates and expose this data, much easier than slaving over SQL databases and messing around with XML. Suppliers could also easily modify their systems to add RDFa markup (although, suppliers being suppliers, they&#x2019;ll probably charge an exorbitant fee for this work!).</p>
+
+<p>At Lichfield, we&#x2019;re currently putting together a consultation system, and, following the directions on the COI site, I managed to mark up our consultations in RDFa, and, other than a few issues with validation, <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/voiceitdocs.php?id=146">I managed it pretty quickly</a> - <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=http%3A%2F%2Fwww.lichfielddc.gov.uk%2Fsite%2Fcustom_scripts%2Fvoiceitdocs.php%3Fid%3D146&amp;format=pretty-xml&amp;warnings=false&amp;parser=lax&amp;space-preserve=true&amp;submit=Go!&amp;text=">here&#x2019;s the RDF in all it&#x2019;s glory</a> (you&#x2019;ll need to view the source to see it properly).</p>
+
+<p>The COI are asking central government departments to implement this new format for all their consultations from 1 January 2010, which is no mean feat, but I&#x2019;d like to see a similar dictact (albeit one with a slightly more realistic timeline!) come for local authorities too - we did it with IPSV, so why can&#x2019;t we do this too?</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/adventures-in-sparql-part-2-now-with-added-kml/">Adventures in SPARQL Part 2 - Now With Added KML!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T17:18:28+00:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/11/adventures-in-sparql-part-2-now-with-added-kml/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>It&#x2019;s been a few weeks now since I posted my <a href="http://www.pezholio.co.uk/2009/10/adventures-in-sparql/">first foray into the Edubase dataset</a>, and since then, there&#x2019;s been a few changes to the dataset, so I thought I&#x2019;d give it another crack - the end result meaning I might have something exciting for everyone to benefit from!</p>
+
+<p>Since the dataset was published, the most significant thing has been the addition of latitude and longitude, as well as eastings and northings. This means that we can now get location-based data much easier, without a lot of mathematical mucking about with conversions.</p>
+
+<p>To get a list of primary schools, addresses, locations and a latitude and longitude point, I can use the following query on the <a href="http://services.data.gov.uk/education/sparql">SPARQL endpoint</a>:</p>
+
+<p>`
+prefix geo: <a href="http://www.w3.org/2003/01/geo/wgs84_pos#">http://www.w3.org/2003/01/geo/wgs84_pos#</a>
+prefix sch-ont: <a href="http://education.data.gov.uk/def/school/">http://education.data.gov.uk/def/school/</a>
+prefix space: <a href="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/">http://data.ordnancesurvey.co.uk/ontology/spatialrelations/</a>
+SELECT ?name ?lat ?long ?reference ?address1 ?address2 ?town ?postcode WHERE {
+?school a sch-ont:School ; &#x201C;.$open.&#x201D;
+sch-ont:districtAdministrative <a href="http://statistics.data.gov.uk/id/local-authority-district/41UD">http://statistics.data.gov.uk/id/local-authority-district/41UD</a> ;
+sch-ont:phaseOfEducation <a href="http://education.data.gov.uk/def/school/PhaseOfEducation_Primary">http://education.data.gov.uk/def/school/PhaseOfEducation_Primary</a> ;
+sch-ont:establishmentName ?name;
+sch-ont:uniqueReferenceNumber ?reference ;
+geo:lat ?lat;
+geo:long ?long;
+  OPTIONAL {
+   ?school sch-ont:address ?address .
+  ?address sch-ont:address1 ?address1 ;</p>
+
+<pre><code>  sch-ont:address2 ?address2 ;
+  sch-ont:town ?town ;
+  sch-ont:postcode ?postcode .
+</code></pre>
+
+<p>  }
+}
+ORDER BY ?name
+`</p>
+
+<p>This gives me <a href="http://services.data.gov.uk/education/sparql?query=prefix+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E%0D%0Aprefix+sch-ont%3A+%3Chttp%3A%2F%2Feducation.data.gov.uk%2Fdef%2Fschool%2F%3E%0D%0Aprefix+space%3A+%3Chttp%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fontology%2Fspatialrelations%2F%3E%0D%0ASELECT+%3Fname+%3Flat+%3Flong+%3Freference+%3Faddress1+%3Faddress2+%3Ftown+%3Fpostcode+WHERE+%7B%0D%0A%3Fschool+a+sch-ont%3ASchool+%3B%0D%0Asch-ont%3AdistrictAdministrative+%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Flocal-authority-district%2F41UD%3E+%3B%0D%0Asch-ont%3AphaseOfEducation+%3Chttp%3A%2F%2Feducation.data.gov.uk%2Fdef%2Fschool%2FPhaseOfEducation_Primary%3E+%3B%0D%0Asch-ont%3AestablishmentName+%3Fname%3B%0D%0Asch-ont%3AuniqueReferenceNumber+%3Freference+%3B%0D%0Ageo%3Alat+%3Flat%3B%0D%0Ageo%3Along+%3Flong%3B%0D%0A++OPTIONAL+%7B%0D%0A+++%3Fschool+sch-ont%3Aaddress+%3Faddress+.%0D%0A++%3Faddress+sch-ont%3Aaddress1+%3Faddress1+%3B%0D%0A++++++sch-ont%3Aaddress2+%3Faddress2+%3B%0D%0A++++++sch-ont%3Atown+%3Ftown+%3B%0D%0A++++++sch-ont%3Apostcode+%3Fpostcode+.%0D%0A++%7D%0D%0A%7D%0D%0AORDER+BY+%3Fname">this result</a>, which I can easily (with a bit of code wizardry), turn into a KML file, which can then be used with Google Maps, Google Earth and Bing.</p>
+
+<p>I&#x2019;ve generated two KML files for Lichfield District, Primary and Secondary, which I&#x2019;ve used on the (still in development) <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/bingmap.php">&#x2018;ubermap&#x2019; on the Lichfield District Council website</a>.</p>
+
+<p>This was quite easy to replicate for everyone, so, because I&#x2019;m a nice fella, I&#x2019;ve put together a <a href="http://www.pezholio.co.uk/edubasekml.php">script that generates KML files for primary and secondary schools in any council area in the country</a>. All that I ask is that you save the files to your server if you use them, so you don&#x2019;t cane my bandwidth!</p>
+
+<h3>Just in case you&#x2019;re interested&#x2026;</h3>
+
+<p>To get the list of councils for the above script, I did another bit of SPARQLing, this time using the <a href="http://services.data.gov.uk/statistics/sparql">Office of National Statistics SPARQL endpoint</a>. The query I used was as follows:</p>
+
+<p>`
+PREFIX rdfs: <a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a>
+SELECT ?authority ?label
+   WHERE {</p>
+
+<pre><code> ?authority
+   a http://statistics.data.gov.uk/def/administrative-geography/LocalAuthority .
+</code></pre>
+
+<p>?authority rdfs:label ?label ;
+   }
+ORDER BY ?label
+`</p>
+
+<p>This returns the authority label, as well as a unique URI.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/cautious-optimism-oclock-ordnance-survey-opening-up-data/">Cautious Optimism O&#8217;clock - Ordnance Survey Opening Up Data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-17T18:51:08+00:00" pubdate data-updated="true">Nov 17<span>th</span>, 2009</time>
+        
+         | <a href="/2009/11/cautious-optimism-oclock-ordnance-survey-opening-up-data/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>If you have an interest in open data, there&#x2019;s a pretty good chance that you&#x2019;ve heard <a href="http://nds.coi.gov.uk/content/Detail.aspx?ReleaseID=408663&amp;NewsAreaID=2">today&#x2019;s announcement that the public will have more access to Ordnance Survey data</a>. Details are a bit sketchy at the moment, but data set to be released includes boundary data, postcodes, and mid-scale mapping.</p>
+
+<p>Consultation will start soon on exactly how this will happen, but it&#x2019;s about bloomin&#x2019; time. It&#x2019;s especially good to see Stephen Timms, the Minister for Digital Britain ticking all the open data boxes with this little tit bit:</p>
+
+<blockquote><p>About 80 per cent of public sector data mentions a place. Making Ordnance Survey data more freely available will encourage more effective exploitation of public data by businesses, individuals and community organisations.</p></blockquote>
+
+<p>Which is exactly what a lot of &#x2018;us lot&#x2019; have been saying, open data is all well and good, but if the tools that we need to make the data really useful (such as postcode and boundary data) are locked up, then what&#x2019;s the point?</p>
+
+<p>The two datasets that really piqued my interest were boundary data and postcodes. Boundary data is probably one of the most ridiculous examples of OS&#x2019;s derived data conditions, because all political boundaries (local authorities, parish councils etc) were originally plotted on an Ordnance Survey map, this is classed as derived data - because it&#x2019;s derived data, OS own the copyright, so you can&#x2019;t legally use it in any way you choose.</p>
+
+<p>Even walking a boundary with a GPS device and plotting the output is verboten, because how would you know where a boundary was without looking at an OS map?</p>
+
+<p>Postcodes is an interesting one, and one I&#x2019;d like to know more about - If you&#x2019;re a regular reader of this blog, then you&#x2019;ll know that my folk devil de jour is the Royal Mail, who are the copyright holders of postcode data, and recently <a href="http://www.pezholio.co.uk/2009/10/one-step-forward-two-steps-back-ernest-marples-and-the-idiocy-of-the-royal-mail/">shut down ErnestMarples.com - provider of postcode data to many useful non-profit sites</a>. Now, if the Royal Mail have exclusive rights to postcode data, where do OS come in?</p>
+
+<p>My guess is that this dataset is the <a href="http://www.ordnancesurvey.co.uk/oswebsite/products/codepoint/">Codepoint product</a>. I&#x2019;m not sure how Codepoint differs from the Royal Mail offering, but it&#x2019;ll be interesting to find out. It could also be a potential use of the derived data rule for good, instead of evil - after all, the Royal Mail use OS maps to plot postcode data, so surely this is derived? (and therefore the intellectual property of OS, rather than the Royal Mail)</p>
+
+<p>This announcement also comes off the back of the ongoing plans to privatise Ordnance Survey, and hopefully means that lessons have been learned from the earlier &#x2018;sort-of-kind-of&#x2019; privatisation of the Royal Mail in 2000, which pretty much means the Government have little say in what the Royal Mail does with regard to PAF licensing.</p>
+
+<p>If Ordnance Survey do become a private organisation, then it&#x2019;s essential that, before selling them off, we make sure that any socially useful data they hold is put back into the hands of the public.</p>
+
+<p>I&#x2019;m excited (but cautiously so).</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/barcode-posters-the-second-coming/">Barcode Posters - the Second Coming</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-09T17:11:11+00:00" pubdate data-updated="true">Nov 9<span>th</span>, 2009</time>
+        
+         | <a href="/2009/11/barcode-posters-the-second-coming/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt="">With all this talk of data, and online, we can often lose sight of the real, physical world (as a certified iPhone addict, I know I do - there&#x2019;s been a few times I&#x2019;ve almost walked into a lampost due to me paying more attention to my phone than what&#x2019;s going on in front of me!) - digital is all very well, but how do we link this in with real life?</p>
+
+<p><a href="http://twitter.com/adrianshort">Adrian Short</a> (he of <a href="http://www.mashthestate.org.uk/">Mash the State</a> fame) recently blogged about <a href="http://mashthestate.wordpress.com/2009/09/28/guerilla-noticeboarding-the-council-with-barcode-posters/">his barcode posters site</a>, which allows you to change RSS feeds into printable documents with QR barcodes (those thingies above) attached to each article - people with smartphones that can read barcodes (iPhone, Android etc) can then scan the code and link directly to the article. It&#x2019;s almost like hyperlinks for real life.</p>
+
+<p>I&#x2019;ve had this idea on the back burner for a while now, but after tweeting about seeing the first new style Ratemyplace (a website I run which publishes food safety scores online) poster &#x2018;in the wild&#x2019; - I got this reply:</p>
+
+<p>[tweet url=http://twitter.com/tonypiper/status/5561369295]</p>
+
+<p>This made me think - it&#x2019;s a perfect fit for barcode posters - people can see the inspection certificate and scan the barcode to find more information. You can see an example of what I dun <a href="http://www.pezholio.co.uk/certificate.pdf">here</a></p>
+
+<p>Now, I know what you&#x2019;re thinking - &#x2018;but generating images server side is hard! It&#x2019;ll take me ages fiddling around with various libraries and I&#x2019;ll be pulling my hair out with frustration!&#x2019; - Not so - Thanks to the wonderful people at Google, all you need to do to generate a barcode for a given URL is this:</p>
+
+<p><code>http://chart.apis.google.com/chart?chs=125cht;=qrchl;={url-goes-here}</code></p>
+
+<p>You can then stick it in the src attribute of an IMG tag and display it on a page like so:</p>
+
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt=""></p>
+
+<p>(Make sure you encode the URL of the website either on the server or using this <a href="http://www.albionresearch.com/misc/urlencode.php">handy online url encoder</a>.)</p>
+
+<p>Simple innit? There&#x2019;s more explanation of the whys and wherefores of QR barcodes on the <a href="http://www.barcodeposters.com/">Barcode posters website</a>. Now get out there and barcode!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/impossible-possibities-a-wishlist-for-linked-data/">Impossible Possibilities - a Wishlist for Linked Data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-04T10:34:59+00:00" pubdate data-updated="true">Nov 4<span>th</span>, 2009</time>
+        
+         | <a href="/2009/11/impossible-possibities-a-wishlist-for-linked-data/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I&#x2019;ve been playing around with the <a href="http://data.ordnancesurvey.co.uk/">Ordnance Survey linked data</a> and, while it&#x2019;s not perfect, it&#x2019;s certainly a step in the right direction.</p>
+
+<p>It&#x2019;s got me thinking though - in an ideal world, where an &#x2018;information-wants-to-be-free&#x2019;-esque hippy such as myself could get <strong>all</strong> the data I wanted, what cool stuff could be added on to this dataset to make it <em>really</em> useful?</p>
+
+<ul>
+<li><strong>Shape files for all administrative regions</strong></li>
+</ul>
+
+
+<p>Yes, now this really is cloud cuckoo land, I know we can use the unit ID in combination with OpenSpace to display the layers, but, let&#x2019;s be honest, OpenSpace isn&#x2019;t great.</p>
+
+<p>As with the linked data, it&#x2019;s a step in the right direction, but the mapping (until you get down to street view) is not designed for screen, and the API is still a bit too buggy. I know there&#x2019;s also a few licensing issues that a couple of people aren&#x2019;t too comfortable with.  Besides, shouldn&#x2019;t we be able to use the platform that we want to use?</p>
+
+<ul>
+<li><strong>Postcodes in every administrative region</strong></li>
+</ul>
+
+
+<p>This is where things get <strong>really</strong> cool, imagine if in every resource, there was a list of every postcode contained in that area - for example, looking at the resource for the <a href="http://data.ordnancesurvey.co.uk/doc/7000000000010183">resource for Coleshill</a>, we could have listed every single postcode in that parish.</p>
+
+<p>This would mean that, once others started making datasets that used the OS linked data URIs as identifiers, a simple postcode search would reveal everything that was relevant to that area.</p>
+
+<p>Even better, every postcode could have its own URI (for example <a href="http://data.royalmail.co.uk/postcode/WS13+6YY">http://data.royalmail.co.uk/postcode/WS13+6YY</a> (now you know I&#x2019;m dreaming!)) which gave information about where that postcode was (lat/long, parish, police authority, council etc etc).</p>
+
+<p>This is just a taster to get some conversation going, but please feel free to add your own ideas in the comments. Forget about licensing, let&#x2019;s just imagine a brave new world of free data without limits and just go mad on this thing.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/who-said-social-media-cant-save-councils-money/">Who Said Social Media Can&#8217;t Save Councils Money?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-03T13:07:59+00:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/11/who-said-social-media-cant-save-councils-money/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Certainly not me! We as councils are constantly being asked to save money, and one big element of this is front facing customer services. It&#x2019;s estimated that it costs councils &#xA3;6.56 to deal with enquiries face to face, &#xA3;3.22 by telephone contact, and 27p for online *.</p>
+
+<p>So, imagine my joy when I get this tweet sent to <a href="http://twitter.com/lichfield_dc">@lichfield_dc</a>:</p>
+
+<p>[tweet url=http://twitter.com/JoshandArchie/status/5390162309]</p>
+
+<p>Now, we don&#x2019;t do roads, this is the responsibility of the county council, so I came back with this response:</p>
+
+<p>[tweet url=http://twitter.com/Lichfield_DC/status/5390256583]</p>
+
+<p>This is the exact kind of response they&#x2019;d get by calling us up, so the council&#x2019;s Twitter account has made a cashable saving of &#xA3;3.22 today! It&#x2019;s baby steps, but it just goes to show that actively monitoring your Twitter presence can reap some real benefits.</p>
+
+<ul>
+<li>Thanks to numerous people on Twitter for getting these stats for me!</li>
+</ul>
+
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/adventures-in-sparql/">Adventures in SPARQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-21T15:45:25+01:00" pubdate data-updated="true">Oct 21<span>st</span>, 2009</time>
+        
+         | <a href="/2009/10/adventures-in-sparql/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In case you&#x2019;ve been living under a rock for the past month or so (or actually have a life), then you&#x2019;ll have noticed that the cabinet office have started to release a big load of open data to a select few developers to have a play.</p>
+
+<p>Much of this data is still in very &#x2018;flat&#x2019; formats (such as Excel docs and the like), but some data is being released in RDFa format, the preferred format of the semantic web.</p>
+
+<p>The most interesting of these datasets has been the education one, giving me (and other developers) the ability to get information about schools in an open format. I&#x2019;ve been playing with this data for a bit, and now (I think) I might have something useful.</p>
+
+<p>The key way of interacting with it is using a language called SPARQL, which is very similar to SQL, but with the web of data in mind. An example query for the education dataset is as follows:</p>
+
+<p><code>
+prefix sch-ont: http://education.data.gov.uk/ontology/school#
+SELECT ?name WHERE {
+?school a sch-ont:School;
+sch-ont:establishmentName ?name;
+sch-ont:districtAdministrative
+http://education.data.gov.uk/placeholder-id/administrativeDistrict/Lichfield ;
+}
+ORDER BY ?name
+</code></p>
+
+<p>This gets the names of all the educational establishments (schools, nurseries etc) in Lichfield District. You can <a href="http://services.data.gov.uk/education/sparql">give it a try yourself on the public facing SPARQL endpoint</a>.</p>
+
+<p>What I wanted to do though, was to get all the primary or secondary schools within a 2 mile radius of a postcode. This was a little harder, but perfectly doable.</p>
+
+<p>As well as general details (such as address, name of school etc) and more detailed information (such as capacity, inspection details etc), the dataset also has the easting and northing of the school. Therefore, to get all Primary Schools within a 2 mile radius of a point with an easting of 411021 and a northing of 307291, I needed to do the following query:</p>
+
+<p><code>
+prefix sch-ont: http://education.data.gov.uk/ontology/school#
+SELECT ?name ?address1 ?address2 ?postcode ?town ?easting ?northing ?reference WHERE {
+?school a sch-ont:School;
+sch-ont:establishmentName ?name;
+sch-ont:easting ?easting ;
+sch-ont:northing ?northing ;
+sch-ont:uniqueReferenceNumber ?reference ;
+sch-ont:phaseOfEducation http://education.data.gov.uk/ontology/school#PhaseOfEducation_Primary .
+FILTER (?easting  414239  ?easting  411021  ?northing  310509
+ ?northing  307291)
+}
+</code></p>
+
+<p>This gets the name, easting, northing and reference number of every school within a 2 mile (3201-ish metre) box, with the original easting and northing as the midpoint.</p>
+
+<p>I&#x2019;ve given it a test here (a bit of naughtiness is required using the Google Maps API to get the latitude and longitude of the postcode, but it&#x2019;s the only way at the moment!), so please feel free to try it out.</p>
+
+<p>Once you submit the form you&#x2019;ll get a list of all the primary and secondary schools in that area, as well as a link to more info on the Edubase site.</p>
+
+<p>Postcode</p>
+
+<p>School Type</p>
+
+<p>Primary
+Secondary</p>
+
+<p>I&#x2019;d be interested to know your thoughts, so please feel free to comment! :)</p>
+
+<p>There&#x2019;s also a few more example queries on the <a href="http://blogs.talis.com/n2/archives/818">Talis Blog</a>, so if you&#x2019;re that way inclined I heartily recommend having a play.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/4/">&larr; Older</a>
+    
+    <a href="archives">Blog Archives</a>
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

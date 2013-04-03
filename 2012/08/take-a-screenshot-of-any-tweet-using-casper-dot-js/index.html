@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Take a Screenshot of Any Tweet Using Casper.js - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="While Twitter do offer a way of embedding tweets, there&#x2019;s no guarantee that this feature will stay in its current form, and equally no &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Take a Screenshot of Any Tweet Using Casper.js</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-29T21:46:00+01:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>While Twitter do offer <a href="https://support.twitter.com/articles/20169559-how-to-embed-a-tweet-on-your-website-or-blog">a way of embedding tweets</a>, there&#x2019;s no guarantee that this feature will stay in its current form, and equally no guarantee that if the tweet is deleted, the embed will continue to work, which is a potential headache for journalists and bloggers.</p>
+
+<p>With this in mind, I&#x2019;ve developed <a href="https://gist.github.com/3518514">a quick solution to the problem</a>,  using the fantastic headless browser <a href="http://phantomjs.org/">Phantom.js</a> and <a href="http://casperjs.org/">Phantom.js utility Casper.js</a>.</p>
+
+<p>Simply put, all the solution does is allow you to take a simple screenshot in png format of any tweet you give the URL for.</p>
+
+<p>To get Phantom.js and Casper.js running, first <a href="http://code.google.com/p/phantomjs/wiki/Installation">install phantom.js</a> and then <a href="http://casperjs.org/installation.html">casper.js</a> (I won&#x2019;t go into the details here).</p>
+
+<p>Next, download the script to your machine by running:</p>
+
+<pre><code>wget https://raw.github.com/gist/3518514/51c87bc6e59040948b7aebe08cb73e500e0783e5/tweetshot.js
+</code></pre>
+
+<p>You will then be able to grab a screenshot by running the command:</p>
+
+<pre><code>casperjs tweetshot.js {tweet permalink} {output filename}
+</code></pre>
+
+<p>Your screenshot will then be saved with the filename you requested (with a .png extension).</p>
+
+<p>And that&#x2019;s it really! Ideally I&#x2019;d like to wrap it in a simple Sinatra app, so you don&#x2019;t have to have any technical knowledge to get a link, but that&#x2019;s something for another day.</p>
+
+<p>If anyone has any improvements to suggest, or would like to build on this, please let me know. I&#x2019;d love to hear what you can do with this.</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-29T21:46:00+01:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/media/'>Media,</a>, <a class='category' href='/blog/categories/social/'>Social</a>, <a class='category' href='/blog/categories/javascript/'>javascript,</a>, <a class='category' href='/blog/categories/stuff/'>stuff</a>, <a class='category' href='/blog/categories/techy/'>techy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/" data-via="pezholio" data-counturl="http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/06/make-your-own-food-safety-twitter-bot-with-scraperwiki-and-ifttt/" title="Previous Post: Make Your Own Food Safety Twitter Bot With Scraperwiki and Ifttt">&laquo; Make Your Own Food Safety Twitter Bot With Scraperwiki and Ifttt</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/09/local-gds-a-skunkworks-for-local-government/" title="Next Post: Local GDS: A Skunkworks for Local Government?">Local GDS: A Skunkworks for Local Government? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/';
+        var disqus_url = 'http://pezholio.github.com/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mashing Up Planning Data With Google Maps - Part 1.5 - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="I will, as promised go into some more advanced coding stuff later on this week, but first, here&#x2019;s a few tips for people who might not be &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2009/02/mashing-up-planning-data-with-google-maps-part-15/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mashing Up Planning Data With Google Maps - Part 1.5</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-02T05:57:33+00:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p><img src="http://www.pezholio.co.uk/planningalerts.png" alt="Planning Alerts Logo"> I will, as promised go into some more advanced coding stuff later on this week, but first, here&#x2019;s a few tips for people who might not be javascript savvy, or for whatever reason might not have code access to their sites (thanks to Andrew Beeken (<a href="http://twitter.com/abeeken">@abeeken</a>) from Lincoln City Council)</p>
+
+<p>Simply follow these steps and get a planning application map <a href="http://www.lincoln.gov.uk/Info_page_two_pic_2_det.asp?art_id=12757">like this</a> on your own site!</p>
+
+<h3>Step 1: Get the your RSS feed</h3>
+
+<p>As detailed in Part 1, feeds are returned in this format:</p>
+
+<p><code>http://www.planningalerts.com/api.php?call=authorityauthority;=**[some name]**</code></p>
+
+<p>Just replace [some name] with the name of your council (without the &#x2018;district / borough council&#x2019; suffix) for example:</p>
+
+<p><a href="http://www.planningalerts.com/api.php?call=authority&amp;authority=Tamworth">http://www.planningalerts.com/api.php?call=authority=Tamworth</a></p>
+
+<p>Once you&#x2019;ve got an address, test it out in your browser and move on</p>
+
+<h3>Step 2: Get your code</h3>
+
+<p>Next we need to get some code, first, with the RSS feed link copied to your clipbboard, go to the <a href="http://maps.google.co.uk">Google Maps Website</a>, paste the feed link into the search box
+and click the &#x2018;Search Maps&#x2019; button. The feed will show up in the map as below:</p>
+
+<p><img src="http://pezholio.co.uk/images/maps1.gif" alt="Screenshot of Google Maps after feed link has been entered"></p>
+
+<p>Once that&#x2019;s done, click on the &#x2018;link&#x2019; link on the right hand side of the screen and a window will appear. Select all the code in the second box (marked &#x2018;Paste HTML to embed in website&#x2019;)</p>
+
+<p><img src="http://pezholio.co.uk/images/maps2.gif" alt="Screenshot of code box to select"></p>
+
+<p>If you want to change the size of the map first, you can click on &#x2018;Customize and preview embedded map&#x2019; and follow the onscreen prompts</p>
+
+<h3>Step 3: Add the code to your site!</h3>
+
+<p>Well, pretty self explanatory really! Armed with the code, go into your CMS and add the code!</p>
+
+<p>Any questions, comments, suggestions etc, please let me know.</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-02T05:57:33+00:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/council-stuff/'>Council Stuff</a>, <a class='category' href='/blog/categories/web-development/'>Web Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/02/mashing-up-planning-data-with-google-maps-part-15/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/02/mashing-up-planning-data-with-google-maps-part-15/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/01/mashing-up-planning-data-with-google-maps/" title="Previous Post: Mashing Up Planning Data With Google Maps">&laquo; Mashing Up Planning Data With Google Maps</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/02/oh-erm-hi-by-the-way/" title="Next Post: Oh, Erm Hi by the Way!">Oh, Erm Hi by the Way! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2009/02/mashing-up-planning-data-with-google-maps-part-15/';
+        var disqus_url = 'http://pezholio.github.com/2009/02/mashing-up-planning-data-with-google-maps-part-15/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

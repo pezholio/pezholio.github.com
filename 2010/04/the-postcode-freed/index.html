@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Postcode - Freed! - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="Well, it&#x2019;s finally happened, Ordnance Survey have gone from being the bad guy of the internet, a big, bumbling behemoth, squishing innovation &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2010/04/the-postcode-freed/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Postcode - Freed!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-08T10:35:27+01:00" pubdate data-updated="true">Apr 8<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>Well, it&#x2019;s finally happened, Ordnance Survey have gone from being the bad guy of the internet, a big, bumbling behemoth, squishing innovation wherever it goes, to being the darling of the internet, throwing out free data wherever it goes (well, sort of).</p>
+
+<p>As well as lots of mapping data being released, it also release Codepoint Open, which matches every postcode up a geographical location, it&#x2019;s what I, along with the <a href="http://www.ernestmarples.com/">oh-so-clever uber trolling project Ernest Marples</a> have been banging on about for ages. Now, finally, developers can get a user&#x2019;s location details based on one thing that almost everyone in the UK is guaranteed to know, their postcode - this can then be used to get all sorts of useful information, like their nearest school, fire station, police station, cafe, tanning salon (or whatever).</p>
+
+<p>As well as matching postcodes to a physical location, CodePoint Open also matches postcodes to local authority information, something which, in the past, I&#x2019;ve used the <a href="http://www.pezholio.co.uk/2010/03/postcode-to-councillor-in-one-easy-step/">NESS Data Exchange for</a>, but I&#x2019;ll probably migrate to this, &#x2018;cos it&#x2019;s easier.</p>
+
+<p>Anyway, although the data has been released and is out there, it&#x2019;s in a whopping 250mb CSV file, so if anyone wants to use it, they need to download a local copy and import it into a database for their own use. I wanted to do this, but thought, instead of everyone doing this, why don&#x2019;t I make it easier for everyone (myself included) and wrap it in a web service?</p>
+
+<p>That is wot I dun - enter <a href="http://www.uk-postcodes.com">UK Postcodes</a>. Initially I built this over the Easter break, in a few snatched moments between eating easter eggs and making sure my <a href="http://twitter.com/dotty_dog">new puppy</a> didn&#x2019;t wee anywhere. On the surface it&#x2019;s very simple, a request like this:</p>
+
+<p><code>http://www.uk-postcodes.com/postcode/WS136YY.xml</code></p>
+
+<p>will give you all the information about WS13 6YY in XML format, including latitude/longitude, easting/northing, a Geo Hash URI, as well as the county council (if applicable), district council and ward the postcode is in. You can also have JSON, CSV and RDF just by changing the extension (Thanks to <a href="http://www.jenitennison.com/blog/">Jeni Tennison</a> for her help with the latter format!).</p>
+
+<p>After posting the results of my fiddling on the <a href="http://groups.google.com/group/uk-government-data-developers">UK government Data Developers mailing list</a> - I got a lot of helpful people suggesting other ways I could interact with the data, so I know have methods for finding the nearest postcodes to a point, as well as reverse geocoding (going from a lat/lng point to a postcode) - there&#x2019;s more information on the <a href="http://www.uk-postcodes.com/api.php">API page</a>.</p>
+
+<p>That&#x2019;s basically it, I&#x2019;m always happy to hear feedback, so if you&#x2019;ve got any suggestions or feedback (good or bad!), please feel free to comment below!</p>
+
+<p>(Oh, and a massive thanks goes out to <a href="http://twitter.com/adrianshort">Adrian Short</a> (actually it was Adrian who created the torrent of the data - proving that file sharing isn&#x2019;t always used for nefarious purposes :cough:#debill:cough:) <a href="http://twitter.com/dracos">Matthew Somerville</a>, who translated all those Eastings and Northings in the original dataset to Latitude and Longitude - you can download his version from the <a href="http://parlvid.mysociety.org:81/os/">MySociety mirror</a>.)</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-08T10:35:27+01:00" pubdate data-updated="true">Apr 8<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/open-data/'>Open Data</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2010/04/the-postcode-freed/" data-via="pezholio" data-counturl="http://pezholio.github.com/2010/04/the-postcode-freed/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/03/postcode-to-councillor-in-one-easy-step/" title="Previous Post: Postcode to Councillor in One Easy Step!">&laquo; Postcode to Councillor in One Easy Step!</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/05/ringing-mapping-the-changes/" title="Next Post: Ringing Mapping the Changes">Ringing Mapping the Changes &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2010/04/the-postcode-freed/';
+        var disqus_url = 'http://pezholio.github.com/2010/04/the-postcode-freed/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

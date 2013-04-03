@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Council | Pezholio]]></title>
+  <link href="http://pezholio.github.com/blog/categories/council/atom.xml" rel="self"/>
+  <link href="http://pezholio.github.com/"/>
+  <updated>2013-04-03T08:40:07+01:00</updated>
+  <id>http://pezholio.github.com/</id>
+  <author>
+    <name><![CDATA[Pezholio]]></name>
+    <email><![CDATA[pezholio@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Make Your Own Food Safety Twitter Bot With Scraperwiki and Ifttt]]></title>
+    <link href="http://pezholio.github.com/2012/06/make-your-own-food-safety-twitter-bot-with-scraperwiki-and-ifttt/"/>
+    <updated>2012-06-21T10:25:00+01:00</updated>
+    <id>http://pezholio.github.com/2012/06/make-your-own-food-safety-twitter-bot-with-scraperwiki-and-ifttt</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>Food safety is a subject very close to my heart, and something I can get very geeky and passionate about.</p>
+
+<p>This isn&#x2019;t because I&#x2019;ve ever been struck down by a particularly nasty case of the runs, but because I&#x2019;ve been very heavily involved in the publication of online food safety inspections reports since 2006, when I worked on <a href="http://www.ratemyplace.org.uk/">Ratemyplace</a>, the food safety inspection website for Staffordshire councils.</p>
+
+<p>Because of my work with Ratemyplace, I&#x2019;ve had a lot of people asking &#x201C;can we get Ratemyplace in my council area?&#x201D; It&#x2019;s not really up to me, but I have put something together that will replicate one aspect of Ratemyplace&#x2019;s functionality - Twitter alerts, for your council area without you having to write one line of code.</p>
+
+<h2>Step 1 - Get the data</h2>
+
+<p>The first thing you&#x2019;ll need to do is look on the <a href="http://ratings.food.gov.uk/">national Food Ratings website</a>, to see if your council is there. More are being added as time goes on, so if your council isn&#x2019;t there, there&#x2019;s a chance they&#x2019;ll come on board in the near future. The best way to do this is have a look on the <a href="http://ratings.food.gov.uk/open-data/en-GB">open data page</a> and scan down the list (it&#x2019;s divided into regions, which makes it easier).</p>
+
+<p>If your council is there, click on the link marked &#x2018;English language&#x2019; (which is the link to the data), and copy the address from the address bar. Armed with this link, you&#x2019;re then ready for the next step.</p>
+
+<h2>Step 2 - Make your scraper</h2>
+
+<p><em>I know what you&#x2019;re saying, &#x2018;but you said this wouldn&#x2019;t involve coding!&#x2019; Worry not, dear reader, this won&#x2019;t hurt a bit.</em></p>
+
+<p>Next, you&#x2019;ll need to <a href="https://scraperwiki.com/login/#signup">create an account on ScraperWiki</a>. Once, you&#x2019;ve done that, go to <a href="https://scraperwiki.com/scrapers/food_safety_inspections_scraper_template/">this scraper on ScraperWiki</a>, and click &#x2018;Copy&#x2019; as highlighted below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki1.png" alt="Copying the scraper"></p>
+
+<p>You&#x2019;ll then be presented with the inner workings of the scraper, but don&#x2019;t worry, all you need to do is replace the text that says <code>{ENTER YOUR URL HERE}</code> with the url you copied earlier. Once that&#x2019;s done, you can rename the scraper to something more meaningful by clicking on the title (as shown), and then click &#x2018;Save Scraper&#x2019; at the bottom right of the screen.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki2.png" alt="Editing and saving the scraper"></p>
+
+<p>Once your scraper is saved, you can click &#x2018;Back to scraper overview at the top right of the page&#x2019; to see your scraper&#x2019;s page. Now click edit, under the &#x2018;Schedule&#x2019; section as highlighted below, and choose the &#x2018;Run every day&#x2019; option.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki3.png" alt="Setting the schedule"></p>
+
+<p>Then click the &#x2018;Run now&#x2019; button just above the &#x2018;Schedule&#x2019; section, and go an make a cup of tea. Depending on how busy Scraperwiki is, this should take around half an hour.</p>
+
+<h2>Step 3 - Making your feed</h2>
+
+<p>Once you&#x2019;ve had a cup of tea, refresh the webpage with your scraper in, and it should look something like this:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki4.png" alt="A working scraper"></p>
+
+<p>This means the scraper has done its magic and you can now more on to the next step. Click the &#x2018;Explore with API&#x2019; button as marked below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki5.png" alt="Explorer with API link"></p>
+
+<p>Now, copy this code below:</p>
+
+<pre><code>select name || ", " || address as title, "Rating: " || rating  as description, link as link, lng || " " || lat as "georss:point", date from swdata  order by date desc limit 10
+</code></pre>
+
+<p>and paste it into the box marked &#x2018;query in SQL&#x2019;, then click &#x2018;copy&#x2019; as shown below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki6.png" alt="Making your feed"></p>
+
+<p>Paste it into a text editor and add <code>format=rss2</code> to the end of the URL. You now have an RSS feed, ready to take along to <a href="http://ifttt.com">Ifttt</a></p>
+
+<h2>Step 4 - Tweet your feed!</h2>
+
+<p>Next, pop along to <a href="http://ifttt.com">Ifttt</a> and create an account. You&#x2019;ll also need a Twitter account, either your own, or a specific Twitter account for this purpose (I recommend the latter).</p>
+
+<p>In true Blue Peter style, I&#x2019;ve prepared a &#x2018;recipe&#x2019; for you to follow on Ifttt. Once you&#x2019;re logged in to Ifttt, <a href="http://ifttt.com/recipes/41648">go to the recipe</a>, click &#x2018;Activate&#x2019; under the Twitter Channel heading to connect your Twitter account (make sure you&#x2019;re logged in to the right account!), follow the instructions on the window that pops up, then click &#x2018;Done&#x2019;.</p>
+
+<p>Next, scroll down and in the box marked &#x2018;Feed URL&#x2019;, and copy and paste the URL you created earlier.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/ifttt.png" alt="Ifttt"></p>
+
+<p>The next box shows the format that the Tweet will be posted in, you can fiddle with this if you want, or just leave it as is.</p>
+
+<p>That&#x2019;s it! Just click &#x2018;Use Recipe&#x2019; and every time the ScraperWiki scraper picks up a new inspection, your Twitter account will tweet it!</p>
+
+<p>If you want to see it in action, check out <a href="http://twitter.com/eatsafewalsall">@EatSafeWalsall</a>. I&#x2019;ve been running this for a while, and it seems to be picking up quite a few followers!</p>
+
+<p>If you do use this recipe, or have any problems following my none-too-lucid instructions, please let me know in the comments. Have fun! :)</p>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

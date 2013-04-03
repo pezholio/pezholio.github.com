@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Postcode to Councillor in One Easy Step! - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="Finding out who your councillor is isn&#x2019;t always easy is it? Even if you know which council provides your services, wards often have odd &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2010/03/postcode-to-councillor-in-one-easy-step/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Postcode to Councillor in One Easy Step!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-15T16:58:34+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>Finding out who your councillor is isn&#x2019;t always easy is it? Even if you know which council provides your services, wards often have odd sounding names, and council websites don&#x2019;t always have an easy postcode search. With this in mind, and now the <a href="http://neighbourhood.statistics.gov.uk/dissemination/Info.do?page=NDE.htm">Office of National Statistics have released a brand new API</a> and because I&#x2019;ve got a day off looking after <a href="http://twitter.com/dotty_dog">my new puppy</a>, I decided to have a play and see if I could make it easier.</p>
+
+<p>First I <a href="http://neighbourhood.statistics.gov.uk/HTMLDocs/downloads/QuickStart-Guide-V2.0.pdf">trawled through the documentation</a> to find the best API methods for my needs, it turns out that this URL did what I needed:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/SearchSByAByPostcode?LevelTypeId=14Postcode;=**{POSTCODE}**</code></p>
+
+<p>This basically asks the NeSS Data Exchange to return the details of a ward (which in Office of National Statistics language is level type ID 14) which a particular postcode is in. Helpfully, I don&#x2019;t get the SNAC ID straight away (you&#x2019;ll see why I need this later), so I have to get the ONS internal ID, and make another API call:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/GetAreaDetail?AreaId=**{AREA ID}**</code></p>
+
+<p>This gives a whole bunch of extra info about the area, including the SNAC ID (which is called the ExtCode). Once I have that, I can then move across to OpenlyLocal, where I can get the councillor&#x2019;s information:</p>
+
+<p><code>http://openlylocal.com/wards/snac_id/**SNAC ID**.xml</code></p>
+
+<p>Once I&#x2019;ve got this info, I can then display it all, <a href="http://pezholio.co.uk/councillor.php?postcode=ws14+9sq">like so</a>! Obviously if the council isn&#x2019;t on OpenlyLocal, then we can&#x2019;t show their details, but we can say who their council is and what ward they&#x2019;re in, and then, with a bit more jiggery pokery on the OpenlyLocal side, we can direct them to their local authority&#x2019;s website, <a href="http://pezholio.co.uk/councillor.php?postcode=b463ld">like so</a>!</p>
+
+<p><a href="http://pezholio.co.uk/councillor.php">Give it a try yourself</a>, and let me know any feedback in the ol&#x2019; comments below. Obviously, this only shows your district council if you&#x2019;re in a two tier council, but I&#x2019;m working on getting county council info later :)</p>
+
+<p>Oooh, it&#x2019;s worth pointing out that you need a <a href="http://www.opsi.gov.uk/click-use/index.htm">PSI click-use licence </a> to publish the Data Exchange data on your own website, but it&#x2019;s a doddle to apply for and goes live instantly!</p>
+
+<p><strong>Update:</strong> I&#x2019;ve published the code on <a href="http://github.com/pezholio/Who-is-my-councillor">Github</a> in case you want to see how I did it!</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-15T16:58:34+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/open-data/'>Open Data</a>, <a class='category' href='/blog/categories/stuff/'>stuff</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2010/03/postcode-to-councillor-in-one-easy-step/" data-via="pezholio" data-counturl="http://pezholio.github.com/2010/03/postcode-to-councillor-in-one-easy-step/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/01/royal-fail-part-3-response-received-and-it-aint-good/" title="Previous Post: Royal Fail Part 3: Response Received (and It Ain't Good)">&laquo; Royal Fail Part 3: Response Received (and It Ain't Good)</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/04/the-postcode-freed/" title="Next Post: The Postcode - Freed!">The Postcode - Freed! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2010/03/postcode-to-councillor-in-one-easy-step/';
+        var disqus_url = 'http://pezholio.github.com/2010/03/postcode-to-councillor-in-one-easy-step/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="It&#x2019;s been a while since my last post about local spending data, and, since then, our finance team have been busy beavering away behind the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/page/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/spending-data-beyond-the-csv/">Spending Data - Beyond the CSV</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-14T10:00:51+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2011</time>
+        
+         | <a href="/2011/01/spending-data-beyond-the-csv/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/01/csv.png" alt="">It&#x2019;s been a while since my <a href="http://www.pezholio.co.uk/2010/08/local-spending-data-a-few-ideas/">last post about local spending data</a>, and, since then, our finance team have been busy beavering away behind the scenes to get our own spending data out of the council&#x2019;s finance systems.</p>
+
+<p>However, from the outset, I was really pleased that both our finance people and our chief exec wanted to go beyond just whacking a CSV (or worse, a PDF) on the internet and show our commitment to transparency by putting the data on the web in an easy, human readable format.</p>
+
+<p>Armed with a few CSVs, a Macbook Pro and some server space, I was put to task, and the <a href="http://spending.lichfielddc.gov.uk/">the results can be seen here</a>. Users can navigate by the various parts of the cost code (called &#x201C;Department&#x201D;, &#x201C;Type&#x201D; and &#x201C;Subject&#x201D;), as well as by month and supplier.</p>
+
+<p>As well as human readable formats, almost every view of the data has an XML, JSON, CSV and RDF equivalent, achieved either by putting the relevant extension on the end, or through <a href="http://en.wikipedia.org/wiki/Content_negotiation">content negotiation</a>.</p>
+
+<p>The user interface had been heavily influenced by <a href="http://openlylocal.com/councils/spending">OpenlyLocal</a> (after all, if it ain&#x2019;t broke, why fix it?) and, as well as feeding our data in to OpenlyLocal, we also take a little bit away. When data is imported into OpenlyLocal, the system does some clever data matching to match company names to real life entities on <a href="http://opencorporates.com/">Open Corporates</a>. We have a batch job that takes that information and puts it on our spending system - <a href="http://spending.lichfielddc.gov.uk/supplier/p-casey-land-reclamation-ltd.html">you can see an example here</a>. This is an example of how open data cuts both ways, by sharing our data, we can improve it.</p>
+
+<p>Also, thanks to the wonderful people at <a href="http://www.talis.com/">Talis</a>, we have our RDF data in a triple store, so it can be queried, both through SPARQL queries and a free text search, making the data even more useful from the off. I&#x2019;m hoping to put together a tutorial in SPARQL soon, both here and on the Lichfield District Council website, which should hopefully demystify the process a bit more.</p>
+
+<p>Finally, I&#x2019;m hoping to open source the code (once it&#x2019;s tidied up a bit), so of you&#x2019;re from a local authority and want to make your spending data a little more clear to Joe Public, then you can benefit from my work too!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/11/grit-bins-your-help-needed/">Grit Bins - Your Help Needed!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-12T10:28:36+00:00" pubdate data-updated="true">Nov 12<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/grit-bins-your-help-needed/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>During the <a href="http://lichhack.eventbrite.com/">Lichfield Hacks and Hackers day</a> yesterday (bigger blog post to come on that later) - I was gifted a list of <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en">grit bins in Lichfield District</a>, I got very excited about this, but my excitement was quickly dampened when I realised that there was no geographical data in the list, just road names and a vague location.</p>
+
+<p>However, I then thought &#x2018;not to worry, I can just ask people who live nearby to geolocate them on their phones and add them to a Google Doc&#x2019;, I asked a <a href="http://twitter.com/robthedog">@robthedog</a> (who lives in a village north of the district) if he could do a few when he got home, his reply was &#x2018;I can do one now&#x2019;:</p>
+
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2010/11/gritbin-300x158.png" alt="Grit Bin on Google Street View"></p>
+
+<p>Of course! Google Street view! This is where you lot come in. I&#x2019;m going to crowdsource the location of these grit bins (I&#x2019;ve <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en#gid=0">already done a few myself</a>) - to help, all you need to do is follow a few simple steps:</p>
+
+<ol>
+<li><p>Open up <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en#gid=0">this Google document</a></p></li>
+<li><p>Drag <a href="javascript:void(prompt('',gApplication.getMap(">this bookmarklet to your browser&#x2019;s toolbar</a>.getCenter()));)</p></li>
+<li><p>Open up <a href="http://maps.google.co.uk">Google Maps</a> and search for a road name and town / village which doesn&#x2019;t have a lat/lng yet</p></li>
+<li><p>Drag the little yellow street view man (<a href="http://www.pezholio.co.uk/?attachment_id=405">this guy</a>) to the map and have a look round Street View for the grit bin</p></li>
+<li><p>Once you&#x2019;re right by it - zoom out of Street View and click the bookmarklet - a window will pop up with the lat/lng - you can then copy and paste it and enter it into the Google doc!</p></li>
+</ol>
+
+
+<p>It&#x2019;s that simple! If you could do just a couple, I&#x2019;ll be forever in your debt (I might buy you a pint if I see you in the flesh too!)</p>
+
+<p>Once it&#x2019;s done, I&#x2019;ll be able to build a handy map of grit bins in the area and hopefully save a few slips and falls (as well as a few costly calls to our contact centre!). There&#x2019;s 87of them, and, as I&#x2019;ve already done 10, it should be long before I&#x2019;ve got them all.</p>
+
+<p>Thanks again, you lovely people you!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/council-linked-data/">First Steps to Councils Publishing Their Own Linked Data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-06T12:17:33+01:00" pubdate data-updated="true">Sep 6<span>th</span>, 2010</time>
+        
+         | <a href="/2010/09/council-linked-data/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>On Friday, I toddled along to London for a bit of a chat about local spending data, organised by <a href="http://www.legsb.gov.uk/Home.aspx">LeGSB</a>, the local government e-Standards body. In particular we looked at how councils can publish their spending data in a linked data format. It was an interesting day, and much of the work seems to have already been done by folks much cleverer than myself.</p>
+
+<p>However, at the end of the day, Paul Davidson (the Director of Standards at LeGSB) raised an interesting topic. At the moment, much of the <em>describing</em> of councils in the linked data world seems to be done by external bodies, such as <a href="http://statistics.data.gov.uk">The Office for National Statistics</a> and <a href="http://data.ordnancesurvey.co.uk">Ordnance Survey</a>, and often, this isn&#x2019;t always the best fit, with the data referring to geographical regions, rather than councils themselves.</p>
+
+<p>Paul then made the point that really, it should be the councils themselves that describe who they are, rather than some arbitrary body, after all, there is no one better placed to know about the council than the council themselves! We then talked very briefly about the possibility of councils minting their own URIs and publishing some RDF with some information about themselves (such as contact details etc). Other organisations and people can then use these URIs to refer to the councils in their data.</p>
+
+<p>I&#x2019;ve been mulling this over over the weekend, and I fired off an email this morning suggesting that, rather than publishing a page of RDF, people simply add data to their council homepages, either as RDFa or metadata (although I&#x2019;m not sure how you&#x2019;d do the latter!). People could then use their council homepage URLs as URIs (perhaps with #id at the end of the URI, to make the URI for the council different to the one for the page).</p>
+
+<p>With this in mind I&#x2019;ve knocked up a sample dataset for Lichfield District Council using various ontologies from around the linked data web (including FOAF, vCard, Chris Taggart&#x2019;s Openly Local ontology and a bit of the <a href="http://www.epimorphics.com/public/vocabulary/org.html">Organizational (sic) Ontology</a>). I&#x2019;ve also <a href="http://sameas.org/">sameAs</a>ed to the <a href="http://statistics.data.gov.uk/">National Statistics Dataset</a>, <a href="http://openlylocal.com/">Openly Local</a> and <a href="http://openlylocal.com/">DBpedia</a>:</p>
+
+<p>`
+?xml version=&#x201D;1.0&#x201D;?&gt;
+rdf:RDF xmlns:rdf=&#x201D;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#x201D;
+  xmlns:skos=&#x201D;http://www.w3.org/2004/02/skos/core#&#x201D;
+  xmlns:rdfs=&#x201D;http://www.w3.org/2000/01/rdf-schema#&#x201D;
+  xmlns:owl=&#x201D;http://www.w3.org/2002/07/owl#&#x201D;
+  xmlns:foaf=&#x201D;http://xmlns.com/foaf/0.1/&#x201D;
+  xmlns:dct=&#x201D;http://purl.org/dc/terms/&#x201D;
+  xmlns:vcard=&#x201D;http://www.w3.org/2006/vcard/ns#&#x201D;
+  xmlns:administrative-geography=&#x201D;http://statistics.data.gov.uk/def/administrative-geography/&#x201D;
+  xmlns:openlylocal=&#x201D;http://openlylocal.com/info/vocab#&#x201D;
+  xmlns:org=&#x201D;http://www.w3.org/ns/org#&#x201D;&gt;
+rdf:Description rdf:about=&#x201D;http://www.lichfielddc.gov.uk/#id&#x201D;&gt;</p>
+
+<pre><code>    rdfs:labelLichfield District Council/rdfs:label 
+    vcard:organisation-nameLichfield District Council/vcard:organisation-name 
+    rdf:type rdf:resource="http://openlylocal.com/info/vocab#DistrictAuthority"/ 
+    rdf:type rdf:resource="http://www.w3.org/ns/org#FormalOrganization"/ 
+    skos:notation rdf:datatype="http://statistics.data.gov.uk/def/administrative-geography//StandardCode"41UD/skos:notation
+    foaf:mboxmailto:enquiries@lichfielddc.gov.uk/foaf:mbox 
+    foaf:homepage rdf:resource="http://www.lichfielddc.gov.uk"/ 
+    foaf:phone rdf:resource="tel:+44-1543-308999"/ 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://twitter.com/Lichfield_DC" 
+    foaf:accountServiceHomepage rdf:resource="http://twitter.com/"/ 
+    foaf:accountNameLichfield_DC/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://www.facebook.com/lichfielddc" 
+    foaf:accountServiceHomepage rdf:resource="http://www.facebook.com/"/ 
+    foaf:accountNameLichfield District Council/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+vcard:ADR rdf:parseType="Resource" 
+  vcard:ExtaddDistrict Council House, Frog Lane, Lichfield WS13 6YY/vcard:Extadd 
+  vcard:CountryEngland/vcard:Country 
+  vcard:postal-code rdf:resource="http://www.uk-postcodes.com/postcode/WS136YY.rdf" / 
+/vcard:ADR 
+    administrative-geography:coverage rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000014797"/ 
+    owl:sameAs rdf:resource="http://statistics.data.gov.uk/doc/local-authority/41UD"/ 
+    owl:sameAs rdf:resource="http://openlylocal.com/councils/156.rdf"/ 
+    owl:sameAs rdf:resource="http://dbpedia.org/resource/Lichfield_%28district%29"/ 
+</code></pre>
+
+<p>/rdf:Description&gt;
+/rdf:RDF&gt;
+`</p>
+
+<p>It&#x2019;s not perfect, but it&#x2019;s a start, there&#x2019;s 24 triples there and I&#x2019;m sure there could be more. Only problem is, I&#x2019;m not a linked data expert, so I&#x2019;m looking for a bit of feedback both on what I&#x2019;ve done, but also what I could add - For example, I could add the chief executive and leader of the council - but I&#x2019;m not sure how I&#x2019;d do it!</p>
+
+<p>Feedback from non-linked data experts is welcome too - especially those at the coal face of local gov - if there was a step by step guide to doing this, could you do it? (i.e. have you got access to add metadata to your homepage) and, more importantly, would you do it?</p>
+
+<p><strong>UPDATE</strong> I&#x2019;ve now published the final(ish) version at <a href="http://www.lichfielddc.gov.uk/lichfield.rdf">http://www.lichfielddc.gov.uk/lichfield.rdf</a>, with a rel=&#x2019;alternate&#x2019; meta link on the Lichfield homepage. I&#x2019;ve also reused the reference.data.gov.uk ontology to show the councils CEO, leader etc, together with a bit of FOAF for their contact details.</p>
+
+<p>Thanks to Jeni Tennison, Leigh Dodds and Dave Reynolds for helping me to get this far, and hopefully we can encourage more councils to do the same!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/local-spending-data-a-few-ideas/">A Local Spending Data Brain Splurge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-02T14:40:49+01:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
+        
+         | <a href="/2010/08/local-spending-data-a-few-ideas/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Today I was at a &#x2018;quick and dirty&#x2019; local spending data workshop at Birmingham City Council&#x2019;s newly refurbished offices on Lancaster Circus. There&#x2019;ll be more detailed info to come on the <a href="http://www.communities.idea.gov.uk/c/3916997/home.do">Local Open Data Community</a> (login required), but I just wanted to blog a few of my thoughts post the meeting.</p>
+
+<p>There was a lot of talk about what other councils have done (such as Windsor and Maidenhead, Barnet, Islington etc), and it was agreed that there was a lot of difference in how the data was presented, Paul Davidson also talked about some of the work that the <a href="http://www.legsb.gov.uk/">Local eGovernment Standards Body</a> had done regarding getting spending data out there in a linked data format. There did seem to be a bit of resistance to the linked data approach, mainly because agreeing standards seems to be a long, drawn out process, which is counter to the JFDI approach of publishing local data.</p>
+
+<p>However, while I am a fan of the possibilities of linked data, I also recognise that there are difficulties in both publishing the data and also working with it. For example, I think it&#x2019;s unrealistic to expect every local authority to maintain a triple store to publish their spending data. As we learned from the local elections project, often local authorities don&#x2019;t even have people who are competent in HTML, let alone RDF, SPARQL etc.</p>
+
+<p>Therefore, I think the way forward is a centralised approach, with authorities publishing CSVs in a standard format on their website and some kind of system picking up these CSVs (say, on a monthly basis) and converting this data to a linked data format (as well as publishing in vanilla XML, JSON and CSV format).</p>
+
+<p>The great thing about the linked data approach is it will mean that each item of spending can have its own URI - e.g.</p>
+
+<p><code>http://localspending.data.gov.uk/41UD/12345</code></p>
+
+<p>(The first part of the URI would be the SNAC code for the authority, and then the second part of the URI would be the internal reference number)</p>
+
+<p>As well as having a human-readable summary of the data (together with links to the actual data in RDF, XML, CSV and JSON), there would be a comments box (similar to <a href="http://twitter.com/adrianshort">Adrian Short&#x2019;s</a> fantastic <a href="http://armchairauditor.co.uk/">Armchair Auditor</a>), as well as the ability to ask any questions about an item of expenditure - the answers to these questions would then be automatically published next to the item of spend (hopefully helping to cut down on multiple FOI requests).</p>
+
+<p>While this may be a bit of a pie in the sky idea, I do feel that there does need to be some kind of effort on the part of central government to help move this project along, as we&#x2019;ve seen already (naming no names!) some authorities have got it drastically wrong, and while there is definitely mileage in the &#x2018;just get it out there&#x2019; approach, I think if we&#x2019;re going to end up with something <em>really</em> useful (for both members of the public and local authorities), we need to get the data in one place.</p>
+
+<p>Thoughts?</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/07/further-adventures-in-sparql/">Further Adventures in SPARQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-09T16:18:23+01:00" pubdate data-updated="true">Jul 9<span>th</span>, 2010</time>
+        
+         | <a href="/2010/07/further-adventures-in-sparql/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>It&#x2019;s been a while since my last blog post, and <a href="http://twitter.com/abeeken/status/18123920325">after a request from Twitter</a>, I thought it might be time to dust off Wordpress and do a quick blog post. Since we last spoke, <a href="http://www.uk-postcodes.com/">UK Postcodes</a> (the postcodes webservice I blogged about a few blog posts back) has been plodding along nicely and, as a natural tinkerer, I&#x2019;ve been tinkering ever since.</p>
+
+<p>I&#x2019;ve sped up request times considerably, and wanted to add the ability to get parliamentary constituencies from a Postcode - originally, I was using the <a href="http://www.theyworkforyou.com/api/">TheyWorkForYou API</a>, which, while useful, didn&#x2019;t return a National Statistics or Ordnance Survey URI / ID, so I got to thinking about how I could SPARQL this using the <a href="http://statistics.data.gov.uk/">National Statistics Endpoint</a>, after some exploration, I noticed that district wards were always inside one parliamentary consituency, so thanks to some linked data knowledge (helpfully pumped into my brain at a two-day training course at Talis a few weeks back), I got to writing a SPARQL query, which you can see below (using the SNAC ID for Coleshill South Ward, where I live):</p>
+
+<pre><code>PREFIX rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+PREFIX administrative-geography: http://statistics.data.gov.uk/def/administrative-geography/
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+PREFIX skos: http://www.w3.org/2004/02/skos/core#
+PREFIX electoral-geography: http://statistics.data.gov.uk/def/electoral-geography/
+
+SELECT ?ward ?label ?constituency ?constituencyname
+WHERE {
+?ward
+a http://data.ordnancesurvey.co.uk/ontology/admingeo/Ward .
+?ward skos:notation "44UBGC"^^administrative-geography:StandardCode .
+?ward rdfs:label ?label .
+?ward electoral-geography:parliamentaryConstituency ?constituency .
+?constituency skos:prefLabel ?constituencyname ;
+}
+LIMIT 1
+</code></pre>
+
+<p>This query basically asks for the URI and name of a ward with a specific SNAC ID, as well as the constiuency&#x2019;s URI and name. <a href="http://www.uk-postcodes.com/postcode/B463LD">I&#x2019;ve now added this to UK Postcodes</a>.</p>
+
+<p>But I haven&#x2019;t stopped there, oh no! The next step is to get parishes. Again, ward and parish boundaries don&#x2019;t overlap, so I&#x2019;ve used another (slightly more complex) SPARQL query to find out what parish a ward is inside, this time using the <a href="http://api.talis.com/stores/ordnance-survey/services/sparql">Ordnance Survey Endpoint</a>:</p>
+
+<pre><code>PREFIX rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+PREFIX foaf: http://xmlns.com/foaf/0.1/
+PREFIX spatialrelations: http://data.ordnancesurvey.co.uk/ontology/spatialrelations/
+PREFIX admingeo: http://data.ordnancesurvey.co.uk/ontology/admingeo/
+
+SELECT ?parish ?parishcode ?ward ?label
+WHERE {
+?ward a http://data.ordnancesurvey.co.uk/ontology/admingeo/DistrictWard .
+?ward admingeo:hasCensusCode "44UBGB" .
+?parish a http://data.ordnancesurvey.co.uk/ontology/admingeo/CivilParish .
+?parish spatialrelations:contains ?ward .
+?parish admingeo:hasCensusCode ?parishcode .
+?parish foaf:name ?label ;
+}
+LIMIT 1
+</code></pre>
+
+<p>This fella here is asking for a parish which contains a given ward<del> - at the moment I&#x2019;m using the OS URI, but I&#x2019;m hoping to figure out a way of using SNAC IDs before I put it onto the live UK Postcodes system</del>.</p>
+
+<p>Hope this gives people a bit of an insight, and if anyone who is cleverer than me wants to point out any problems, or make any suggestions, feel free! :)</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/ringing-mapping-the-changes/">Ringing Mapping the Changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-25T10:21:44+01:00" pubdate data-updated="true">May 25<span>th</span>, 2010</time>
+        
+         | <a href="/2010/05/ringing-mapping-the-changes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Some people would say we&#x2019;re mad, but last Saturday, on the hottest day of the year so far, a group of people eschewed barbecues and beer in the garden for a whole day spent working with mapping data and other bits of open data to help people understand the benefits of open data at <a href="http://mapitude.eventbrite.com/">Mapitude</a>, an event aimed at developing understanding and practical collaboration between web developers and mappers.</p>
+
+<p>As well as unconference style talks and discussions, there was also a hack day, where a group of us got together to try and solve practical problems using open data in just one day. The brief we decided on was to map a council ward, add some statistical information to it, and then compare it with a neigbouring ward.</p>
+
+<p>As <a href="http://twitter.com/danslee">Dan Slee</a> from Walsall Council was in attendance, he was keen that we map <a href="http://openlylocal.com/wards/1959-St-Matthews">St. Matthew&#x2019;s ward</a> in Walsall, a deprived ward in the centre of Walsall, and compare it with <a href="http://openlylocal.com/wards/1944-Aldridge-Central-and-South">Aldridge Central and South</a>, a neighbouring, but significantly less deprived area.</p>
+
+<p>Once the brief was written up, I got together with <a href="http://twitter.com/countculture">Chris Taggart</a> of <a href="http://www.openlylocal.com">OpenlyLocal</a> to identify some data sources. The first thing we noticed was that OpenlyLocal didn&#x2019;t have much information about the wards and councillors in Walsall - however, after a bit of trawling Walsall&#x2019;s website and adapting an existing screen scraper, OpenlyLocal had Walsall&#x2019;s data up, this made it easier to get the councillors for each ward.</p>
+
+<p>The next challenge was getting the ward boundaries. Now, a few months ago, this would have been nigh on impossible without either breaking the law, or physically walking the boundaries with a GPS tracker (which, even then, might have been dodgy). However, thanks the the release of <a href="http://www.ordnancesurvey.co.uk/oswebsite/opendata/">Ordnance Survey data</a>, this is now significantly easier.</p>
+
+<p>However, even with Open Data, this was still not an easy task. The boundary data comes in <a href="http://en.wikipedia.org/wiki/Shapefile">ESRI shapefile format</a>, which, on it&#x2019;s own isn&#x2019;t a particularly friendly format for web developers, as it&#x2019;s designed for desktop GIS software, so the first task was converting the Shapefiles to something we can easily work with online.</p>
+
+<p>Thankfully, I&#x2019;d been doing some research a few days prior, and chanced upon <a href="http://kartoweb.itc.nl/RIMapper/">this bit of work</a>, which includes a program that converts ESRI Shapefiles to MySQL tables, a format that is much kinder to web developers. Once that was done, we then had to convert the boundaries themselves from <a href="http://www.ordnancesurvey.co.uk/oswebsite/freefun/geofacts/geo0667.html">Ordnance Survey National Grid References</a> to latitude and longitude, which was easily done by <a href="http://www.jstott.me.uk/phpcoord/">this PHP script</a>.</p>
+
+<p>We now had councillors and shapefiles, and already time was against us. The group who put together the brief had decided on population, families claiming child benefit, average income, and number of unpaid carers. This could be retrieved from the <a href="http://www.neighbourhood.statistics.gov.uk/dissemination/Info.do?page=NDE.htm">National Statistics Data Exchange</a>, but we ran out of time, so ended up simply copying and pasting the data. However, given enough time, we knew we could&#x2019;ve done it.</p>
+
+<p><a href="http://mapitude.pezholio.co.uk/">You can see the results of our work here</a>, and some of the comparisons are quite stark. We would&#x2019;ve liked to add crime data from the <a href="http://policeapi.rkh.co.uk/">Police API</a>, but again, pressures of time meant we didn&#x2019;t get round to it. However, if you look at the crime stats for <a href="http://openlylocal.com/areas/search?postcode=WS1+1PL&amp;submit=Search+by+postcode">St Matthew&#x2019;s</a> and <a href="http://openlylocal.com/areas/search?postcode=WS9+0BG+&amp;submit=Search+by+postcode">Aldridge Central and South</a>, you can see there&#x2019;s quite a difference, with crime in St Matthew&#x2019;s being much much higher. However, this may be slightly skewed by the fact that St Matthew&#x2019;s takes in much of Walsall town centre where there are a lot of pubs and bars, so fights etc at chucking out time are, sadly, common.</p>
+
+<h3>Where next?</h3>
+
+<p>So, was it all worth it? Well, I know Chris Taggart will be adding similar functionality to OpenlyLocal in the future, so in that respect it was useful. It also helped me get a handle on how to work with the OS boundary data, and yesterday, I released the Lichfield portion in a much more usable format on the <a href="http://www.lichfielddc.gov.uk/data">Lichfield District Council open data section</a>.</p>
+
+<p>The most important aspect though, I think, is serving as an example of what can be done with open data. For too long, us open data folks have been banging on about how great open data is and everyone should do it. However, the people who have the power to really open stuff up aren&#x2019;t always convinced, they might be wary, or not understand the issues. With examples like this, we can start with a problem, and in less than a day, have a solution. It&#x2019;s these solutions which open people&#x2019;s eyes to the power of data, and convince them that this is the future.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/04/the-postcode-freed/">The Postcode - Freed!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-08T10:35:27+01:00" pubdate data-updated="true">Apr 8<span>th</span>, 2010</time>
+        
+         | <a href="/2010/04/the-postcode-freed/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Well, it&#x2019;s finally happened, Ordnance Survey have gone from being the bad guy of the internet, a big, bumbling behemoth, squishing innovation wherever it goes, to being the darling of the internet, throwing out free data wherever it goes (well, sort of).</p>
+
+<p>As well as lots of mapping data being released, it also release Codepoint Open, which matches every postcode up a geographical location, it&#x2019;s what I, along with the <a href="http://www.ernestmarples.com/">oh-so-clever uber trolling project Ernest Marples</a> have been banging on about for ages. Now, finally, developers can get a user&#x2019;s location details based on one thing that almost everyone in the UK is guaranteed to know, their postcode - this can then be used to get all sorts of useful information, like their nearest school, fire station, police station, cafe, tanning salon (or whatever).</p>
+
+<p>As well as matching postcodes to a physical location, CodePoint Open also matches postcodes to local authority information, something which, in the past, I&#x2019;ve used the <a href="http://www.pezholio.co.uk/2010/03/postcode-to-councillor-in-one-easy-step/">NESS Data Exchange for</a>, but I&#x2019;ll probably migrate to this, &#x2018;cos it&#x2019;s easier.</p>
+
+<p>Anyway, although the data has been released and is out there, it&#x2019;s in a whopping 250mb CSV file, so if anyone wants to use it, they need to download a local copy and import it into a database for their own use. I wanted to do this, but thought, instead of everyone doing this, why don&#x2019;t I make it easier for everyone (myself included) and wrap it in a web service?</p>
+
+<p>That is wot I dun - enter <a href="http://www.uk-postcodes.com">UK Postcodes</a>. Initially I built this over the Easter break, in a few snatched moments between eating easter eggs and making sure my <a href="http://twitter.com/dotty_dog">new puppy</a> didn&#x2019;t wee anywhere. On the surface it&#x2019;s very simple, a request like this:</p>
+
+<p><code>http://www.uk-postcodes.com/postcode/WS136YY.xml</code></p>
+
+<p>will give you all the information about WS13 6YY in XML format, including latitude/longitude, easting/northing, a Geo Hash URI, as well as the county council (if applicable), district council and ward the postcode is in. You can also have JSON, CSV and RDF just by changing the extension (Thanks to <a href="http://www.jenitennison.com/blog/">Jeni Tennison</a> for her help with the latter format!).</p>
+
+<p>After posting the results of my fiddling on the <a href="http://groups.google.com/group/uk-government-data-developers">UK government Data Developers mailing list</a> - I got a lot of helpful people suggesting other ways I could interact with the data, so I know have methods for finding the nearest postcodes to a point, as well as reverse geocoding (going from a lat/lng point to a postcode) - there&#x2019;s more information on the <a href="http://www.uk-postcodes.com/api.php">API page</a>.</p>
+
+<p>That&#x2019;s basically it, I&#x2019;m always happy to hear feedback, so if you&#x2019;ve got any suggestions or feedback (good or bad!), please feel free to comment below!</p>
+
+<p>(Oh, and a massive thanks goes out to <a href="http://twitter.com/adrianshort">Adrian Short</a> (actually it was Adrian who created the torrent of the data - proving that file sharing isn&#x2019;t always used for nefarious purposes :cough:#debill:cough:) <a href="http://twitter.com/dracos">Matthew Somerville</a>, who translated all those Eastings and Northings in the original dataset to Latitude and Longitude - you can download his version from the <a href="http://parlvid.mysociety.org:81/os/">MySociety mirror</a>.)</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/postcode-to-councillor-in-one-easy-step/">Postcode to Councillor in One Easy Step!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-15T16:58:34+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2010</time>
+        
+         | <a href="/2010/03/postcode-to-councillor-in-one-easy-step/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Finding out who your councillor is isn&#x2019;t always easy is it? Even if you know which council provides your services, wards often have odd sounding names, and council websites don&#x2019;t always have an easy postcode search. With this in mind, and now the <a href="http://neighbourhood.statistics.gov.uk/dissemination/Info.do?page=NDE.htm">Office of National Statistics have released a brand new API</a> and because I&#x2019;ve got a day off looking after <a href="http://twitter.com/dotty_dog">my new puppy</a>, I decided to have a play and see if I could make it easier.</p>
+
+<p>First I <a href="http://neighbourhood.statistics.gov.uk/HTMLDocs/downloads/QuickStart-Guide-V2.0.pdf">trawled through the documentation</a> to find the best API methods for my needs, it turns out that this URL did what I needed:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/SearchSByAByPostcode?LevelTypeId=14Postcode;=**{POSTCODE}**</code></p>
+
+<p>This basically asks the NeSS Data Exchange to return the details of a ward (which in Office of National Statistics language is level type ID 14) which a particular postcode is in. Helpfully, I don&#x2019;t get the SNAC ID straight away (you&#x2019;ll see why I need this later), so I have to get the ONS internal ID, and make another API call:</p>
+
+<p><code>http://neighbourhood.statistics.gov.uk/NDE2/Disco/GetAreaDetail?AreaId=**{AREA ID}**</code></p>
+
+<p>This gives a whole bunch of extra info about the area, including the SNAC ID (which is called the ExtCode). Once I have that, I can then move across to OpenlyLocal, where I can get the councillor&#x2019;s information:</p>
+
+<p><code>http://openlylocal.com/wards/snac_id/**SNAC ID**.xml</code></p>
+
+<p>Once I&#x2019;ve got this info, I can then display it all, <a href="http://pezholio.co.uk/councillor.php?postcode=ws14+9sq">like so</a>! Obviously if the council isn&#x2019;t on OpenlyLocal, then we can&#x2019;t show their details, but we can say who their council is and what ward they&#x2019;re in, and then, with a bit more jiggery pokery on the OpenlyLocal side, we can direct them to their local authority&#x2019;s website, <a href="http://pezholio.co.uk/councillor.php?postcode=b463ld">like so</a>!</p>
+
+<p><a href="http://pezholio.co.uk/councillor.php">Give it a try yourself</a>, and let me know any feedback in the ol&#x2019; comments below. Obviously, this only shows your district council if you&#x2019;re in a two tier council, but I&#x2019;m working on getting county council info later :)</p>
+
+<p>Oooh, it&#x2019;s worth pointing out that you need a <a href="http://www.opsi.gov.uk/click-use/index.htm">PSI click-use licence </a> to publish the Data Exchange data on your own website, but it&#x2019;s a doddle to apply for and goes live instantly!</p>
+
+<p><strong>Update:</strong> I&#x2019;ve published the code on <a href="http://github.com/pezholio/Who-is-my-councillor">Github</a> in case you want to see how I did it!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/royal-fail-part-3-response-received-and-it-aint-good/">Royal Fail Part 3: Response Received (and It Ain&#8217;t Good)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-22T13:31:27+00:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2010</time>
+        
+         | <a href="/2010/01/royal-fail-part-3-response-received-and-it-aint-good/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Well, it&#x2019;s been an exciting few months for the open data movement, with the <a href="http://www.communities.gov.uk/publications/corporate/ordnancesurveyconsultation">future of the Ordnance Survey and geographical data going out to consultation</a> and <a href="http://data.gov.uk">data.gov.uk</a> being launched, but imagine my horror when I finally received a response to <a href="http://petitions.pm.gov.uk/Nfppostcodes">the petition I started to make postcode data free to non-profits</a>. The full text is below:</p>
+
+<blockquote>
+<p>Under the Postal Services Act 2000, Parliament set up Royal Mail as a public limited company with the Government as its only shareholder. Under this framework, the Government established an arm&#x2019;s length relationship with the company so that the company had more commercial freedom and could run its operations without interference from the shareholder.</p>
+
+<p>The Postcode Address File (PAF) dataset was designed and engineered by Royal Mail and is owned and managed by the company as a commercial asset of the business (containing around 29 million addresses in the UK). Royal Mail developed the PAF with the primary purpose to aid the efficient delivery of mail, though over the years the PAF has come to be used for a number of purposes other than the postal purpose for which it is designed and was established. Indeed, many organisations, including new postal operators, banks, insurance companies and others offering to deliver goods to your door, use the information held on the database. The PAF is also used in other business processes, including mailing list &#x201C;cleaning&#x201D;, anti-fraud activities and various customer services.</p>
+
+<p>Royal Mail invests significantly in collating and maintaining the Postcode Address File (PAF) and this cost is recovered through an independently regulated licensing arrangement. It would of course be very time-consuming and costly for anyone to try to replicate the list, so Royal Mail licenses PAF data, for a fee, allowing others to use it. Under Section 116 of the Postal Services Act 2000, Royal Mail must maintain the PAF and make it available to any person who wishes to use it on &#x201C;such terms as are reasonable&#x201D;.</p>
+
+<p>This requirement is replicated as a condition of Royal Mail&#x2019;s licence issued by the postal regulator, Postcomm. Provision exists for Royal Mail to recover a reasonable charge for the supply of PAF and it must not impose any term or condition other than reasonable restrictions to safeguard its intellectual property rights (IPR), and to ensure that the PAF and its updates are used to support effective addressing.</p>
+
+<p>As access to the PAF is governed under a condition of licence, Postcomm monitors its practice. Royal Mail&#x2019;s licence obliges the company to make access to the PAF available on reasonable terms. Postcomm allows the company to make a reasonable specified profit margin and monitors its accounts.</p>
+
+<p>Postcomm has previously undertaken a public consultation reviewing how the PAF was managed. The consultation started in 2006 and finished in 2007. Postcomm took all the diverse uses of the PAF into account before reaching its decision in 2007, announcing more safeguards for the management of the address information held in the PAF with the aim of making sure that the PAF is maintained properly and made available on fair and reasonable terms. The findings of the consultation can be found on Postcomm&#x2019;s website (<a href="http://www.psc.gov.uk">www.psc.gov.uk</a>).</p>
+
+<p>If any PAF user or stakeholder feels that Royal Mail is not complying with the terms of section 116 of the PSA 2000 or Condition 22 of its licence, they can either raise concerns direct with the company or with Postcomm. Postcomm would consider the merits of any such concerns in the light of its statutory duties.</p>
+</blockquote>
+
+<p>This is, word for word, the exact same response I got from Lord Young via my MP, Mike O&#x2019;Brien after I wrote to him in October (which is also <a href="http://www.number10.gov.uk/Page20993">exactly the same response as the Free PAF petition got earlier last year</a>). No mention of data.gov.uk, no mention of the Ordnance Survey consultation, just a flat out &#x2018;no&#x2019;, even though steps have already been put into place to free postcode data!</p>
+
+<p>I can only assume that this was written (read: copy and pasted) by someone who has little or no understanding of the issues, has seen &#x2018;postcodes&#x2019; and &#x2018;royal mail&#x2019; and just whacked a standard response on. It doesn&#x2019;t really do much for your faith in democracy and the system when you know more than the Prime Minister&#x2019;s office seems to know.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/open-postcodes-my-letter-to-the-ft/">Open Postcodes - My Letter to the FT</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-23T11:32:11+00:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/12/open-postcodes-my-letter-to-the-ft/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>As some of you have have seen, Sue Cameron of the Financial times has written a <a href="http://www.ft.com/cms/s/0/4cdde84a-ef69-11de-86c4-00144feab49a.html">confused and desperate sounding article</a> about the government&#x2019;s recent announcement to open up the postcode dataset for public reuse.</p>
+
+<p>As the FT doesn&#x2019;t have any commenting functionality (my biggest bugbear with newspaper websites), I&#x2019;ve drafted a letter to the editor. I&#x2019;ve not sent it yet, so would appreciate your comments! The full text is below:</p>
+
+<blockquote><p>Sir,</p></blockquote>
+
+<p>In Sue Cameron&#x2019;s article &#x2018;Mandy and Gordon - the unravelling&#x2019;, Ms. Cameron claims Gordon Brown&#x2019;s opening of the PAF dataset will be a &#x2018;free gift from the taxpayer to major money makers such as Google&#x2019;.</p>
+
+<p>Yes, large corporations will benefit slightly (very slightly - they won&#x2019;t have to pay &#xA3;1,200 per year to use the PostZon dataset), but the real winners will be small, community built websites, such as Planning Alerts, Job Centre Pro Plus, The Straight Choice and countless other sites, which, until recently were powered by a free service - ernestmarples.com, which tied location data to postcodes.</p>
+
+<p>These sites offered services like alerting people to planning applications and jobs in their area for free, providing useful, innovative services for free and taking the load off the stretched public sector.</p>
+
+<p>However, in October, Ernestmarples.com was forced to close by heavy-handed legal action from the Royal Mail, and without a free location-based dataset, these sites could not function and were closed down.</p>
+
+<p>Linking locations to postcodes is an extremely valuable service which should not be in the control of one private organisation, the data was sourced at the public&#x2019;s expense and should be free for the public to reuse as they see fit. Who knows - it might end up saving the government a few quid too.</p>
+
+<p>Yours Faithfully</p>
+
+<p>Stuart Harrison</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/3/">&larr; Older</a>
+    
+    <a href="archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

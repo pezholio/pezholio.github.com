@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Web Development | Pezholio]]></title>
+  <link href="http://pezholio.github.com/blog/categories/web-development/atom.xml" rel="self"/>
+  <link href="http://pezholio.github.com/"/>
+  <updated>2013-04-03T08:40:07+01:00</updated>
+  <id>http://pezholio.github.com/</id>
+  <author>
+    <name><![CDATA[Pezholio]]></name>
+    <email><![CDATA[pezholio@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fixmytweet!]]></title>
+    <link href="http://pezholio.github.com/2009/12/fixmytweet/"/>
+    <updated>2009-12-14T12:24:07+00:00</updated>
+    <id>http://pezholio.github.com/2009/12/fixmytweet</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I love <a href="http://www.fixmystreet.com/">Fixmystreet</a> - it&#x2019;s the nearest thing we&#x2019;ve got to a national problem reporting hub, while other council website bury their reporting facilities under pages and pages of navigation, Fixmystreet is simple, quick and direct.</p>
+
+<p>What I also love is its openness, as well as being able to <a href="http://www.fixmystreet.com/alert">pull out reports for problems in your area</a>, you can also <a href="http://www.fixmystreet.com/import">inject problem reports directly into the system</a>, meaning anyone can build their own front end for the system.</p>
+
+<p>I&#x2019;ve been thinking about Fixmystreet a lot recently, after building my own frontend for it via the <a href="http://www.lichfielddc.gov.uk/site/custom_scripts/map.php">Ubermap</a>, I&#x2019;ve also been thinking about repurposing our existing streetscene reporting forms, and getting them to use Fixmystreet.</p>
+
+<p>It was while fiddling about under the hood, that I thought &#x2018;wouldn&#x2019;t it be cool if people could report problems via Twitter?&#x2019;</p>
+
+<p>Twitter is a fast way of communicating, and crucially, it&#x2019;s mobile. There&#x2019;s a plethora of mobile apps and frontends for Twitter, and even if you&#x2019;re only on an aged Nokia 3310, you can send tweets by text message. This means that when you spot a problem, you can report it straight away. You could even add a picture.</p>
+
+<p>I got cracking on it, and, within the space of 24 hours I had a prototype - users sign up with their Twitter username and email address on the <a href="http://fixmytweet.com/">Fixmytweet website</a>, and whenever they spot a problem, they can send a tweet in this format:</p>
+
+<p><code>@fixmytweet {postcode} {description of problem} {twitpic link (optional)}</code></p>
+
+<p>(If you&#x2019;ve got a smartphone with a Twitter app that supports the <a href="http://blog.twitter.com/2009/08/location-location-location.html">geolocation API</a> you don&#x2019;t even need the postcode!)</p>
+
+<p>The system then parses the tweet and sends the necessaries to Fixmystreet. Fixmystreet then sends an email to the user, with a link for them to add more detail and approve the report. It then gets sent directly to the council! (and, if the council is smart, they can even <a href="http://www.mysociety.org/2008/11/12/first-council-lets-fixmystreet-post-straight-to-the-crm/">integrate it with their CRM system</a>)</p>
+
+<p>I&#x2019;m currently testing this out on a test version of Fixmystreet, and it seems to be working well so far. If you&#x2019;re interested in helping test me test it, please <a href="http://fixmytweet.com/">sign up on the Fixmytweet website</a> and send a test tweet.</p>
+
+<p>I&#x2019;ll keep everyone posted on developments on Twitter and this here blog!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Barcode Posters - the Second Coming]]></title>
+    <link href="http://pezholio.github.com/2009/11/barcode-posters-the-second-coming/"/>
+    <updated>2009-11-09T17:11:11+00:00</updated>
+    <id>http://pezholio.github.com/2009/11/barcode-posters-the-second-coming</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt="">With all this talk of data, and online, we can often lose sight of the real, physical world (as a certified iPhone addict, I know I do - there&#x2019;s been a few times I&#x2019;ve almost walked into a lampost due to me paying more attention to my phone than what&#x2019;s going on in front of me!) - digital is all very well, but how do we link this in with real life?</p>
+
+<p><a href="http://twitter.com/adrianshort">Adrian Short</a> (he of <a href="http://www.mashthestate.org.uk/">Mash the State</a> fame) recently blogged about <a href="http://mashthestate.wordpress.com/2009/09/28/guerilla-noticeboarding-the-council-with-barcode-posters/">his barcode posters site</a>, which allows you to change RSS feeds into printable documents with QR barcodes (those thingies above) attached to each article - people with smartphones that can read barcodes (iPhone, Android etc) can then scan the code and link directly to the article. It&#x2019;s almost like hyperlinks for real life.</p>
+
+<p>I&#x2019;ve had this idea on the back burner for a while now, but after tweeting about seeing the first new style Ratemyplace (a website I run which publishes food safety scores online) poster &#x2018;in the wild&#x2019; - I got this reply:</p>
+
+<p>[tweet url=http://twitter.com/tonypiper/status/5561369295]</p>
+
+<p>This made me think - it&#x2019;s a perfect fit for barcode posters - people can see the inspection certificate and scan the barcode to find more information. You can see an example of what I dun <a href="http://www.pezholio.co.uk/certificate.pdf">here</a></p>
+
+<p>Now, I know what you&#x2019;re thinking - &#x2018;but generating images server side is hard! It&#x2019;ll take me ages fiddling around with various libraries and I&#x2019;ll be pulling my hair out with frustration!&#x2019; - Not so - Thanks to the wonderful people at Google, all you need to do to generate a barcode for a given URL is this:</p>
+
+<p><code>http://chart.apis.google.com/chart?chs=125cht;=qrchl;={url-goes-here}</code></p>
+
+<p>You can then stick it in the src attribute of an IMG tag and display it on a page like so:</p>
+
+<p><img src="http://chart.apis.google.com/chart?chs=125&amp;cht=qr&amp;chl=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DYu_moia-oVI" alt=""></p>
+
+<p>(Make sure you encode the URL of the website either on the server or using this <a href="http://www.albionresearch.com/misc/urlencode.php">handy online url encoder</a>.)</p>
+
+<p>Simple innit? There&#x2019;s more explanation of the whys and wherefores of QR barcodes on the <a href="http://www.barcodeposters.com/">Barcode posters website</a>. Now get out there and barcode!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adventures in Wordpress Plugin Building]]></title>
+    <link href="http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/"/>
+    <updated>2009-10-09T11:45:08+01:00</updated>
+    <id>http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I love Wordpress (hell, I use it for my blog don&#x2019;t I?) and for a while I&#x2019;ve been looking for an excuse to add to the community and build a plugin.</p>
+
+<p>Whilst working on a <a href="http://www2.lichfielddc.gov.uk/northlichfield">new community blog for the North Lichfield Initiative</a> I found that excuse.</p>
+
+<p>The guy I was training to update the blog wanted an easy way to show Flickr slideshows on posts and pages and didn&#x2019;t want to mess around with code. I first tried using <a href="http://www.flickrslideshow.com/">Flickr Slideshow</a>, which generates code to embed Flickr slideshows into websites, but found that the visual editor strips away the iframe code when you publish the post.</p>
+
+<p>I searched and searched through the Wordpress plugins, but couldn&#x2019;t find anything that did what I wanted to do quickly and easily - so I rolled up my sleeves and got my hands dirty!</p>
+
+<p>The result is <a href="http://www.pezholio.co.uk/my-work/flickr-slideshow/">Flickr Flash Slideshow</a> - all you need to do is put the link the to user, set or group you want a slideshow of between [ flickr][ /flickr] tags (without the spaces) like so:</p>
+
+<p>[ flickr]url[ /flickr]</p>
+
+<p>You can also add the width or height of the slideshow like so:</p>
+
+<p>[ flickr]url,width,height[ /flickr]</p>
+
+<p>If the width and height is left out, then the plugin defaults to 300px x 300px</p>
+
+<p>Check out an example here:</p>
+
+<p>[flickr]http://www.flickr.com/groups/894733@N22/[/flickr]</p>
+
+<p>I was amazed by how quickly I could put it together and it&#x2019;s further cemented my belief that Wordpress is one of the best, if not best open source projects ever -  a lot of projects could learn from its ease and extensibility.</p>
+
+<p>Anyways, if you want the plugin, please <a href="http://pezholio.github.com/flickr-flash-slideshow.zip">Download it here</a> and let me know if you have any problems! I&#x2019;m sure it&#x2019;ll come in handy for a lot of community based sites who&#x2019;s users may not have enough technical knowledge to edit raw HTML.</p>
+
+<p><strong>Update:</strong> I&#x2019;ve finally got access to the Wordpress SVN repository, so you should be able to install it directly from your admin section - just search for &#x2018;Flickr Flash Slideshow&#x2019;</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[One Step Forward, Two Steps Back - Ernest Marples and the Idiocy of the Royal Mail]]></title>
+    <link href="http://pezholio.github.com/2009/10/one-step-forward-two-steps-back-ernest-marples-and-the-idiocy-of-the-royal-mail/"/>
+    <updated>2009-10-05T20:19:46+01:00</updated>
+    <id>http://pezholio.github.com/2009/10/one-step-forward-two-steps-back-ernest-marples-and-the-idiocy-of-the-royal-mail</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2009/10/Untitled-11.jpg" alt="Royal Fail">Well, it happened. today, the Royal Mail have <a href="http://ernestmarples.com/blog/">issued ernestmarples.com with a takedown notice</a>, demanding that the service be taken down immediately under pain of legal action.</p>
+
+<p>For those of you who don&#x2019;t know, <a href="http://www.ernestmarples.com">Ernest Marples</a> was / is a system that provided not-for-profit sites (such as <a href="http://www.mappage.org/hw/">HealthWhere</a>, <a href="http://jobcentreproplus.com/">JobcentreProPlus.com</a>, <a href="http://www.planningalerts.com">Planning Alerts</a> and, by extension <a href="http://www.twitterplan.co.uk/">Twitterplan</a>) with latitude and longitude data from postcodes, which means that people can get information about their areas with only their postcode.</p>
+
+<p>Because Ernest Marples has been served with this notice, none of these sites can function, meaning the Royal Mail (who are <em>supposed</em> to be a public service)  are directly responsible for taking away a wealth of useful tools from the public it&#x2019;s <em>supposed</em> to serve.</p>
+
+<p>Judging by the <a href="http://search.twitter.com/search?q=royal+mail">flurry of outcry on Twitter</a>, the Royal Mail are not a popular bunch because of this decision, and have really shot themselves in the foot PR wise.</p>
+
+<p>Instead of getting heavy-handed with the lawyers, why didn&#x2019;t they enter with a dialogue with Harry and Richard (the people behind the site) and try and come up with an alternative license for volunteer-built, community focused sites of this nature?</p>
+
+<p>I can sort of understand them wanting to protect their revenue stream (although it&#x2019;s arguable that this data should be in the public domain anyway), but because these sites are built by volunteers and make no money, they aren&#x2019;t going to have the funding to fork out the &#xA3;4k per year to have access to the official postcode database - so the Royal Mail aren&#x2019;t losing out on any extra cash anyway. All they&#x2019;ve done is picked up their ball and gone off in a strop, meaning no one can play anymore.</p>
+
+<p>I&#x2019;m hoping that something can be worked out, because it&#x2019;d be a crying shame if this service (or something similar) didn&#x2019;t get going again.</p>
+
+<p><strong>Update:</strong> I&#x2019;ve submitted a <a href="http://petitions.number10.gov.uk/nfppostcodes/">petition to Number 10 about this</a>, not sure how much good it&#x2019;ll do, but it&#x2019;s worth a try! Please sign, retweet, pass around by any means you can!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Local Authorities Can Learn From the Birmingham City Council DIY Project]]></title>
+    <link href="http://pezholio.github.com/2009/09/what-local-authorities-can-learn-from-the-birmingham-city-council-diy-project/"/>
+    <updated>2009-09-28T16:34:24+01:00</updated>
+    <id>http://pezholio.github.com/2009/09/what-local-authorities-can-learn-from-the-birmingham-city-council-diy-project</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2009/09/bccdiy-300x101.png" alt="BCC DIY logo">
+In case you&#x2019;ve had your head buried in a good few feet of sand, then you&#x2019;ll know all about the <a href="http://www.pezholio.co.uk/2009/09/a-few-thoughts-on-birmingham-city-councils-website/">issues surrounding the new Birmingham City Council website</a>. I won&#x2019;t get into it too much here, but, suffice to say, the project was over budget, late and didn&#x2019;t deliver half of what is expected from a modern .gov.uk website.</p>
+
+<p>We&#x2019;re all aware of over budget government schemes that deliver less than the sum of their parts, but the interesting stuff didn&#x2019;t stop there, in fact, it&#x2019;s only just started - a group of passionate web type people (developers, designers, proofreaders and the like) have got together to build <a href="http://bccdiy.com/">BCC DIY</a>, a site that tries to give the people of Birmingham a better web experience.</p>
+
+<p>As well as scraping the existing content of the original Birmingham City Council site (and publishing it in a wiki format - so people can edit and change at will), it also brings in external tools, such as <a href="http://www.fixmystreet.com/">FixMyStreet</a> and <a href="http://planningalerts.com/">Planning Alerts</a>, so people can see, at a glance, what&#x2019;s going on in their area.</p>
+
+<p>The work really got going last Friday with a <a href="http://bccdiy.eventbrite.com/">hack day up at Moseley Exchange</a> (which I wanted to get to, but sadly car trouble prevented me) where people from across Birmingham (and beyond - <a href="http://al-smith.co.uk/">Al Smith</a> - Newcastle City Council&#x2019;s Web 2.0 guy, made a special trip down for the occasion) got together for a big heave ho to get the project up and running.</p>
+
+<p>The results, while not reflective of a fully formed project (yet), are impressive, and for me, as a local government webbie, really interesting.</p>
+
+<p>While usability studies can tell us a lot, they are often informed by our own ideas and prejudices. BCC DIY shows us the kind of website that people who spend a lot of time on the web (and often work in the sector too) want from a website and gives us a fresh view of local government online.</p>
+
+<p>Obviously, what &#x2018;web people&#x2019; want from a website may well be different from what less web savvy people want, but it&#x2019;s a viewpoint, and one that reflects the views of a lot of our users. I&#x2019;m continuing to watch with interest.</p>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

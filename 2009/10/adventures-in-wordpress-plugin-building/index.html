@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adventures in Wordpress Plugin Building - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="I love Wordpress (hell, I use it for my blog don&#x2019;t I?) and for a while I&#x2019;ve been looking for an excuse to add to the community and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Adventures in Wordpress Plugin Building</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T11:45:08+01:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>I love Wordpress (hell, I use it for my blog don&#x2019;t I?) and for a while I&#x2019;ve been looking for an excuse to add to the community and build a plugin.</p>
+
+<p>Whilst working on a <a href="http://www2.lichfielddc.gov.uk/northlichfield">new community blog for the North Lichfield Initiative</a> I found that excuse.</p>
+
+<p>The guy I was training to update the blog wanted an easy way to show Flickr slideshows on posts and pages and didn&#x2019;t want to mess around with code. I first tried using <a href="http://www.flickrslideshow.com/">Flickr Slideshow</a>, which generates code to embed Flickr slideshows into websites, but found that the visual editor strips away the iframe code when you publish the post.</p>
+
+<p>I searched and searched through the Wordpress plugins, but couldn&#x2019;t find anything that did what I wanted to do quickly and easily - so I rolled up my sleeves and got my hands dirty!</p>
+
+<p>The result is <a href="http://www.pezholio.co.uk/my-work/flickr-slideshow/">Flickr Flash Slideshow</a> - all you need to do is put the link the to user, set or group you want a slideshow of between [ flickr][ /flickr] tags (without the spaces) like so:</p>
+
+<p>[ flickr]url[ /flickr]</p>
+
+<p>You can also add the width or height of the slideshow like so:</p>
+
+<p>[ flickr]url,width,height[ /flickr]</p>
+
+<p>If the width and height is left out, then the plugin defaults to 300px x 300px</p>
+
+<p>Check out an example here:</p>
+
+<p>[flickr]http://www.flickr.com/groups/894733@N22/[/flickr]</p>
+
+<p>I was amazed by how quickly I could put it together and it&#x2019;s further cemented my belief that Wordpress is one of the best, if not best open source projects ever -  a lot of projects could learn from its ease and extensibility.</p>
+
+<p>Anyways, if you want the plugin, please <a href="/flickr-flash-slideshow.zip">Download it here</a> and let me know if you have any problems! I&#x2019;m sure it&#x2019;ll come in handy for a lot of community based sites who&#x2019;s users may not have enough technical knowledge to edit raw HTML.</p>
+
+<p><strong>Update:</strong> I&#x2019;ve finally got access to the Wordpress SVN repository, so you should be able to install it directly from your admin section - just search for &#x2018;Flickr Flash Slideshow&#x2019;</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T11:45:08+01:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/web-development/'>Web Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/10/royal-fail-part-2-lets-do-something/" title="Previous Post: Royal Fail Part 2: Let's Do Something!">&laquo; Royal Fail Part 2: Let's Do Something!</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/10/royal-mail-calls-striking-workers-whiny-sort-of/" title="Next Post: Royal Mail Calls Striking Workers 'Whiny' on Twitter. Sort Of">Royal Mail Calls Striking Workers 'Whiny' on Twitter. Sort Of &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/';
+        var disqus_url = 'http://pezholio.github.com/2009/10/adventures-in-wordpress-plugin-building/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

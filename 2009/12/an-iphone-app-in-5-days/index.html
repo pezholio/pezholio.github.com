@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>An iPhone App in 5 Days? - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="iPhones are ace aren&#x2019;t they? Despite howls of derision from some camps, in the space of a few years, it&#x2019;s completely turned the mobile &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2009/12/an-iphone-app-in-5-days/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">An iPhone App in 5 Days?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T12:13:55+00:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2009/12/ratemyplace-290x300.png" alt="Mockup of Ratemyplace app on an iPhone and iPod touch ">iPhones are ace aren&#x2019;t they? Despite <a href="http://www.electronista.com/articles/07/04/30/ballmer.on.iphone/">howls of derision</a> from some camps, in the space of a few years, it&#x2019;s completely turned the mobile world on its head.</p>
+
+<p>I&#x2019;ve wanted to build an iPhone app for <a href="http://www.ratemyplace.org.uk">Ratemyplace</a> - the food safety ratings website I run at the council on behalf of 8 other councils in Staffordshire for a while, but unfortunately just didn&#x2019;t have time to learn Objective-C, the language that iPhone apps are built in - at the same time, I&#x2019;m also aware that not everyone has an iPhone, so have been scouting around for ways to build apps that can be ported to other platforms quickly and easily.</p>
+
+<p>About 6 months ago, I looked at <a href="http://phonegap.com/">Phonegap</a>, which promised to allow me to build apps quickly using only HTML and Javascript. I beavered away for a few weeks, and finally had an app I was (sort of) pleased with. It used native features such as geolocation, and I used <a href="http://code.google.com/p/iphone-universal/">the UiUi Kit CSS library</a> to make the app look as much like a native app as possible. I was all ready to submit it to the app store. Then the 3.0 firmware upgrade came.</p>
+
+<p>My iPhone app was busted - native geolocation no longer worked, and a little hack I&#x2019;d worked out to get a toolbar at the bottom and a navbar at the top was also kaputt. I tried to fix it for a bit, but other priorities took over, and the project went on hold.</p>
+
+<p>Then, a few weeks ago, I came across <a href="http://www.appcelerator.com/">Appcelerator Titanium</a>, a platform that does pretty much everything Phonegap does, but (in my opinion) much better. While Phonegap uses a portion of the iPhone&#x2019;s API called the webview to display webpages as though they were native apps, Titanium goes one better, it compiles your code into a mixture of web views and native Objective-C code. Like Phonegap, it also works with Android, and a promise of more platforms to come.</p>
+
+<p>This means that you can not only take advantage of many more native iPhone features, your app is much less likely to be rejected (as <a href="http://www.readwriteweb.com/archives/why_is_apple_rejecting_phonegap-built_iphone_apps.php">a lot of phonegap apps were</a>) because of the use of what Apple calls &#x2018;private APIs&#x2019;.</p>
+
+<p>I dusted down my old bits of code, bookmarked the <a href="http://www.codestrong.com/timobile/api/">API documentation</a>, and set to work. In the end, as well as doing my other duties, the app took me 5 days (and one beery evening) to complete. You can see a few screenshots below:</p>
+
+<p>[flickr]http://www.flickr.com/photos/13492966@N06/sets/72157622918161445/,460,460[/flickr]</p>
+
+<p>I submitted it to Apple yesterday, and I&#x2019;m not expecting to hear anything for a good few weeks, if not months (Apple&#x2019;s approvals processes to get an app into the app store are <a href="http://theappleblog.com/2008/09/13/why-apples-app-store-approval-process-is-broken/">notoriously strict</a>) but I&#x2019;m reasonably hopeful. I&#x2019;m now looking at porting my code to Android phones, with a view to looking at Blackberry and Nokia devices too.</p>
+
+<p>Looking forward a few years, with the growing adoption by mobile phone browsers of HTML5 and CSS3, I can see that apps are going to become more browser based, and (hopefully), this will lead to standards being adopted across the industry, but, until then, it seems that platforms like Titanium are going to be the best way to get your apps to as many people as quickly as possible.</p>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T12:13:55+00:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/council-stuff/'>Council Stuff</a>, <a class='category' href='/blog/categories/iphone/'>iphone</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/12/an-iphone-app-in-5-days/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/12/an-iphone-app-in-5-days/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/12/fixmytweet/" title="Previous Post: Fixmytweet!">&laquo; Fixmytweet!</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/12/open-postcodes-my-letter-to-the-ft/" title="Next Post: Open Postcodes - My Letter to the FT">Open Postcodes - My Letter to the FT &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2009/12/an-iphone-app-in-5-days/';
+        var disqus_url = 'http://pezholio.github.com/2009/12/an-iphone-app-in-5-days/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

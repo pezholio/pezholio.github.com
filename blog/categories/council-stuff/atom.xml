@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Council Stuff | Pezholio]]></title>
+  <link href="http://pezholio.github.com/blog/categories/council-stuff/atom.xml" rel="self"/>
+  <link href="http://pezholio.github.com/"/>
+  <updated>2013-04-03T08:40:07+01:00</updated>
+  <id>http://pezholio.github.com/</id>
+  <author>
+    <name><![CDATA[Pezholio]]></name>
+    <email><![CDATA[pezholio@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Generating QR Codes Using PHP and the Goo.gl API]]></title>
+    <link href="http://pezholio.github.com/2011/07/generating-qr-codes-using-php-and-the-googl-ap/"/>
+    <updated>2011-07-25T13:33:48+01:00</updated>
+    <id>http://pezholio.github.com/2011/07/generating-qr-codes-using-php-and-the-googl-ap</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>QR codes are all the rage at the mo, after a bit of a slow start, they&#x2019;re popping up everywhere, <a href="http://www.customqrcodes.com/story/31/Home">even appearing in cookery programmes</a>.</p>
+
+<p>I&#x2019;ve decided to take advantage of this, and have started a project to get QR codes on planning notices, so if someone is out and about and they see a planning notice attached to a lampost, they can scan the code with their phone and immediately find out more about the application.</p>
+
+<p>I&#x2019;ve still not finished this, but the first hurdle was actually generating the QR codes themselves. There are plenty of APIs out there, but, the more information you put in a QR code, the more complex it is, making it more difficult it is to scan and more prone to errors.</p>
+
+<p>What I really wanted to do was shorten a URL and then create a QR code from that. If this is going to be automated, I&#x2019;d need a little script to do the legwork for me.</p>
+
+<p>I chose Google&#x2019;s goo.gl url shortener, as it provides an easy option for creating a QR code, just by putting .qr at the end. Here&#x2019;s the code, with comments along the way:</p>
+
+<pre><code>// We're going to be outputting this as an image, rather than as plaintext, to make it easier to include in, for example a webpage
+header("Content-Type: image/png");
+
+// We put the long URL in an array, as we're going to encode our data as JSON for the Goo.gl API 
+$request = array(
+    'longUrl' = $_GET['url']
+);
+
+// As we need to POST the data, we're using cURL
+$ch = curl_init(); 
+
+// This tells cURL to output the result of the request
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// This is the URL of the Goo.gl API
+curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url"); 
+
+// We're setting the content type of our request as JSON
+curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Content-Type: application/json"));
+
+// It's a POST request
+curl_setopt($ch, CURLOPT_POST, true);
+
+// And here is the contents of the request we set earlier, encoded as JSON
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+
+// Now we're getting our data, again, as per the request, it's JSON, so we're using json_decode() to convert to JSON to a PHP object
+$data = json_decode(curl_exec($ch));
+
+// Closing the cURL request 
+curl_close($ch);
+
+/*
+The response is in this format:
+
+{
+ "kind": "urlshortener#url",
+ "id": "http://goo.gl/fbsS",
+ "longUrl": "http://www.google.com/"
+}
+
+and it's 'id' we're intested so:
+*/
+$shorturl = $data-id;
+
+// We now add .qr to the end of the URL and get the raw contents of the resulting QR code
+$image = file_get_contents($shorturl.".qr");
+
+// Now echo the result out! As we've set the header of the document to be a PNG image, the browser (or whatever) knows to display an image, rather than a meaningless string of characters
+echo $image;
+</code></pre>
+
+<p>And there you have it! Any questions, give me a yell in the comments. Next step is getting the codes on the notices, which I&#x2019;m nearly there with - will let you know how I get on.</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Foursquare in Local Government]]></title>
+    <link href="http://pezholio.github.com/2011/02/using-foursquare-in-local-government/"/>
+    <updated>2011-02-21T13:56:25+00:00</updated>
+    <id>http://pezholio.github.com/2011/02/using-foursquare-in-local-government</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/02/foursquare.png" alt="">Foursquare. It&#x2019;s just a vanity publishing tool that takes over your Twitter stream and Facebook feed right? OK, I&#x2019;m as guilty as the next Foursquare user for checking in to the pub at lunchtime and telling all my Twitter followers, but Foursquare can actually be a pretty useful tool for giving visitors and residents useful information about their surroundings.</p>
+
+<p>As well as being able to check into places and see where your friends are, Foursquare also allows you to leave &#x2018;tips&#x2019; about venues for your friends and followers, so when they check into that venue (or one nearby), they&#x2019;ll see this tip. I&#x2019;ve left a couple of tips on my personal Foursquare account (mainly plugging nights I play at, or calling out bad service at restaurants), but I&#x2019;ve always thought Foursquare tips could be really useful for our tourism team, highlighting special offers and also giving historical titbits of information about places in the district.</p>
+
+<p>I never really knew how to get started with a Foursquare page until I read <a href="http://josephstashko.com/media/using-foursquare-with-hyperlocal/">Joseph Stashko&#x2019;s post</a> on how he added a <a href="http://foursquare.com/blogpreston">Foursquare page for Blog Preston</a>. I&#x2019;ll leave you to read Joseph&#x2019;s explanation on how he got set up, but needless to say, the sign up process is a little bit convoluted (To be fair, Foursquare say they will be changing this soon).</p>
+
+<p>That said, once I&#x2019;d filled everything out, got our designer to design a header and sent it all off to Foursquare, I was up and running within a few hours (together with a nice personal response from a Foursquare staffer).</p>
+
+<p>You can now see the results on the <a href="http://foursquare.com/visitlichfield">Visit Lichfield Foursquare page</a>. I&#x2019;ve added a few tips in and around Lichfield City with historical information that I know about personally, together with a few special offers, and I&#x2019;m looking at getting a few more tips added after talking to our Green Badge guides (who know much more about Lichfield&#x2019;s history than me) before launching the page officially (bizarrely, we already seem to have 600+ followers without doing any promotion, mainly people from Indonesia and New York).</p>
+
+<p>However, it&#x2019;s not just tourism that Foursquare can help with, I&#x2019;d love to develop something like <a href="http://donteat.at/">donteat.at</a>, which uses public data on food safety inspections in New York to warn you if you&#x2019;re about to eat at a place with a poor hygiene report, and if you&#x2019;re a council with a lot of venues, you could leave tips about upcoming events or special offers. The only limit, as they say, is your imagination!</p>
+
+<p>If anyone else has any useful tips on local gov using Foursquare, I&#x2019;d love to hear them - drop me a line in the comments.</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Spending Data - Beyond the CSV]]></title>
+    <link href="http://pezholio.github.com/2011/01/spending-data-beyond-the-csv/"/>
+    <updated>2011-01-14T10:00:51+00:00</updated>
+    <id>http://pezholio.github.com/2011/01/spending-data-beyond-the-csv</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/01/csv.png" alt="">It&#x2019;s been a while since my <a href="http://www.pezholio.co.uk/2010/08/local-spending-data-a-few-ideas/">last post about local spending data</a>, and, since then, our finance team have been busy beavering away behind the scenes to get our own spending data out of the council&#x2019;s finance systems.</p>
+
+<p>However, from the outset, I was really pleased that both our finance people and our chief exec wanted to go beyond just whacking a CSV (or worse, a PDF) on the internet and show our commitment to transparency by putting the data on the web in an easy, human readable format.</p>
+
+<p>Armed with a few CSVs, a Macbook Pro and some server space, I was put to task, and the <a href="http://spending.lichfielddc.gov.uk/">the results can be seen here</a>. Users can navigate by the various parts of the cost code (called &#x201C;Department&#x201D;, &#x201C;Type&#x201D; and &#x201C;Subject&#x201D;), as well as by month and supplier.</p>
+
+<p>As well as human readable formats, almost every view of the data has an XML, JSON, CSV and RDF equivalent, achieved either by putting the relevant extension on the end, or through <a href="http://en.wikipedia.org/wiki/Content_negotiation">content negotiation</a>.</p>
+
+<p>The user interface had been heavily influenced by <a href="http://openlylocal.com/councils/spending">OpenlyLocal</a> (after all, if it ain&#x2019;t broke, why fix it?) and, as well as feeding our data in to OpenlyLocal, we also take a little bit away. When data is imported into OpenlyLocal, the system does some clever data matching to match company names to real life entities on <a href="http://opencorporates.com/">Open Corporates</a>. We have a batch job that takes that information and puts it on our spending system - <a href="http://spending.lichfielddc.gov.uk/supplier/p-casey-land-reclamation-ltd.html">you can see an example here</a>. This is an example of how open data cuts both ways, by sharing our data, we can improve it.</p>
+
+<p>Also, thanks to the wonderful people at <a href="http://www.talis.com/">Talis</a>, we have our RDF data in a triple store, so it can be queried, both through SPARQL queries and a free text search, making the data even more useful from the off. I&#x2019;m hoping to put together a tutorial in SPARQL soon, both here and on the Lichfield District Council website, which should hopefully demystify the process a bit more.</p>
+
+<p>Finally, I&#x2019;m hoping to open source the code (once it&#x2019;s tidied up a bit), so of you&#x2019;re from a local authority and want to make your spending data a little more clear to Joe Public, then you can benefit from my work too!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grit Bins - Your Help Needed!]]></title>
+    <link href="http://pezholio.github.com/2010/11/grit-bins-your-help-needed/"/>
+    <updated>2010-11-12T10:28:36+00:00</updated>
+    <id>http://pezholio.github.com/2010/11/grit-bins-your-help-needed</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>During the <a href="http://lichhack.eventbrite.com/">Lichfield Hacks and Hackers day</a> yesterday (bigger blog post to come on that later) - I was gifted a list of <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en">grit bins in Lichfield District</a>, I got very excited about this, but my excitement was quickly dampened when I realised that there was no geographical data in the list, just road names and a vague location.</p>
+
+<p>However, I then thought &#x2018;not to worry, I can just ask people who live nearby to geolocate them on their phones and add them to a Google Doc&#x2019;, I asked a <a href="http://twitter.com/robthedog">@robthedog</a> (who lives in a village north of the district) if he could do a few when he got home, his reply was &#x2018;I can do one now&#x2019;:</p>
+
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2010/11/gritbin-300x158.png" alt="Grit Bin on Google Street View"></p>
+
+<p>Of course! Google Street view! This is where you lot come in. I&#x2019;m going to crowdsource the location of these grit bins (I&#x2019;ve <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en#gid=0">already done a few myself</a>) - to help, all you need to do is follow a few simple steps:</p>
+
+<ol>
+<li><p>Open up <a href="https://spreadsheets.google.com/ccc?key=0As1cSxPJOFWldEpxNDZady1aUmhIVTFXUjdjZHJ1M1E&amp;hl=en#gid=0">this Google document</a></p></li>
+<li><p>Drag <a href="javascript:void(prompt('',gApplication.getMap(">this bookmarklet to your browser&#x2019;s toolbar</a>.getCenter()));)</p></li>
+<li><p>Open up <a href="http://maps.google.co.uk">Google Maps</a> and search for a road name and town / village which doesn&#x2019;t have a lat/lng yet</p></li>
+<li><p>Drag the little yellow street view man (<a href="http://www.pezholio.co.uk/?attachment_id=405">this guy</a>) to the map and have a look round Street View for the grit bin</p></li>
+<li><p>Once you&#x2019;re right by it - zoom out of Street View and click the bookmarklet - a window will pop up with the lat/lng - you can then copy and paste it and enter it into the Google doc!</p></li>
+</ol>
+
+
+<p>It&#x2019;s that simple! If you could do just a couple, I&#x2019;ll be forever in your debt (I might buy you a pint if I see you in the flesh too!)</p>
+
+<p>Once it&#x2019;s done, I&#x2019;ll be able to build a handy map of grit bins in the area and hopefully save a few slips and falls (as well as a few costly calls to our contact centre!). There&#x2019;s 87of them, and, as I&#x2019;ve already done 10, it should be long before I&#x2019;ve got them all.</p>
+
+<p>Thanks again, you lovely people you!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Steps to Councils Publishing Their Own Linked Data]]></title>
+    <link href="http://pezholio.github.com/2010/09/council-linked-data/"/>
+    <updated>2010-09-06T12:17:33+01:00</updated>
+    <id>http://pezholio.github.com/2010/09/council-linked-data</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>On Friday, I toddled along to London for a bit of a chat about local spending data, organised by <a href="http://www.legsb.gov.uk/Home.aspx">LeGSB</a>, the local government e-Standards body. In particular we looked at how councils can publish their spending data in a linked data format. It was an interesting day, and much of the work seems to have already been done by folks much cleverer than myself.</p>
+
+<p>However, at the end of the day, Paul Davidson (the Director of Standards at LeGSB) raised an interesting topic. At the moment, much of the <em>describing</em> of councils in the linked data world seems to be done by external bodies, such as <a href="http://statistics.data.gov.uk">The Office for National Statistics</a> and <a href="http://data.ordnancesurvey.co.uk">Ordnance Survey</a>, and often, this isn&#x2019;t always the best fit, with the data referring to geographical regions, rather than councils themselves.</p>
+
+<p>Paul then made the point that really, it should be the councils themselves that describe who they are, rather than some arbitrary body, after all, there is no one better placed to know about the council than the council themselves! We then talked very briefly about the possibility of councils minting their own URIs and publishing some RDF with some information about themselves (such as contact details etc). Other organisations and people can then use these URIs to refer to the councils in their data.</p>
+
+<p>I&#x2019;ve been mulling this over over the weekend, and I fired off an email this morning suggesting that, rather than publishing a page of RDF, people simply add data to their council homepages, either as RDFa or metadata (although I&#x2019;m not sure how you&#x2019;d do the latter!). People could then use their council homepage URLs as URIs (perhaps with #id at the end of the URI, to make the URI for the council different to the one for the page).</p>
+
+<p>With this in mind I&#x2019;ve knocked up a sample dataset for Lichfield District Council using various ontologies from around the linked data web (including FOAF, vCard, Chris Taggart&#x2019;s Openly Local ontology and a bit of the <a href="http://www.epimorphics.com/public/vocabulary/org.html">Organizational (sic) Ontology</a>). I&#x2019;ve also <a href="http://sameas.org/">sameAs</a>ed to the <a href="http://statistics.data.gov.uk/">National Statistics Dataset</a>, <a href="http://openlylocal.com/">Openly Local</a> and <a href="http://openlylocal.com/">DBpedia</a>:</p>
+
+<p>`
+?xml version=&#x201D;1.0&#x201D;?&gt;
+rdf:RDF xmlns:rdf=&#x201D;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#x201D;
+  xmlns:skos=&#x201D;http://www.w3.org/2004/02/skos/core#&#x201D;
+  xmlns:rdfs=&#x201D;http://www.w3.org/2000/01/rdf-schema#&#x201D;
+  xmlns:owl=&#x201D;http://www.w3.org/2002/07/owl#&#x201D;
+  xmlns:foaf=&#x201D;http://xmlns.com/foaf/0.1/&#x201D;
+  xmlns:dct=&#x201D;http://purl.org/dc/terms/&#x201D;
+  xmlns:vcard=&#x201D;http://www.w3.org/2006/vcard/ns#&#x201D;
+  xmlns:administrative-geography=&#x201D;http://statistics.data.gov.uk/def/administrative-geography/&#x201D;
+  xmlns:openlylocal=&#x201D;http://openlylocal.com/info/vocab#&#x201D;
+  xmlns:org=&#x201D;http://www.w3.org/ns/org#&#x201D;&gt;
+rdf:Description rdf:about=&#x201D;http://www.lichfielddc.gov.uk/#id&#x201D;&gt;</p>
+
+<pre><code>    rdfs:labelLichfield District Council/rdfs:label 
+    vcard:organisation-nameLichfield District Council/vcard:organisation-name 
+    rdf:type rdf:resource="http://openlylocal.com/info/vocab#DistrictAuthority"/ 
+    rdf:type rdf:resource="http://www.w3.org/ns/org#FormalOrganization"/ 
+    skos:notation rdf:datatype="http://statistics.data.gov.uk/def/administrative-geography//StandardCode"41UD/skos:notation
+    foaf:mboxmailto:enquiries@lichfielddc.gov.uk/foaf:mbox 
+    foaf:homepage rdf:resource="http://www.lichfielddc.gov.uk"/ 
+    foaf:phone rdf:resource="tel:+44-1543-308999"/ 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://twitter.com/Lichfield_DC" 
+    foaf:accountServiceHomepage rdf:resource="http://twitter.com/"/ 
+    foaf:accountNameLichfield_DC/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+foaf:holdsAccount 
+  foaf:OnlineAccount rdf:about="http://www.facebook.com/lichfielddc" 
+    foaf:accountServiceHomepage rdf:resource="http://www.facebook.com/"/ 
+    foaf:accountNameLichfield District Council/foaf:accountName 
+  /foaf:OnlineAccount 
+/foaf:holdsAccount 
+vcard:ADR rdf:parseType="Resource" 
+  vcard:ExtaddDistrict Council House, Frog Lane, Lichfield WS13 6YY/vcard:Extadd 
+  vcard:CountryEngland/vcard:Country 
+  vcard:postal-code rdf:resource="http://www.uk-postcodes.com/postcode/WS136YY.rdf" / 
+/vcard:ADR 
+    administrative-geography:coverage rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000014797"/ 
+    owl:sameAs rdf:resource="http://statistics.data.gov.uk/doc/local-authority/41UD"/ 
+    owl:sameAs rdf:resource="http://openlylocal.com/councils/156.rdf"/ 
+    owl:sameAs rdf:resource="http://dbpedia.org/resource/Lichfield_%28district%29"/ 
+</code></pre>
+
+<p>/rdf:Description&gt;
+/rdf:RDF&gt;
+`</p>
+
+<p>It&#x2019;s not perfect, but it&#x2019;s a start, there&#x2019;s 24 triples there and I&#x2019;m sure there could be more. Only problem is, I&#x2019;m not a linked data expert, so I&#x2019;m looking for a bit of feedback both on what I&#x2019;ve done, but also what I could add - For example, I could add the chief executive and leader of the council - but I&#x2019;m not sure how I&#x2019;d do it!</p>
+
+<p>Feedback from non-linked data experts is welcome too - especially those at the coal face of local gov - if there was a step by step guide to doing this, could you do it? (i.e. have you got access to add metadata to your homepage) and, more importantly, would you do it?</p>
+
+<p><strong>UPDATE</strong> I&#x2019;ve now published the final(ish) version at <a href="http://www.lichfielddc.gov.uk/lichfield.rdf">http://www.lichfielddc.gov.uk/lichfield.rdf</a>, with a rel=&#x2019;alternate&#x2019; meta link on the Lichfield homepage. I&#x2019;ve also reused the reference.data.gov.uk ontology to show the councils CEO, leader etc, together with a bit of FOAF for their contact details.</p>
+
+<p>Thanks to Jeni Tennison, Leigh Dodds and Dave Reynolds for helping me to get this far, and hopefully we can encourage more councils to do the same!</p>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,1 +1,1104 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="Since I last spoke to you, I&#8217;ve been very busy. I&#8217;ve recently changed jobs and am now working at the Open Data Institute. It&#8217;s a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated Testing With Cucumber and Phantom.js</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T08:39:00+01:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since I last spoke to you, I&#8217;ve been very busy. I&#8217;ve recently changed jobs and am now working at the <a href="http://theodi.org">Open Data Institute</a>. It&#8217;s a massive change from working at my old place, and one of the many new things I&#8217;ve learnt about is the joys of automated testing.</p>
+
+<p>Working, as I did, on my own, in isolation (almost as a one man <a href="http://blog.pezholio.co.uk/2012/09/local-gds-a-skunkworks-for-local-government/">skunkworks</a>) meant I didn&#8217;t really need to worry about the quality of my code, and, as far as testing went - I could just test it in my browser and it&#8217;d work, right?</p>
+
+<p>Well, yeah, I suppose, but this isn&#8217;t The Right Way of doing things. Also, if I changed a line of code, how could I be sure that what I changed wouldn&#8217;t have unintended consequences in some obscure part of my application without testing the whole application myself? Also, as I would often not have a development environment (at least in my non-Ruby apps), this would mean introducing a whole load of test data into my live environment.</p>
+
+<p>In short, writing code without tests is a Very Bad Idea, and, as we move to the holy grail of <a href="http://en.wikipedia.org/wiki/Continuous_delivery">continuous deployment</a> at the ODI, this would mean that my code will be getting pushed into the live environment regularly by <a href="http://jenkins.theodi.org/">robots</a>, so we need to make sure that any changes made aren&#8217;t going to break anything.</p>
+
+<p>This is where <a href="http://cukes.info">Cucumber</a> comes in. I won&#8217;t go into this too much, but this is where the magic happens. I can write expectations (in a language called <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin</a>), and write code in Ruby that attempts to match these expectations. I can call code that queries the database, spins up browsers and acts like a real user and <a href="https://github.com/vcr/vcr">records HTTP interactions</a>.</p>
+
+<p>This is all well and good, but if I&#8217;m building an app that makes heavy use of JavaScript, then, out of the box, Cucumber (via <a href="http://docs.seleniumhq.org/">Selinium</a>) needs to spin up a real browser (such as Firefox or Chrome). This is OK when developing on my Mac at work, but once the code is being tested remotely in Jenkins before deploy, this isn&#8217;t possible.</p>
+
+<p>However, there does exist a neat tool called <a href="http://phantomjs.org/">Phantom.js</a> - a fully functional WebKit browser (like Chrome), but without one crucial thing, a window. All user interactions are carried out via JavaScript, and you can do everything a normal user would do, but without having to have a GUI. This mean you can automate all sorts of tasks on the command line, screen scraping, filling out forms, and yes, testing.</p>
+
+<p>As Phantom.js is not like other browsers, getting Phantom.js and Cucumber to play nicely together is not, a straightforward task. However, there is a nice tool called <a href="https://github.com/jonleighton/poltergeist">Poltergeist</a>, which allows you to do just that.</p>
+
+<p>Getting Poltergeist set up in a Rails app is easy, but not trivial, and I had to jump through a few hoops to get it sorted, so I thought I&#8217;d document it here for the ages.</p>
+
+<p>I&#8217;m assuming you&#8217;ve got <code>Cucumber-rails</code> set up in your Rails app already, so if you haven&#8217;t, take a look at this <a href="http://railscasts.com/episodes/155-beginning-with-cucumber">Railscast</a> to get you started.</p>
+
+<p>Once you&#8217;re all set up, the first thing to do is install Phantom.js - if you&#8217;re on a Mac and running Homebrew, it&#8217;s as easy as running <code>brew install phantomjs</code> on the command line, otherwise <a href="http://phantomjs.org/download.html">take a look at these instructions</a>.</p>
+
+<p>Next, add <code>poltergeist</code> to your <code>gemfile</code> (probably in your <code>:test</code> group) like so:</p>
+
+<pre><code>gem 'poltergeist'
+</code></pre>
+
+<p>and run <code>bundle install</code></p>
+
+<p>The next thing to do is register Poltergeist as a new browser in Cucumber, and make it run as the default driver for all your JavaScript tests. Open up your <code>features/support/env.rb</code> file and add the following lines:</p>
+
+<pre><code>require 'capybara/poltergeist'
+
+Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, {debug: false})
+end
+
+Capybara.javascript_driver = :poltergeist
+</code></pre>
+
+<p>Then you should be good to go! Crucially, you need to make sure you add the <code>@javascript</code> tag to all your tests, so Capybara knows to use Poltergeist for your tests, but other than that, when you now run your tests, rather than a browser window being fired up, everything happens in the background like magic!</p>
+
+<p>There are a couple of other cool things you can do with Poltergeist that may help you when you&#8217;re writing initial tests, like taking screenshots and executing arbitrary JavaScript (like in the JS Console in Chrome). <a href="https://github.com/jonleighton/poltergeist#whats-supported">Take a look at the docs</a> for more info, and have fun!</p>
+
+<p>One very small gotcha, is that, as Capybara fires up a real browser when running tests, if you&#8217;re recording API interactions with <a href="https://github.com/vcr/vcr">VCR</a>, it will try and record your browser interactions too. To get around this, you&#8217;ll need to make VCR ignore local requests by adding this line to your <code>features/support/vcr.rb</code> file:</p>
+
+<pre><code>VCR.configure do |c|
+    c.ignore_localhost = true
+end
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-10T08:49:00+01:00" pubdate data-updated="true">Oct 10<span>th</span>, 2012</time>
+        
+         | <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>If you spend any amount of time on different council websites (like I do, sad as I am), you&#x2019;ll noticed that most of them will have a similar navigation structure, starting with categories like Advice and Benefits, Environment and Planning, Transport and Streets etc.</p>
+
+<p>This is known as the Local Government Navigation List (or LGNL), and it&#x2019;s been going since the early days of eGovernment (remember that?), backed up by a steering group of people who shape and mould the list as time goes on.</p>
+
+<p>I&#x2019;ve been of the opinion that it is in serious need of reexamining for some time now - I don&#x2019;t feel it&#x2019;s customer focussed, there are too many levels and it can, in some cases be far too detailed for a council website navigation.</p>
+
+<p>That said, I&#x2019;ve shrugged my shoulders and put up with it, as for some time I&#x2019;ve believed that the future of website navigation is search. Why put up with clicking endless links when you can just type a few words in and (generally) get to what you&#x2019;re looking for. It&#x2019;s what I do and what (I assumed) most people would do too.</p>
+
+<p>However, you know what they say about assumption, and I was surprised to see that, in their latest redesign, <a href="http://digital.cabinetoffice.gov.uk/2012/10/03/why-weve-changed-the-homepage/">the gov.uk team are dropping the idea of a big search bar on the homepage, and going back to good old fashioned navigation</a>.</p>
+
+<p>You can see more about their rationale on the blog post, but, suffice to say, it&#x2019;s backed up by hours of testing with real users, the same sort of users that we have on our council&#x2019;s website, and it does makes sense.</p>
+
+<p>This leaves us with a problem, if search isn&#x2019;t the way forward, where does that leave LGNL? If, as I think, LGNL is in serious need of looking at, then what can we do?</p>
+
+<p>I put up a <a href="https://docs.google.com/spreadsheet/ccc?key=0As1cSxPJOFWldHBYU0tDNlFldTNmM1ZNT1I5VDF6X0E">Google doc yesterday</a> to kick around a few ideas, and already, I could see it was becoming monolithic, exactly like the LGNL I would like to see killed off. So what is the future?</p>
+
+<p>I believe we need a user tested, people focused navigation system, with no more than two levels, but one that isn&#x2019;t prescriptive, and can be moulded and shifted to meet the needs of a particular council. Maybe this is something that any potential <a href="http://blog.pezholio.co.uk/2012/09/local-gds-a-skunkworks-for-local-government/">local GDS can do</a>?</p>
+
+<p>I don&#x2019;t have all the answers, but I think it&#x2019;s a discussion we need to have. As always, let&#x2019;s have those thoughts in the comments.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-08T09:05:00+01:00" pubdate data-updated="true">Sep 8<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><a href="https://dev.twitter.com/docs/api/1.1/overview">As announced this week</a>, Twitter are continuing their war on developers by killing off RSS feeds.</p>
+
+<p>Add this to the fact that, once the old API is killed off around the middle of next year, all endpoints will require authentication, it&#x2019;s going to be a bit harder to do simple stuff with Twitter (such as display the latest tweets from your Twitter feed).</p>
+
+<p>You could, of course, use <a href="http://twitter.com/about/resources/widgetsShare">Twitter&#x2019;s own widgets</a>, but what if you (quite reasonably) want control over  the look and feel of your own website? You&#x2019;re either screwed, or you have to sign up for a developer account, create an application and use OAuth authentication just to display a couple of tweets, which is possibly overkill.</p>
+
+<p>However, there is a third way, by using Scraperwiki to scrape the tweets from your profile page you can create an RSS feed which will also act as a drop in replacement for any feeds you already use.</p>
+
+<p>It&#x2019;s pretty simple, just <a href="https://scraperwiki.com/scrapers/twitter_scraper_15/">go to my scraper on Scraperwiki</a>, click <code>copy</code>, and change the <code>username</code> to whatever username you want a feed for. Save the scraper and then run it.</p>
+
+<p>Next, copy this URL, replacing <code>YOUR_SCRAPER_NAME</code> with the name of your scraper (this will be in the URL when you save the scraper):</p>
+
+<pre><code>https://views.scraperwiki.com/run/twitter_rss_feed/?scraper=YOUR_SCRAPER_NAME
+</code></pre>
+
+<p>And there you have it! The URL you have will then display an RSS feed of your latest tweets. An added advantage of this approach is that the scraper runs every day and saves the tweets in a database, so you&#x2019;ve also got a daily archive of your tweets.</p>
+
+<p>One disadvantage is, however, as the scraper only runs once a day (unless you upgrade your Scraperwiki account so you can run scrapers every hour), it may not be particularly up to date, but it&#x2019;s better than nothing!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T14:46:00+01:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/local-gds-a-skunkworks-for-local-government/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><img src="http://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Skunk_works_Logo.svg/200px-Skunk_works_Logo.svg.png" alt="Skunkworks logo" class="mainimage">
+
+<h2>A bit of history</h2>
+
+<p>GDS has received a lot of good press by going against the grain of how we in the public sector traditionally do things and acting more like a startup, using agile project management techniques, shying away from the traditional Microsoft stack by using Ruby and other open source programming languages and publishing (most of) their code on <a href="https://github.com/alphagov">Github</a>.</p>
+
+<h2>The problem(s)</h2>
+
+<p>As someone who works in local government and is an advocate of these practices, I would love to see this sort of thing cross over into local government. There are pockets of local government webby innovation around the country, and this isn&#x2019;t often shared - meaning that there are some councils who have great websites, and some councils who have not so great ones.</p>
+
+<p>This is exacerbated further by the fact that some councils have no technical resource at all, meaning they&#x2019;re beholden to suppliers who sometimes (not always!) charge the earth for simple solutions and tweaks to existing products.</p>
+
+<h2>The solution(s)</h2>
+
+<p>Therefore, it would seem that the simple solution would be to abolish all local government web teams and have one central web team for all local councils, but to do this would be to miss the point of local councils  completely. We could just as easily say let&#x2019;s just have one national waste service, or one national planning department. By being close to their residents, and having councillors who live in an area, councils can better adapt to their residents&#x2019; needs.</p>
+
+<p>I think, therefore, a better solution would be to have something closer to a local government skunkworks.</p>
+
+<h2>What is a skunkworks?</h2>
+
+<p>For the uninitiated, the first skunkworks was set up in 1943 at the defence company Lockheed, and was tasked with working on highly secret and advanced projects, unheeded by bureaucracy and given a high degree of autonomy. The Lockheed skunkworks came up with  number of famous aircraft designs, including the U-2, the SR-71 Blackbird, the F-117 Nighthawk, and the F-22 Raptor.</p>
+
+<p>This has been tried before in the public sector with the HMG Skunkworks (presided over by one <a href="http://twitter.com/marxculture">Mark O&#x2019;Neill</a>), who worked on (amongst other things) the <a href="http://epetitions.direct.gov.uk/">latest version of the government ePetitions site</a>. The Skunkworks has since been moved into GDS, but it could be argued that without the skunkworks, there would have been no GDS.</p>
+
+<h2>So, how would a local government skunkworks work?</h2>
+
+<p>There are two possible solutions, either a centralised team that works out of an office, or a collection of individuals working for local councils seconded for a couple of days a week.</p>
+
+<p>However it works, these people will already be doing great stuff in the field of web development, design, UX, sysadmin etc.</p>
+
+<p>The skunkworks could work on modular projects (like planning systems, &#x2018;find my nearest&#x2019; tools, bin collection day finders etc), as well as actively looking for projects from councils who don&#x2019;t have technical resource, but also don&#x2019;t have the budget to use big suppliers.</p>
+
+<p>All these projects would be open source and published on Github for those with the technical nous to self-host, but could also be sold / given away via the <a href="http://gcloud.civilservice.gov.uk/cloudstore/">G-Cloud</a>, so the headache of setup and hosting is taken away from them and taken care of by the skunkworks team.</p>
+
+<p>This is sort of the thing we&#x2019;ve already talked about with Project Maple, but I think I&#x2019;ve struggled to communicate these ideas properly, and, to be honest, they&#x2019;ve only just crystalised in my head recently.</p>
+
+<h2>What do you think?</h2>
+
+<p>I&#x2019;m keen to get people&#x2019;s thoughts on this, so let me know what you think, either in the comments, or <a href="https://groups.google.com/forum/?fromgroups#!forum/project-maple-localgov">join the Project Maple Google Group</a> and have your say there.</p>
+</p>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T14:46:00+01:00"></time>data-updated=&#8221;true&#8221;&gt;Sep 4<span>th</span>, 2012</p>
+      
+
+
+    </footer>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2012/09/local-gds-a-skunkworks-for-local-government/" data-via="pezholio" data-counturl="http://pezholio.github.com/2012/09/local-gds-a-skunkworks-for-local-government/">Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/" title="Previous Post: Take a screenshot of any tweet using Casper.js"> Take a screenshot of any tweet using Casper.js</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/" title="Next Post: Twitter kills RSS: How to roll your own feed with Scraperwiki">Twitter kills RSS: How to roll your own feed with Scraperwiki </a>
+      
+    </p>
+  </div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-29T21:46:00+01:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+        
+         | <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>While Twitter do offer <a href="https://support.twitter.com/articles/20169559-how-to-embed-a-tweet-on-your-website-or-blog">a way of embedding tweets</a>, there&#x2019;s no guarantee that this feature will stay in its current form, and equally no guarantee that if the tweet is deleted, the embed will continue to work, which is a potential headache for journalists and bloggers.</p>
+
+<p>With this in mind, I&#x2019;ve developed <a href="https://gist.github.com/3518514">a quick solution to the problem</a>,  using the fantastic headless browser <a href="http://phantomjs.org/">Phantom.js</a> and <a href="http://casperjs.org/">Phantom.js utility Casper.js</a>.</p>
+
+<p>Simply put, all the solution does is allow you to take a simple screenshot in png format of any tweet you give the URL for.</p>
+
+<p>To get Phantom.js and Casper.js running, first <a href="http://code.google.com/p/phantomjs/wiki/Installation">install phantom.js</a> and then <a href="http://casperjs.org/installation.html">casper.js</a> (I won&#x2019;t go into the details here).</p>
+
+<p>Next, download the script to your machine by running:</p>
+
+<pre><code>wget https://raw.github.com/gist/3518514/51c87bc6e59040948b7aebe08cb73e500e0783e5/tweetshot.js
+</code></pre>
+
+<p>You will then be able to grab a screenshot by running the command:</p>
+
+<pre><code>casperjs tweetshot.js {tweet permalink} {output filename}
+</code></pre>
+
+<p>Your screenshot will then be saved with the filename you requested (with a .png extension).</p>
+
+<p>And that&#x2019;s it really! Ideally I&#x2019;d like to wrap it in a simple Sinatra app, so you don&#x2019;t have to have any technical knowledge to get a link, but that&#x2019;s something for another day.</p>
+
+<p>If anyone has any improvements to suggest, or would like to build on this, please let me know. I&#x2019;d love to hear what you can do with this.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/make-your-own-food-safety-twitter-bot-with-scraperwiki-and-ifttt/">Make Your Own Food Safety Twitter Bot With Scraperwiki and Ifttt</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-21T10:25:00+01:00" pubdate data-updated="true">Jun 21<span>st</span>, 2012</time>
+        
+         | <a href="/2012/06/make-your-own-food-safety-twitter-bot-with-scraperwiki-and-ifttt/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Food safety is a subject very close to my heart, and something I can get very geeky and passionate about.</p>
+
+<p>This isn&#x2019;t because I&#x2019;ve ever been struck down by a particularly nasty case of the runs, but because I&#x2019;ve been very heavily involved in the publication of online food safety inspections reports since 2006, when I worked on <a href="http://www.ratemyplace.org.uk/">Ratemyplace</a>, the food safety inspection website for Staffordshire councils.</p>
+
+<p>Because of my work with Ratemyplace, I&#x2019;ve had a lot of people asking &#x201C;can we get Ratemyplace in my council area?&#x201D; It&#x2019;s not really up to me, but I have put something together that will replicate one aspect of Ratemyplace&#x2019;s functionality - Twitter alerts, for your council area without you having to write one line of code.</p>
+
+<h2>Step 1 - Get the data</h2>
+
+<p>The first thing you&#x2019;ll need to do is look on the <a href="http://ratings.food.gov.uk/">national Food Ratings website</a>, to see if your council is there. More are being added as time goes on, so if your council isn&#x2019;t there, there&#x2019;s a chance they&#x2019;ll come on board in the near future. The best way to do this is have a look on the <a href="http://ratings.food.gov.uk/open-data/en-GB">open data page</a> and scan down the list (it&#x2019;s divided into regions, which makes it easier).</p>
+
+<p>If your council is there, click on the link marked &#x2018;English language&#x2019; (which is the link to the data), and copy the address from the address bar. Armed with this link, you&#x2019;re then ready for the next step.</p>
+
+<h2>Step 2 - Make your scraper</h2>
+
+<p><em>I know what you&#x2019;re saying, &#x2018;but you said this wouldn&#x2019;t involve coding!&#x2019; Worry not, dear reader, this won&#x2019;t hurt a bit.</em></p>
+
+<p>Next, you&#x2019;ll need to <a href="https://scraperwiki.com/login/#signup">create an account on ScraperWiki</a>. Once, you&#x2019;ve done that, go to <a href="https://scraperwiki.com/scrapers/food_safety_inspections_scraper_template/">this scraper on ScraperWiki</a>, and click &#x2018;Copy&#x2019; as highlighted below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki1.png" alt="Copying the scraper"></p>
+
+<p>You&#x2019;ll then be presented with the inner workings of the scraper, but don&#x2019;t worry, all you need to do is replace the text that says <code>{ENTER YOUR URL HERE}</code> with the url you copied earlier. Once that&#x2019;s done, you can rename the scraper to something more meaningful by clicking on the title (as shown), and then click &#x2018;Save Scraper&#x2019; at the bottom right of the screen.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki2.png" alt="Editing and saving the scraper"></p>
+
+<p>Once your scraper is saved, you can click &#x2018;Back to scraper overview at the top right of the page&#x2019; to see your scraper&#x2019;s page. Now click edit, under the &#x2018;Schedule&#x2019; section as highlighted below, and choose the &#x2018;Run every day&#x2019; option.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki3.png" alt="Setting the schedule"></p>
+
+<p>Then click the &#x2018;Run now&#x2019; button just above the &#x2018;Schedule&#x2019; section, and go an make a cup of tea. Depending on how busy Scraperwiki is, this should take around half an hour.</p>
+
+<h2>Step 3 - Making your feed</h2>
+
+<p>Once you&#x2019;ve had a cup of tea, refresh the webpage with your scraper in, and it should look something like this:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki4.png" alt="A working scraper"></p>
+
+<p>This means the scraper has done its magic and you can now more on to the next step. Click the &#x2018;Explore with API&#x2019; button as marked below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki5.png" alt="Explorer with API link"></p>
+
+<p>Now, copy this code below:</p>
+
+<pre><code>select name || ", " || address as title, "Rating: " || rating  as description, link as link, lng || " " || lat as "georss:point", date from swdata  order by date desc limit 10
+</code></pre>
+
+<p>and paste it into the box marked &#x2018;query in SQL&#x2019;, then click &#x2018;copy&#x2019; as shown below:</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/scraperwiki6.png" alt="Making your feed"></p>
+
+<p>Paste it into a text editor and add <code>format=rss2</code> to the end of the URL. You now have an RSS feed, ready to take along to <a href="http://ifttt.com">Ifttt</a></p>
+
+<h2>Step 4 - Tweet your feed!</h2>
+
+<p>Next, pop along to <a href="http://ifttt.com">Ifttt</a> and create an account. You&#x2019;ll also need a Twitter account, either your own, or a specific Twitter account for this purpose (I recommend the latter).</p>
+
+<p>In true Blue Peter style, I&#x2019;ve prepared a &#x2018;recipe&#x2019; for you to follow on Ifttt. Once you&#x2019;re logged in to Ifttt, <a href="http://ifttt.com/recipes/41648">go to the recipe</a>, click &#x2018;Activate&#x2019; under the Twitter Channel heading to connect your Twitter account (make sure you&#x2019;re logged in to the right account!), follow the instructions on the window that pops up, then click &#x2018;Done&#x2019;.</p>
+
+<p>Next, scroll down and in the box marked &#x2018;Feed URL&#x2019;, and copy and paste the URL you created earlier.</p>
+
+<p><img src="https://dl.dropbox.com/u/135665/blogimages/ifttt.png" alt="Ifttt"></p>
+
+<p>The next box shows the format that the Tweet will be posted in, you can fiddle with this if you want, or just leave it as is.</p>
+
+<p>That&#x2019;s it! Just click &#x2018;Use Recipe&#x2019; and every time the ScraperWiki scraper picks up a new inspection, your Twitter account will tweet it!</p>
+
+<p>If you want to see it in action, check out <a href="http://twitter.com/eatsafewalsall">@EatSafeWalsall</a>. I&#x2019;ve been running this for a while, and it seems to be picking up quite a few followers!</p>
+
+<p>If you do use this recipe, or have any problems following my none-too-lucid instructions, please let me know in the comments. Have fun! :)</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/new-blog/">New Blog, New Beginning!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-20T19:54:00+01:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
+        
+         | <a href="/2012/06/new-blog/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Shamefully, it&#x2019;s been almost a year since my last blog post, but I&#x2019;ve finally decided to get my act together and get cracking with a brand new blog!</p>
+
+<p>As much as I love Wordpress, I&#x2019;m starting to think it&#x2019;s becoming a bit too bloated to be a blogging platform, and, with this in mind (and just because I like fiddling), I&#x2019;ve switched to <a href="http://octopress.org/">Octopress</a>.</p>
+
+<p>Octopress is most definitely for hackers. It&#x2019;s built in Ruby, and, rather than relying on a database like Wordpress does, it generates pages on your local machine, which you then push to a remote repository.</p>
+
+<p>The benefits of this is you can get free hosting (I use <a href="http://pages.github.com/">Github pages</a>, but you can also use <a href="http://www.heroku.com/">Heroku</a>), and, as the pages are static HTML, you&#x2019;ll always have a super fast blog (so no more <a href="http://en.wikipedia.org/wiki/Slashdot_effect">Slashdot effect</a> if you get a lot of traffic!).</p>
+
+<p>Another benefit is that you can write your pages in <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, which is a great way of writing text that converts to HTML with the minimum of fuss.</p>
+
+<p>I&#x2019;ve used a (slightly customised) version of the <a href="https://github.com/bijumon/oct2">Oct2</a> theme, as although I like the default Octopress theme, as Octopress gets more prevelant, so does the default Octopress theme, and I like to stand out from the crowd. There&#x2019;s <a href="https://github.com/imathis/octopress/wiki/List-Of-Octopress-Themes">not a lot of themes out there</a>, but I&#x2019;m told the next version of Ocotopress makes theming a lot easier, so expect to see more kicking around soon.</p>
+
+<p>I&#x2019;ve also <a href="https://github.com/thomasf/exitwp">imported all my blog posts from Wordpress using Exitwp</a>, so my old brain dumps will always be available for all the world to see. Some of the Markdown is a bit funky (particularly on the code side of things), so that needs sorting. I&#x2019;m also working on importing my old comments too.</p>
+
+<p>All in all, for me, Octopress is a more enjoyable way to blog, so hopefully you&#x2019;ll be seeing much more blogging from me. I&#x2019;m also interested to know any tips or gotchas on blogging from Octopress users (I&#x2019;m particularly keen to know about good Markdown editors for OSX), so let me know in the comments!</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/07/generating-qr-codes-using-php-and-the-googl-ap/">Generating QR Codes Using PHP and the Goo.gl API</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-25T13:33:48+01:00" pubdate data-updated="true">Jul 25<span>th</span>, 2011</time>
+        
+         | <a href="/2011/07/generating-qr-codes-using-php-and-the-googl-ap/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>QR codes are all the rage at the mo, after a bit of a slow start, they&#x2019;re popping up everywhere, <a href="http://www.customqrcodes.com/story/31/Home">even appearing in cookery programmes</a>.</p>
+
+<p>I&#x2019;ve decided to take advantage of this, and have started a project to get QR codes on planning notices, so if someone is out and about and they see a planning notice attached to a lampost, they can scan the code with their phone and immediately find out more about the application.</p>
+
+<p>I&#x2019;ve still not finished this, but the first hurdle was actually generating the QR codes themselves. There are plenty of APIs out there, but, the more information you put in a QR code, the more complex it is, making it more difficult it is to scan and more prone to errors.</p>
+
+<p>What I really wanted to do was shorten a URL and then create a QR code from that. If this is going to be automated, I&#x2019;d need a little script to do the legwork for me.</p>
+
+<p>I chose Google&#x2019;s goo.gl url shortener, as it provides an easy option for creating a QR code, just by putting .qr at the end. Here&#x2019;s the code, with comments along the way:</p>
+
+<pre><code>// We're going to be outputting this as an image, rather than as plaintext, to make it easier to include in, for example a webpage
+header("Content-Type: image/png");
+
+// We put the long URL in an array, as we're going to encode our data as JSON for the Goo.gl API 
+$request = array(
+    'longUrl' = $_GET['url']
+);
+
+// As we need to POST the data, we're using cURL
+$ch = curl_init(); 
+
+// This tells cURL to output the result of the request
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// This is the URL of the Goo.gl API
+curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/urlshortener/v1/url"); 
+
+// We're setting the content type of our request as JSON
+curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Content-Type: application/json"));
+
+// It's a POST request
+curl_setopt($ch, CURLOPT_POST, true);
+
+// And here is the contents of the request we set earlier, encoded as JSON
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+
+// Now we're getting our data, again, as per the request, it's JSON, so we're using json_decode() to convert to JSON to a PHP object
+$data = json_decode(curl_exec($ch));
+
+// Closing the cURL request 
+curl_close($ch);
+
+/*
+The response is in this format:
+
+{
+ "kind": "urlshortener#url",
+ "id": "http://goo.gl/fbsS",
+ "longUrl": "http://www.google.com/"
+}
+
+and it's 'id' we're intested so:
+*/
+$shorturl = $data-id;
+
+// We now add .qr to the end of the URL and get the raw contents of the resulting QR code
+$image = file_get_contents($shorturl.".qr");
+
+// Now echo the result out! As we've set the header of the document to be a PNG image, the browser (or whatever) knows to display an image, rather than a meaningless string of characters
+echo $image;
+</code></pre>
+
+<p>And there you have it! Any questions, give me a yell in the comments. Next step is getting the codes on the notices, which I&#x2019;m nearly there with - will let you know how I get on.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/using-foursquare-in-local-government/">Using Foursquare in Local Government</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-21T13:56:25+00:00" pubdate data-updated="true">Feb 21<span>st</span>, 2011</time>
+        
+         | <a href="/2011/02/using-foursquare-in-local-government/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/02/foursquare.png" alt="">Foursquare. It&#x2019;s just a vanity publishing tool that takes over your Twitter stream and Facebook feed right? OK, I&#x2019;m as guilty as the next Foursquare user for checking in to the pub at lunchtime and telling all my Twitter followers, but Foursquare can actually be a pretty useful tool for giving visitors and residents useful information about their surroundings.</p>
+
+<p>As well as being able to check into places and see where your friends are, Foursquare also allows you to leave &#x2018;tips&#x2019; about venues for your friends and followers, so when they check into that venue (or one nearby), they&#x2019;ll see this tip. I&#x2019;ve left a couple of tips on my personal Foursquare account (mainly plugging nights I play at, or calling out bad service at restaurants), but I&#x2019;ve always thought Foursquare tips could be really useful for our tourism team, highlighting special offers and also giving historical titbits of information about places in the district.</p>
+
+<p>I never really knew how to get started with a Foursquare page until I read <a href="http://josephstashko.com/media/using-foursquare-with-hyperlocal/">Joseph Stashko&#x2019;s post</a> on how he added a <a href="http://foursquare.com/blogpreston">Foursquare page for Blog Preston</a>. I&#x2019;ll leave you to read Joseph&#x2019;s explanation on how he got set up, but needless to say, the sign up process is a little bit convoluted (To be fair, Foursquare say they will be changing this soon).</p>
+
+<p>That said, once I&#x2019;d filled everything out, got our designer to design a header and sent it all off to Foursquare, I was up and running within a few hours (together with a nice personal response from a Foursquare staffer).</p>
+
+<p>You can now see the results on the <a href="http://foursquare.com/visitlichfield">Visit Lichfield Foursquare page</a>. I&#x2019;ve added a few tips in and around Lichfield City with historical information that I know about personally, together with a few special offers, and I&#x2019;m looking at getting a few more tips added after talking to our Green Badge guides (who know much more about Lichfield&#x2019;s history than me) before launching the page officially (bizarrely, we already seem to have 600+ followers without doing any promotion, mainly people from Indonesia and New York).</p>
+
+<p>However, it&#x2019;s not just tourism that Foursquare can help with, I&#x2019;d love to develop something like <a href="http://donteat.at/">donteat.at</a>, which uses public data on food safety inspections in New York to warn you if you&#x2019;re about to eat at a place with a poor hygiene report, and if you&#x2019;re a council with a lot of venues, you could leave tips about upcoming events or special offers. The only limit, as they say, is your imagination!</p>
+
+<p>If anyone else has any useful tips on local gov using Foursquare, I&#x2019;d love to hear them - drop me a line in the comments.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/a-beginners-guide-to-sparqling-linked-data-part-1/">A Beginner&#8217;s Guide to SPARQLing Linked Data (Part 1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-14T14:00:59+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2011</time>
+        
+         | <a href="/2011/01/a-beginners-guide-to-sparqling-linked-data-part-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Regular readers of this blog will have seen that, over the past 12 months or so, I&#x2019;ve been banging on about linked data and SPARQL quite a bit, posting up example queries and the like, but with not much explanation about why I&#x2019;m doing what I&#x2019;m doing.</p>
+
+<p>Thanks to the good folks at Talis and their offer of a <a href="http://www.talis.com/localgov/pr/">free linked data store for spending data</a>, I&#x2019;ve also got a nice little store of my own, and I thought it was high time I went back to basics and passed on what I&#x2019;ve learnt to other people.</p>
+
+<h3>First, a bit of background</h3>
+
+<p>The web, as most of us know it, is a network of <strong>documents</strong>, with each document having an individual URI to show its location on the web. With linked data, the web becomes an network of <strong>things</strong> with each thing having an individual URI to tell us more about it.</p>
+
+<p>When talking about linked data, we talk about UR<strong>I</strong>s, rather than UR<strong>L</strong>s, as URLs refer the the location of a file, whereas URIs are identifiers for things, which could return any format.</p>
+
+<p>An example of a URI is <a href="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service">http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service</a> - when you access this via a web browser, the web browser asks for HTML and a web page giving information about this particular cost centre is returned. If you request this in any other way (say via the command line) and ask for RDF, you will get an <a href="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service.rdf">RDF representation of information about this cost centre</a> (web browsers filter out some of the XML, so it might be worth right clicking and selecting &#x201C;view source&#x201D; to see everything).</p>
+
+<p>As well as identifying things, URIs also represent categories of things (called properties), the previous example therefore is an expenditure category, represented by the URI <a href="http://reference.data.gov.uk/def/payment#expenditureCategory">http://reference.data.gov.uk/def/payment#expenditureCategory</a>. To get all the properties being used for our spending dataset, we can do the following SPARQL query:</p>
+
+<p><code>
+SELECT DISTINCT ?o WHERE {?s a ?o}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=SELECT+DISTINCT+%3Fo+WHERE+%7B%3Fs+a+%3Fo%7D">See the results of this query</a></p>
+
+<h3>SPARQL queries themselves</h3>
+
+<p>SPARQL stands for <strong>S</strong>PARQL <strong>P</strong>rotocol and <strong>R</strong>DF <strong>Q</strong>uery <strong>L</strong>anguage and is a similar sort of idea to SQL (which is used in most databases both on and off the web). The main difference is that while SQL generally allows us read and write from and to a database (and therefore not particularly safe to give everyone access), SPARQL is built for public access, so is non-destructive in nature. SPARQL is, of course, still intended for developers and is just as powerful as SQL for querying datasets.</p>
+
+<p>RDF datastores have a SPARQL endpoint, which is basically a fancy name for a place where you can make SPARQL queries. Our SPARQL endpoint is located at <a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql">http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql</a> and we make SPARQL queries by posting a GET request to this URI in the format http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query={SPARQL query goes here}, or by entering our query on a web-based form that posts to our endpoint. The form we will be using is located <a href="http://spending.lichfielddc.gov.uk/sparql">here</a>.</p>
+
+<p>The first thing we do when writing a SPARQL query is define our prefixes. If you look at <a href="http://spending.lichfielddc.gov.uk/date/dec-2010.rdf">a snapshot of the data we&#x2019;ll be querying</a>, you&#x2019;ll see that most of the XML tags are written in the format prefix:type&gt; (RDF can be written in various formats, but I&#x2019;m using XML, which is not necessarily the best format, but that&#x2019;s a discussion for another day!). If you look at the top of the document (you might need to view source in your web browser) you&#x2019;ll see that all the prefixes are defined at the top as XML namespaces (for example &#x2018;xmlns:payment=&#x201D;http://reference.data.gov.uk/def/payment#&#x201D;&#x2019; means that the prefix &#x201C;payment&#x201D; will be shorthand for &#x201C;http://reference.data.gov.uk/def/payment#&#x201D;, so &#x201C;payment:reference&#x201D; actually refers to a URI, in this case &#x201C;http://reference.data.gov.uk/def/payment#reference&#x201D;). We can do this in a similar way in our SPARQL like so:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+</code></p>
+
+<p>There may be other prefixes too, and we do these a line at a time, for example:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+PREFIX xsd: http://www.w3.org/2001/XMLSchema#
+</code></p>
+
+<p>The next thing to do is choose what data we want to return (in a similar way to an SQL SELECT query)</p>
+
+<p><code>
+SELECT ?payment WHERE {
+</code></p>
+
+<p>Here we&#x2019;re asking for one part of the dataset, which will be the URI which represents a particular payment. At this point, it doesn&#x2019;t matter what we call it, as we need to define this in the next bit of our query:</p>
+
+<p><code>
+?payment a payment:Payment .
+</code></p>
+
+<p>Here we&#x2019;re saying &#x201C;You know that thing I asked for in the SELECT part of the statement? That needs to be a http://reference.data.gov.uk/def/payment#Payment&#x201D;.</p>
+
+<p>We could stop here, but we&#x2019;ll end up getting all the data back, which would take a long time, and probably not be very useful, so let&#x2019;s filter this by only asking for payments made to a particular supplier:</p>
+
+<p><code>
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd
+</code></p>
+
+<p>Let&#x2019;s put it all together:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+SELECT ?Payment WHERE {
+  ?Payment a payment:Payment .
+  ?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0A%0D%0ASELECT+%3FPayment+WHERE+%7B%0D%0A++%3FPayment+a+payment%3APayment+.%0D%0A++%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%7D+">See the results of the query</a>.</p>
+
+<p>The query returns a list of URIs, if you copy and paste these into your browser, you&#x2019;ll see a web page about that payment. The list isn&#x2019;t very useful in itself, so let&#x2019;s ask for a bit more data.</p>
+
+<p>We&#x2019;ll first modify the prefixes:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+</code></p>
+
+<p>Then the rest of the query:</p>
+
+<p><code>
+SELECT ?Payment ?label ?date {
+  ?Payment a payment:Payment .
+  ?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+  ?Payment rdfs:label ?label .
+  ?Payment payment:date ?date
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Flabel+%3Fdate+WHERE+%7B%0D%0A++%3FPayment+a+payment%3APayment+.%0D%0A++%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fbiffa-waste-services-ltd%3E+.%0D%0A++%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A++%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%7D+">See the results of this query</a>.</p>
+
+<p>Hopefully you&#x2019;ll be able to see what&#x2019;s going on here, we&#x2019;re now asking for the label of the payment (rdfs:label) and also the date (Payment:date). In this dataset, the date is returned as a URI (i.e. <a href="http://reference.data.gov.uk/id/day/2010-04-26">http://reference.data.gov.uk/id/day/2010-04-26</a>), but we can also return the date&#x2019;s label in text form by adding the following:</p>
+
+<p><code>
+SELECT ?Payment ?label ?date **?datelabel** {
+</code></p>
+
+<p>&#x2026;snip</p>
+
+<p><code>
+?date rdfs:label ?datelabel .
+</code></p>
+
+<p>Here we&#x2019;re saying &#x201C;You know that date I asked for? I also want to see it&#x2019;s label, and I want to call it datelabel&#x201D;. The query now looks like this:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+SELECT ?Payment ?label ?date ?datelabel {
+?Payment a payment:Payment .
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+?Payment rdfs:label ?label .
+?Payment payment:date ?date .
+?date rdfs:label ?datelabel
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Flabel+%3Fdate+%3Fdatelabel+%7B%0D%0A%3FPayment+a+payment%3APayment+.%0D%0A%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%3Fdate+rdfs%3Alabel+%3Fdatelabel+.%0D%0A%7D">See the results of this query</a>.</p>
+
+<p>This is all well and good, but we don&#x2019;t see any actual figures yet, which isn&#x2019;t very useful. Going back to the <a href="http://spending.lichfielddc.gov.uk/date/dec-2010.rdf">snapshot of data</a> I showed earlier, you can see that each payment has one or more expenditureLines, expressed as:</p>
+
+<p><code>
+payment:expenditureLine rdf:resource="http://spending.lichfielddc.gov.uk/spend/9178363"/
+</code></p>
+
+<p>If you look below each Payment, you&#x2019;ll see the expenditureLine(s) for the payment, e.g:</p>
+
+<p><code>
+payment:ExpenditureLine rdf:about="http://spending.lichfielddc.gov.uk/spend/9178363"
+rdfs:labelPayment number 9178363/rdfs:label
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/costcentre/waste-shared-service"/
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/type/supplies-services"/
+payment:expenditureCategory rdf:resource="http://spending.lichfielddc.gov.uk/subjective/compost-disposal-costs"/
+payment:payment rdf:resource="http://spending.lichfielddc.gov.uk/invoice/16148"/
+payment:netAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal"1855.88/payment:netAmount
+qb:dataSet rdf:resource="http://spending.lichfielddc.gov.uk/dataset.rdf#2010-12-v1"/
+/payment:ExpenditureLine
+</code></p>
+
+<p>We can get this information in a similar way to how we got the date labels, so if we want to get a net amount for each payment we can add:</p>
+
+<p><code>
+SELECT ?Payment **?line** ?label ?date ?datelabel **?amount** {
+</code></p>
+
+<p>&#x2026;snip</p>
+
+<p><code>
+?line payment:payment ?Payment .
+?line payment:netAmount ?amount
+</code></p>
+
+<p>Here we&#x2019;re now asking for each line that has a payment that is equal to &#x201C;?Payment&#x201D; (i.e. the Payments we&#x2019;ve originally requested) and asking for their net amounts. The query now looks like this:</p>
+
+<p><code>
+PREFIX payment: http://reference.data.gov.uk/def/payment#
+PREFIX rdfs: http://www.w3.org/2000/01/rdf-schema#
+SELECT ?Payment ?line ?label ?date ?datelabel ?amount {
+?Payment a payment:Payment .
+?Payment payment:payee http://spending.lichfielddc.gov.uk/supplier/burntwood-road-sweepers-ltd .
+?Payment rdfs:label ?label .
+?Payment payment:date ?date .
+?date rdfs:label ?datelabel .
+?line payment:payment ?Payment .
+?line payment:netAmount ?amount
+}
+</code></p>
+
+<p><a href="http://api.talis.com/stores/lichfielddc-gov-uk/services/sparql?query=PREFIX+payment%3A+%3Chttp%3A%2F%2Freference.data.gov.uk%2Fdef%2Fpayment%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+%3FPayment+%3Fline+%3Flabel+%3Fdate+%3Fdatelabel+%3Famount+%7B%0D%0A%3FPayment+a+payment%3APayment+.%0D%0A%3FPayment+payment%3Apayee+%3Chttp%3A%2F%2Fspending.lichfielddc.gov.uk%2Fsupplier%2Fburntwood-road-sweepers-ltd%3E+.%0D%0A%3FPayment+rdfs%3Alabel+%3Flabel+.%0D%0A%3FPayment+payment%3Adate+%3Fdate+.%0D%0A%3Fdate+rdfs%3Alabel+%3Fdatelabel+.%0D%0A%3Fline+payment%3Apayment+%3FPayment+.%0D%0A%3Fline+payment%3AnetAmount+%3Famount+.%0D%0A%7D">See the results of this query</a>.</p>
+
+<p>Which seems like a pretty neat place to leave it now. Feel free to have a play with the stuff I&#x2019;ve gone thorough so far, and ask any questions in the comments. I don&#x2019;t claim to have all the answers, and I may have made some incorrect assumptions, so please feel free to put me right too!</p>
+
+<p>Stay tuned for part 2, where I&#x2019;ll cover filters and other cool things.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/2/">&larr; Older</a>
+    
+    <a href="archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
