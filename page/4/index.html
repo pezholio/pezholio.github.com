@@ -9,7 +9,7 @@
   <meta name="author" content="Pezholio">
 
   
-  <meta name="description" content="As a lot of you probably know, I&#x2019;m a big fan of open data, as well as driving innovation and making it easier to share information, it&#x2019 &hellip;">
+  <meta name="description" content="In case you&#x2019;ve been living under a rock for the past month or so (or actually have a life), then you&#x2019;ll have noticed that the cabinet &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/adventures-in-sparql/">Adventures in SPARQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-21T15:45:25+01:00" pubdate data-updated="true">Oct 21<span>st</span>, 2009</time>
+        
+         | <a href="/2009/10/adventures-in-sparql/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In case you&#x2019;ve been living under a rock for the past month or so (or actually have a life), then you&#x2019;ll have noticed that the cabinet office have started to release a big load of open data to a select few developers to have a play.</p>
+
+<p>Much of this data is still in very &#x2018;flat&#x2019; formats (such as Excel docs and the like), but some data is being released in RDFa format, the preferred format of the semantic web.</p>
+
+<p>The most interesting of these datasets has been the education one, giving me (and other developers) the ability to get information about schools in an open format. I&#x2019;ve been playing with this data for a bit, and now (I think) I might have something useful.</p>
+
+<p>The key way of interacting with it is using a language called SPARQL, which is very similar to SQL, but with the web of data in mind. An example query for the education dataset is as follows:</p>
+
+<p><code>
+prefix sch-ont: http://education.data.gov.uk/ontology/school#
+SELECT ?name WHERE {
+?school a sch-ont:School;
+sch-ont:establishmentName ?name;
+sch-ont:districtAdministrative
+http://education.data.gov.uk/placeholder-id/administrativeDistrict/Lichfield ;
+}
+ORDER BY ?name
+</code></p>
+
+<p>This gets the names of all the educational establishments (schools, nurseries etc) in Lichfield District. You can <a href="http://services.data.gov.uk/education/sparql">give it a try yourself on the public facing SPARQL endpoint</a>.</p>
+
+<p>What I wanted to do though, was to get all the primary or secondary schools within a 2 mile radius of a postcode. This was a little harder, but perfectly doable.</p>
+
+<p>As well as general details (such as address, name of school etc) and more detailed information (such as capacity, inspection details etc), the dataset also has the easting and northing of the school. Therefore, to get all Primary Schools within a 2 mile radius of a point with an easting of 411021 and a northing of 307291, I needed to do the following query:</p>
+
+<p><code>
+prefix sch-ont: http://education.data.gov.uk/ontology/school#
+SELECT ?name ?address1 ?address2 ?postcode ?town ?easting ?northing ?reference WHERE {
+?school a sch-ont:School;
+sch-ont:establishmentName ?name;
+sch-ont:easting ?easting ;
+sch-ont:northing ?northing ;
+sch-ont:uniqueReferenceNumber ?reference ;
+sch-ont:phaseOfEducation http://education.data.gov.uk/ontology/school#PhaseOfEducation_Primary .
+FILTER (?easting  414239  ?easting  411021  ?northing  310509
+ ?northing  307291)
+}
+</code></p>
+
+<p>This gets the name, easting, northing and reference number of every school within a 2 mile (3201-ish metre) box, with the original easting and northing as the midpoint.</p>
+
+<p>I&#x2019;ve given it a test here (a bit of naughtiness is required using the Google Maps API to get the latitude and longitude of the postcode, but it&#x2019;s the only way at the moment!), so please feel free to try it out.</p>
+
+<p>Once you submit the form you&#x2019;ll get a list of all the primary and secondary schools in that area, as well as a link to more info on the Edubase site.</p>
+
+<p>Postcode</p>
+
+<p>School Type</p>
+
+<p>Primary
+Secondary</p>
+
+<p>I&#x2019;d be interested to know your thoughts, so please feel free to comment! :)</p>
+
+<p>There&#x2019;s also a few more example queries on the <a href="http://blogs.talis.com/n2/archives/818">Talis Blog</a>, so if you&#x2019;re that way inclined I heartily recommend having a play.</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -576,64 +670,6 @@ In case you&#x2019;ve had your head buried in a good few feet of sand, then you&
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/a-few-thoughts-on-birmingham-city-councils-website/">A Few Thoughts on Birmingham City Council&#8217;s Website</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T19:12:39+01:00" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-         | <a href="/2009/09/a-few-thoughts-on-birmingham-city-councils-website/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p><strong>Health warning</strong></p>
-
-<p>Before I go any further, it&#x2019;s worth pointing out that my views are my own, and not the views of my employer - just so you know like.</p>
-
-<p>Well, it&#x2019;s finally happened - massively over budget, and over three years late, <a href="http://www.birmingham.gov.uk/">Birmingham City Council&#x2019;s website</a> has finally launched.</p>
-
-<p>And what a disappointment it is, admittedly it&#x2019;s an improvement from the old site, which looked like it had crawled out of the mid-90s, but already looks a bit dated - there&#x2019;s no RSS feeds (apart from feeds for searches - automatically generated by the Google search appliance) and there&#x2019;s a <a href="http://search.twitter.com/search?q=+%23bccwebsite">myriad of other problems</a>.</p>
-
-<p>Birmingham is the second largest local authority in the UK, has a thriving digital community, and the local authority is doing great stuff with <a href="http://www.digitalbirmingham.co.uk/">Digital Birmingham</a>, so why isn&#x2019;t this reflected in the city council&#x2019;s website?</p>
-
-<p>Manchester, a similar sized authority, launched their <a href="http://www.manchester.gov.uk/">new website</a> in a fraction of the time it took to launch Birmingham&#x2019;s, also scooping a <a href="http://www.btonlineexcellence.com/winners.php">BT online excellence award</a> in the process, proving that it doesn&#x2019;t take an age to launch a website for a large local authority.</p>
-
-<p>Now, I don&#x2019;t blame the web team for this, they&#x2019;ve done a very good job given using the tools they&#x2019;ve been given, but the problem is the system it&#x2019;s been built on - by all accounts the web team have had very little involvement and most of the grunt work has been done by the council&#x2019;s outsourced IT &#x2018;partner&#x2019; <a href="http://www.birmingham.gov.uk/cs/Satellite?c=Page&amp;childpagename=Service-Birmingham%2FPageLayout&amp;cid=1223092749116&amp;pagename=BCC%2FCommon%2FWrapper%2FWrapper">Service Birmingham</a> - operated by everyone&#x2019;s favourite outsourcer Capita (or Crapita if you read Private Eye).</p>
-
-<p>Not involving the people who know best - the web team - in the first place means not only do you have a system which is massively over budget and more than fashionably late, it also means that you have a site that doesn&#x2019;t represent Birmingham in a positive light.</p>
-
-<p>Effectively getting an IT outsourcer - who&#x2019;s expertise is not in the domain of web - is a fatal error - it&#x2019;s akin to getting a printer to publish a newspaper - they may know about printing, but what do they know about journalism? Obviously there is an overlap, but IT and web are, in main, separate disciplines and this needs to be respected.</p>
-
-<p>Now, my good friend Paul Canning has been <a href="http://paulcanning.blogspot.com/2009/05/postscript-why-gov-webbies-need.html">banging on about more respect for government webbies for a while</a>, arguing that we need professional status, and this is a textbook example of why this desperately needs to happen, otherwise we&#x2019;re going to end up with more disasters of this nature.</p>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -663,6 +699,10 @@ In case you&#x2019;ve had your head buried in a good few feet of sand, then you&
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/04/lost-the-source-to-my-octopress-blog-ooops/">Lost the source to my Octopress blog (Ooops)</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
       </li>
     
@@ -676,10 +716,6 @@ In case you&#x2019;ve had your head buried in a good few feet of sand, then you&
     
       <li class="post">
         <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
       </li>
     
   </ul>

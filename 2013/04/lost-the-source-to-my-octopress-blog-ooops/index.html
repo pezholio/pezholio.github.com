@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rate My Teachers and Customer Feedback - Pezholio</title>
+  <title>Lost the source to my Octopress blog (Ooops) - Pezholio</title>
   <meta name="author" content="Pezholio">
 
   
-  <meta name="description" content="I&#x2019;m probably late on this, but, courtesy of a blog post from Mr Fraser Henderson, I&#x2019;ve spotted Rate My Teachers, a crowdsourced site &hellip;">
+  <meta name="description" content="As I use Octopress to publish my blog, there&#8217;s no database and no admin panel for my blog. It&#8217;s all generated on my local machine, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pezholio.github.com/2009/05/rate-my-teachers-and-customer-feedback/">
+  <link rel="canonical" href="http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rate My Teachers and Customer Feedback</h1>
+      <h1 class="entry-title">Lost the Source to My Octopress Blog (Ooops)</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2009-05-28T15:57:20+01:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+<time datetime="2013-04-04T08:16:00+01:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,19 +94,25 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<p>I&#x2019;m probably late on this, but, courtesy of a <a href="http://particitech.ning.com/profiles/blogs/edusec-1">blog post from Mr Fraser Henderson</a>, I&#x2019;ve spotted <a href="http://uk.ratemyteachers.com/">Rate My Teachers</a>, a crowdsourced site that allows kids to, as the name suggests, rate their teachers.</p>
+<div class="entry-content"><p>As I use <a href="http://octopress.org">Octopress</a> to publish my blog, there&#8217;s no database and no admin panel for my blog. It&#8217;s all generated on my local machine, and pushed to <a href="http://github.com/pezholio/pezholio.github.com">Github pages</a>.</p>
 
-<p>Pupils get the opportunity to rate their teachers based on easiness, helpfulness, clarity and popularity, as well as give a bit of a comment on the teacher themselves.</p>
+<p>On one hand, this is great, hosting is free (on Github), and the site is hella lightweight (just flat HTML pages). I also write my posts in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (which makes writing so much more enjoyable than squinting into a WYSIWIG editor on a webpage), save them on my local machine and then run a couple of commands in my terminal to pubish my new blog post.</p>
 
-<p>After posting up on Twitter about this, <a href="http://twitter.com/pauloCanning/statuses/1948306411">@paulocanning pointed out that it wasn&#x2019;t well-liked by teachers, and it&#x2019;s blocked by most school web filters</a>. I can kind of see their reasoning, but I think schools are missing a trick.</p>
+<p>The way it&#8217;s supposed to work is you should have two branches in GitHub, one for the posts that Octopress generates, and one for the actual source of your blog, so if you forget to push your source to Github (like me), and get a new computer (like me), and don&#8217;t BACK EVERYTHING UP (like me), things sort of fall apart at the seams.</p>
 
-<p>OK, yeah, kids can sometimes be cruel, but sometimes, they can also have insight and, at the end of the day (as much as schools might claim otherwise), they&#x2019;re receiving a service. Why not embrace this technology (and moderate it, the site gives people the opportunity to apply to be moderators) and give pupils the opportunity to give feedback on the service they receive? Obviously, you&#x2019;ll get a few nasty comments, but these can be deleted by the moderator.</p>
+<p>I <a href="http://stackoverflow.com/questions/15770341/working-on-an-octopress-blog-from-a-new-computer-without-source-branch">posted a question to StackOverflow about this</a> and, after a day, I got no response, so, with a new blog post I was eager to publish, I decided to get to hacking.</p>
 
-<p>And, besides, even if Rate my teachers is blocked at school, (<a href="http://twitter.com/pigsonthewing/statuses/1948335998">as pointed out by @pigsonthewing</a>) kids have internet at home and on their mobile phones, so what&#x2019;s to stop them using those channels? Why not embrace it, rather than ignore it and (shock, horror!) treat the kids like adults? You&#x2019;ll get the kind of insight and feedback that a million school inspectors couldn&#x2019;t provide.</p>
+<p>First, I <a href="http://octopress.org/docs/setup/">pulled down a new copy of the Octopress source</a> and changed the settings to (more or less) represent what I had before. I also have a modified  vesion of the <a href="https://github.com/bijumon/oct2">oct2 theme</a>, so I pulled that down and made the modifications I&#8217;d done on my old blog.</p>
 
-<p>(It&#x2019;d be nice if it had an API though)</p>
-</div>
+<p>Next came the hard bit, getting my posts back into the source. I came across <a href="https://gist.github.com/dnagir/1765496">this code to import a Blogger export into Octopress</a>, so decided to use this as a basis. I then pulled down my Github pages repo, and made some tweaks to the Blogger code I grabbed to scrape the title, content, published date, and categories out of the published HTML. I didn&#8217;t need to worry about comments, as these are hosted on Disqus (because flat HTML remember?)</p>
+
+<p>I then saved my script in the <code>source</code> directory of the cloned Octopress repo, ran it, and all the pages were generated automagically (in HTML, rather than Markdown, as Octopress supports bog standard HTML in case you&#8217;re mad and would rather write blog posts in raw HTML). I then ran <code>rake generate</code> and then <code>rake preview</code> to see my new site in all it&#8217;s glory.</p>
+
+<p>To my amazement, it worked, and, after <a href="http://octopress.org/docs/deploying/github/">setting up Github Pages</a>, I ran <code>rake deploy</code>, and the site was live!</p>
+
+<p>I also remembered to commit my source this time (<a href="http://octopress.org/docs/deploying/github/">documented quite clearly(!) here</a>), so hopefully will never have the same problem again.</p>
+
+<p>If you&#8217;re an idiot like me, and have done the same thing, you can <a href="https://gist.github.com/pezholio/5299018">see my script here</a>, and please, remember to commit your source next time!</p>
 </div>
 
 
@@ -129,21 +135,15 @@
   
 
 
-<time datetime="2009-05-28T15:57:20+01:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+<time datetime="2013-04-04T08:16:00+01:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/council-stuff/'>Council Stuff</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2009/05/rate-my-teachers-and-customer-feedback/" data-via="pezholio" data-counturl="http://pezholio.github.com/2009/05/rate-my-teachers-and-customer-feedback/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/" data-via="pezholio" data-counturl="http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/" >Tweet</a>
   
   
   
@@ -152,10 +152,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/04/my-interview-with-liz-azyan-about-twitterplan/" title="Previous Post: My Interview With Liz Azyan About TwitterPlan">&laquo; My Interview With Liz Azyan About TwitterPlan</a>
+        <a class="basic-alignment left" href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/" title="Previous Post: Automated testing with Cucumber and Phantom.js">&laquo; Automated testing with Cucumber and Phantom.js</a>
       
-      
-        <a class="basic-alignment right" href="/2009/06/getting-location-in-safari-on-iphone-os-30/" title="Next Post: Getting Location in Safari on iPhone OS 3.0">Getting Location in Safari on iPhone OS 3.0 &raquo;</a>
       
     </p>
   </footer>
@@ -250,8 +248,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pezholio.github.com/2009/05/rate-my-teachers-and-customer-feedback/';
-        var disqus_url = 'http://pezholio.github.com/2009/05/rate-my-teachers-and-customer-feedback/';
+        var disqus_identifier = 'http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/';
+        var disqus_url = 'http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/';
         var disqus_script = 'embed.js';
       
     (function () {

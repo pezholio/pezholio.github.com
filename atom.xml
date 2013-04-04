@@ -4,7 +4,7 @@
   <title><![CDATA[Pezholio]]></title>
   <link href="http://pezholio.github.com/atom.xml" rel="self"/>
   <link href="http://pezholio.github.com/"/>
-  <updated>2013-04-03T09:38:21+01:00</updated>
+  <updated>2013-04-04T17:58:54+01:00</updated>
   <id>http://pezholio.github.com/</id>
   <author>
     <name><![CDATA[Pezholio]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lost the source to my Octopress blog (Ooops)]]></title>
+    <link href="http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops/"/>
+    <updated>2013-04-04T08:16:00+01:00</updated>
+    <id>http://pezholio.github.com/2013/04/lost-the-source-to-my-octopress-blog-ooops</id>
+    <content type="html"><![CDATA[<p>As I use <a href="http://octopress.org">Octopress</a> to publish my blog, there&#8217;s no database and no admin panel for my blog. It&#8217;s all generated on my local machine, and pushed to <a href="http://github.com/pezholio/pezholio.github.com">Github pages</a>.</p>
+
+<p>On one hand, this is great, hosting is free (on Github), and the site is hella lightweight (just flat HTML pages). I also write my posts in <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (which makes writing so much more enjoyable than squinting into a WYSIWIG editor on a webpage), save them on my local machine and then run a couple of commands in my terminal to pubish my new blog post.</p>
+
+<p>The way it&#8217;s supposed to work is you should have two branches in GitHub, one for the posts that Octopress generates, and one for the actual source of your blog, so if you forget to push your source to Github (like me), and get a new computer (like me), and don&#8217;t BACK EVERYTHING UP (like me), things sort of fall apart at the seams.</p>
+
+<p>I <a href="http://stackoverflow.com/questions/15770341/working-on-an-octopress-blog-from-a-new-computer-without-source-branch">posted a question to StackOverflow about this</a> and, after a day, I got no response, so, with a new blog post I was eager to publish, I decided to get to hacking.</p>
+
+<p>First, I <a href="http://octopress.org/docs/setup/">pulled down a new copy of the Octopress source</a> and changed the settings to (more or less) represent what I had before. I also have a modified  vesion of the <a href="https://github.com/bijumon/oct2">oct2 theme</a>, so I pulled that down and made the modifications I&#8217;d done on my old blog.</p>
+
+<p>Next came the hard bit, getting my posts back into the source. I came across <a href="https://gist.github.com/dnagir/1765496">this code to import a Blogger export into Octopress</a>, so decided to use this as a basis. I then pulled down my Github pages repo, and made some tweaks to the Blogger code I grabbed to scrape the title, content, published date, and categories out of the published HTML. I didn&#8217;t need to worry about comments, as these are hosted on Disqus (because flat HTML remember?)</p>
+
+<p>I then saved my script in the <code>source</code> directory of the cloned Octopress repo, ran it, and all the pages were generated automagically (in HTML, rather than Markdown, as Octopress supports bog standard HTML in case you&#8217;re mad and would rather write blog posts in raw HTML). I then ran <code>rake generate</code> and then <code>rake preview</code> to see my new site in all it&#8217;s glory.</p>
+
+<p>To my amazement, it worked, and, after <a href="http://octopress.org/docs/deploying/github/">setting up Github Pages</a>, I ran <code>rake deploy</code>, and the site was live!</p>
+
+<p>I also remembered to commit my source this time (<a href="http://octopress.org/docs/deploying/github/">documented quite clearly(!) here</a>), so hopefully will never have the same problem again.</p>
+
+<p>If you&#8217;re an idiot like me, and have done the same thing, you can <a href="https://gist.github.com/pezholio/5299018">see my script here</a>, and please, remember to commit your source next time!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Automated testing with Cucumber and Phantom.js]]></title>
@@ -976,35 +1003,6 @@ LIMIT 1
 <p>This is, word for word, the exact same response I got from Lord Young via my MP, Mike O&#x2019;Brien after I wrote to him in October (which is also <a href="http://www.number10.gov.uk/Page20993">exactly the same response as the Free PAF petition got earlier last year</a>). No mention of data.gov.uk, no mention of the Ordnance Survey consultation, just a flat out &#x2018;no&#x2019;, even though steps have already been put into place to free postcode data!</p>
 
 <p>I can only assume that this was written (read: copy and pasted) by someone who has little or no understanding of the issues, has seen &#x2018;postcodes&#x2019; and &#x2018;royal mail&#x2019; and just whacked a standard response on. It doesn&#x2019;t really do much for your faith in democracy and the system when you know more than the Prime Minister&#x2019;s office seems to know.</p>
-</div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Open Postcodes - My Letter to the FT]]></title>
-    <link href="http://pezholio.github.com/2009/12/open-postcodes-my-letter-to-the-ft/"/>
-    <updated>2009-12-23T11:32:11+00:00</updated>
-    <id>http://pezholio.github.com/2009/12/open-postcodes-my-letter-to-the-ft</id>
-    <content type="html"><![CDATA[<div class='post'>
-<p>As some of you have have seen, Sue Cameron of the Financial times has written a <a href="http://www.ft.com/cms/s/0/4cdde84a-ef69-11de-86c4-00144feab49a.html">confused and desperate sounding article</a> about the government&#x2019;s recent announcement to open up the postcode dataset for public reuse.</p>
-
-<p>As the FT doesn&#x2019;t have any commenting functionality (my biggest bugbear with newspaper websites), I&#x2019;ve drafted a letter to the editor. I&#x2019;ve not sent it yet, so would appreciate your comments! The full text is below:</p>
-
-<blockquote><p>Sir,</p></blockquote>
-
-<p>In Sue Cameron&#x2019;s article &#x2018;Mandy and Gordon - the unravelling&#x2019;, Ms. Cameron claims Gordon Brown&#x2019;s opening of the PAF dataset will be a &#x2018;free gift from the taxpayer to major money makers such as Google&#x2019;.</p>
-
-<p>Yes, large corporations will benefit slightly (very slightly - they won&#x2019;t have to pay &#xA3;1,200 per year to use the PostZon dataset), but the real winners will be small, community built websites, such as Planning Alerts, Job Centre Pro Plus, The Straight Choice and countless other sites, which, until recently were powered by a free service - ernestmarples.com, which tied location data to postcodes.</p>
-
-<p>These sites offered services like alerting people to planning applications and jobs in their area for free, providing useful, innovative services for free and taking the load off the stretched public sector.</p>
-
-<p>However, in October, Ernestmarples.com was forced to close by heavy-handed legal action from the Royal Mail, and without a free location-based dataset, these sites could not function and were closed down.</p>
-
-<p>Linking locations to postcodes is an extremely valuable service which should not be in the control of one private organisation, the data was sourced at the public&#x2019;s expense and should be free for the public to reuse as they see fit. Who knows - it might end up saving the government a few quid too.</p>
-
-<p>Yours Faithfully</p>
-
-<p>Stuart Harrison</p>
 </div>
 ]]></content>
   </entry>

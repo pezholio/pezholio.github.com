@@ -9,7 +9,7 @@
   <meta name="author" content="Pezholio">
 
   
-  <meta name="description" content="iPhones are ace aren&#x2019;t they? Despite howls of derision from some camps, in the space of a few years, it&#x2019;s completely turned the mobile &hellip;">
+  <meta name="description" content="As some of you have have seen, Sue Cameron of the Financial times has written a confused and desperate sounding article about the government&#x2019; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/open-postcodes-my-letter-to-the-ft/">Open Postcodes - My Letter to the FT</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-23T11:32:11+00:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/12/open-postcodes-my-letter-to-the-ft/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>As some of you have have seen, Sue Cameron of the Financial times has written a <a href="http://www.ft.com/cms/s/0/4cdde84a-ef69-11de-86c4-00144feab49a.html">confused and desperate sounding article</a> about the government&#x2019;s recent announcement to open up the postcode dataset for public reuse.</p>
+
+<p>As the FT doesn&#x2019;t have any commenting functionality (my biggest bugbear with newspaper websites), I&#x2019;ve drafted a letter to the editor. I&#x2019;ve not sent it yet, so would appreciate your comments! The full text is below:</p>
+
+<blockquote><p>Sir,</p></blockquote>
+
+<p>In Sue Cameron&#x2019;s article &#x2018;Mandy and Gordon - the unravelling&#x2019;, Ms. Cameron claims Gordon Brown&#x2019;s opening of the PAF dataset will be a &#x2018;free gift from the taxpayer to major money makers such as Google&#x2019;.</p>
+
+<p>Yes, large corporations will benefit slightly (very slightly - they won&#x2019;t have to pay &#xA3;1,200 per year to use the PostZon dataset), but the real winners will be small, community built websites, such as Planning Alerts, Job Centre Pro Plus, The Straight Choice and countless other sites, which, until recently were powered by a free service - ernestmarples.com, which tied location data to postcodes.</p>
+
+<p>These sites offered services like alerting people to planning applications and jobs in their area for free, providing useful, innovative services for free and taking the load off the stretched public sector.</p>
+
+<p>However, in October, Ernestmarples.com was forced to close by heavy-handed legal action from the Royal Mail, and without a free location-based dataset, these sites could not function and were closed down.</p>
+
+<p>Linking locations to postcodes is an extremely valuable service which should not be in the control of one private organisation, the data was sourced at the public&#x2019;s expense and should be free for the public to reuse as they see fit. Who knows - it might end up saving the government a few quid too.</p>
+
+<p>Yours Faithfully</p>
+
+<p>Stuart Harrison</p>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -655,100 +713,6 @@ ORDER BY ?label
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/adventures-in-sparql/">Adventures in SPARQL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-21T15:45:25+01:00" pubdate data-updated="true">Oct 21<span>st</span>, 2009</time>
-        
-         | <a href="/2009/10/adventures-in-sparql/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>In case you&#x2019;ve been living under a rock for the past month or so (or actually have a life), then you&#x2019;ll have noticed that the cabinet office have started to release a big load of open data to a select few developers to have a play.</p>
-
-<p>Much of this data is still in very &#x2018;flat&#x2019; formats (such as Excel docs and the like), but some data is being released in RDFa format, the preferred format of the semantic web.</p>
-
-<p>The most interesting of these datasets has been the education one, giving me (and other developers) the ability to get information about schools in an open format. I&#x2019;ve been playing with this data for a bit, and now (I think) I might have something useful.</p>
-
-<p>The key way of interacting with it is using a language called SPARQL, which is very similar to SQL, but with the web of data in mind. An example query for the education dataset is as follows:</p>
-
-<p><code>
-prefix sch-ont: http://education.data.gov.uk/ontology/school#
-SELECT ?name WHERE {
-?school a sch-ont:School;
-sch-ont:establishmentName ?name;
-sch-ont:districtAdministrative
-http://education.data.gov.uk/placeholder-id/administrativeDistrict/Lichfield ;
-}
-ORDER BY ?name
-</code></p>
-
-<p>This gets the names of all the educational establishments (schools, nurseries etc) in Lichfield District. You can <a href="http://services.data.gov.uk/education/sparql">give it a try yourself on the public facing SPARQL endpoint</a>.</p>
-
-<p>What I wanted to do though, was to get all the primary or secondary schools within a 2 mile radius of a postcode. This was a little harder, but perfectly doable.</p>
-
-<p>As well as general details (such as address, name of school etc) and more detailed information (such as capacity, inspection details etc), the dataset also has the easting and northing of the school. Therefore, to get all Primary Schools within a 2 mile radius of a point with an easting of 411021 and a northing of 307291, I needed to do the following query:</p>
-
-<p><code>
-prefix sch-ont: http://education.data.gov.uk/ontology/school#
-SELECT ?name ?address1 ?address2 ?postcode ?town ?easting ?northing ?reference WHERE {
-?school a sch-ont:School;
-sch-ont:establishmentName ?name;
-sch-ont:easting ?easting ;
-sch-ont:northing ?northing ;
-sch-ont:uniqueReferenceNumber ?reference ;
-sch-ont:phaseOfEducation http://education.data.gov.uk/ontology/school#PhaseOfEducation_Primary .
-FILTER (?easting  414239  ?easting  411021  ?northing  310509
- ?northing  307291)
-}
-</code></p>
-
-<p>This gets the name, easting, northing and reference number of every school within a 2 mile (3201-ish metre) box, with the original easting and northing as the midpoint.</p>
-
-<p>I&#x2019;ve given it a test here (a bit of naughtiness is required using the Google Maps API to get the latitude and longitude of the postcode, but it&#x2019;s the only way at the moment!), so please feel free to try it out.</p>
-
-<p>Once you submit the form you&#x2019;ll get a list of all the primary and secondary schools in that area, as well as a link to more info on the Edubase site.</p>
-
-<p>Postcode</p>
-
-<p>School Type</p>
-
-<p>Primary
-Secondary</p>
-
-<p>I&#x2019;d be interested to know your thoughts, so please feel free to comment! :)</p>
-
-<p>There&#x2019;s also a few more example queries on the <a href="http://blogs.talis.com/n2/archives/818">Talis Blog</a>, so if you&#x2019;re that way inclined I heartily recommend having a play.</p>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -778,6 +742,10 @@ Secondary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/04/lost-the-source-to-my-octopress-blog-ooops/">Lost the source to my Octopress blog (Ooops)</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
       </li>
     
@@ -791,10 +759,6 @@ Secondary</p>
     
       <li class="post">
         <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/08/take-a-screenshot-of-any-tweet-using-casper-dot-js/">Take a Screenshot of Any Tweet Using Casper.js</a>
       </li>
     
   </ul>
