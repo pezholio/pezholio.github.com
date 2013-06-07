@@ -9,7 +9,7 @@
   <meta name="author" content="Pezholio">
 
   
-  <meta name="description" content="As I use Octopress to publish my blog, there&#8217;s no database and no admin panel for my blog. It&#8217;s all generated on my local machine, and &hellip;">
+  <meta name="description" content="A couple of nights ago, the BBC&#8217;s Watchdog ran an investigation into restaurants on just-eat.co.uk. Their main focus seemed to be on &#8216; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/">My Response to BBC Watchdog: A Chrome Plugin for Just Eat</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:48:00+01:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple of nights ago, <a href="http://www.bbc.co.uk/programmes/b006mg74/features/just-eat-watchdog-investigation">the BBC&#8217;s Watchdog ran an investigation into restaurants on just-eat.co.uk</a>. Their main focus seemed to be on &#8216;fake&#8217; takeaways set up in residential premises or on industrial estates, but they also touched on how many premises listed on the site had low food safety ratings.</p>
+
+<p>This gave me a bit of an idea. I&#8217;d fiddled around with Greasemonkey scripts back when I used to use Firefox (which basically use Javascript to alter the contents of pages if you have that script enabled), and I wondered if I could do the same in Chrome to display food safety inspection ratings next to each premises on Just Eat.</p>
+
+<p>It turns out that you can (Chrome has the concept of <a href="https://developer.chrome.com/extensions/content_scripts.html">content scripts</a>), and with a few lines of Javascript, I had an extension that iterates over each premises listed on the search page of the Just Eat website and uses the <a href="http://ratings.food.gov.uk/open-data/en-GB">Food Standards Agency API</a> to search for the result of the take-away&#8217;s last food safety insepction.</p>
+
+<p>It doesn&#8217;t catch every single premises (mainly because the spelling on the Food Standards Agency Website and Just Eat may not match exactly), but it seems to catch most of them. Interestingly, I also found out that the restaurant I used to use on Just Eat (who used to have a 5) have just gone down to a 2. I&#8217;ll be using somewhere else in future then.</p>
+
+<p>You can <a href="https://chrome.google.com/webstore/detail/just-check/gmjbhhnhbfdnkpgjedfopcljmmccakag">install the plugin via the Chrome web store</a>, if you&#8217;ve got any issues with it, please let me know in the comments. <a href="https://github.com/pezholio/just-check">The code is also on Github</a>, so if you&#8217;ve got any ideas for improvments, please fork and send a pull request. I&#8217;d love to see this extended to support other take-away delivery sites, so if you fancy having a crack, please do!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -773,58 +819,6 @@ echo $image;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/02/using-foursquare-in-local-government/">Using Foursquare in Local Government</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-21T13:56:25+00:00" pubdate data-updated="true">Feb 21<span>st</span>, 2011</time>
-        
-         | <a href="/2011/02/using-foursquare-in-local-government/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p><img src="http://www.pezholio.co.uk/wp-content/uploads/2011/02/foursquare.png" alt="">Foursquare. It&#x2019;s just a vanity publishing tool that takes over your Twitter stream and Facebook feed right? OK, I&#x2019;m as guilty as the next Foursquare user for checking in to the pub at lunchtime and telling all my Twitter followers, but Foursquare can actually be a pretty useful tool for giving visitors and residents useful information about their surroundings.</p>
-
-<p>As well as being able to check into places and see where your friends are, Foursquare also allows you to leave &#x2018;tips&#x2019; about venues for your friends and followers, so when they check into that venue (or one nearby), they&#x2019;ll see this tip. I&#x2019;ve left a couple of tips on my personal Foursquare account (mainly plugging nights I play at, or calling out bad service at restaurants), but I&#x2019;ve always thought Foursquare tips could be really useful for our tourism team, highlighting special offers and also giving historical titbits of information about places in the district.</p>
-
-<p>I never really knew how to get started with a Foursquare page until I read <a href="http://josephstashko.com/media/using-foursquare-with-hyperlocal/">Joseph Stashko&#x2019;s post</a> on how he added a <a href="http://foursquare.com/blogpreston">Foursquare page for Blog Preston</a>. I&#x2019;ll leave you to read Joseph&#x2019;s explanation on how he got set up, but needless to say, the sign up process is a little bit convoluted (To be fair, Foursquare say they will be changing this soon).</p>
-
-<p>That said, once I&#x2019;d filled everything out, got our designer to design a header and sent it all off to Foursquare, I was up and running within a few hours (together with a nice personal response from a Foursquare staffer).</p>
-
-<p>You can now see the results on the <a href="http://foursquare.com/visitlichfield">Visit Lichfield Foursquare page</a>. I&#x2019;ve added a few tips in and around Lichfield City with historical information that I know about personally, together with a few special offers, and I&#x2019;m looking at getting a few more tips added after talking to our Green Badge guides (who know much more about Lichfield&#x2019;s history than me) before launching the page officially (bizarrely, we already seem to have 600+ followers without doing any promotion, mainly people from Indonesia and New York).</p>
-
-<p>However, it&#x2019;s not just tourism that Foursquare can help with, I&#x2019;d love to develop something like <a href="http://donteat.at/">donteat.at</a>, which uses public data on food safety inspections in New York to warn you if you&#x2019;re about to eat at a place with a poor hygiene report, and if you&#x2019;re a council with a lot of venues, you could leave tips about upcoming events or special offers. The only limit, as they say, is your imagination!</p>
-
-<p>If anyone else has any useful tips on local gov using Foursquare, I&#x2019;d love to hear them - drop me a line in the comments.</p>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -852,6 +846,10 @@ echo $image;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/">My response to BBC Watchdog: A Chrome plugin for Just Eat</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/lost-the-source-to-my-octopress-blog-ooops/">Lost the source to my Octopress blog (Ooops)</a>
       </li>
     
@@ -865,10 +863,6 @@ echo $image;
     
       <li class="post">
         <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/local-gds-a-skunkworks-for-local-government/">Local GDS: A Skunkworks for Local Government?</a>
       </li>
     
   </ul>

@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My response to BBC Watchdog: A Chrome plugin for Just Eat - Pezholio</title>
+  <meta name="author" content="Pezholio">
+
+  
+  <meta name="description" content="A couple of nights ago, the BBC&#8217;s Watchdog ran an investigation into restaurants on just-eat.co.uk. Their main focus seemed to be on &#8216; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pezholio" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1>Pezholio</h1>
+</hgroup>
+
+</header>
+  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="pezholio@gmail.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pezholio.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">My Response to BBC Watchdog: A Chrome Plugin for Just Eat</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:48:00+01:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>A couple of nights ago, <a href="http://www.bbc.co.uk/programmes/b006mg74/features/just-eat-watchdog-investigation">the BBC&#8217;s Watchdog ran an investigation into restaurants on just-eat.co.uk</a>. Their main focus seemed to be on &#8216;fake&#8217; takeaways set up in residential premises or on industrial estates, but they also touched on how many premises listed on the site had low food safety ratings.</p>
+
+<p>This gave me a bit of an idea. I&#8217;d fiddled around with Greasemonkey scripts back when I used to use Firefox (which basically use Javascript to alter the contents of pages if you have that script enabled), and I wondered if I could do the same in Chrome to display food safety inspection ratings next to each premises on Just Eat.</p>
+
+<p>It turns out that you can (Chrome has the concept of <a href="https://developer.chrome.com/extensions/content_scripts.html">content scripts</a>), and with a few lines of Javascript, I had an extension that iterates over each premises listed on the search page of the Just Eat website and uses the <a href="http://ratings.food.gov.uk/open-data/en-GB">Food Standards Agency API</a> to search for the result of the take-away&#8217;s last food safety insepction.</p>
+
+<p>It doesn&#8217;t catch every single premises (mainly because the spelling on the Food Standards Agency Website and Just Eat may not match exactly), but it seems to catch most of them. Interestingly, I also found out that the restaurant I used to use on Just Eat (who used to have a 5) have just gone down to a 2. I&#8217;ll be using somewhere else in future then.</p>
+
+<p>You can <a href="https://chrome.google.com/webstore/detail/just-check/gmjbhhnhbfdnkpgjedfopcljmmccakag">install the plugin via the Chrome web store</a>, if you&#8217;ve got any issues with it, please let me know in the comments. <a href="https://github.com/pezholio/just-check">The code is also on Github</a>, so if you&#8217;ve got any ideas for improvments, please fork and send a pull request. I&#8217;d love to see this extended to support other take-away delivery sites, so if you fancy having a crack, please do!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pezholio</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:48:00+01:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/chrome/'>chrome</a>, <a class='category' href='/blog/categories/food-safety/'>food safety</a>, <a class='category' href='/blog/categories/hacks/'>hacks</a>, <a class='category' href='/blog/categories/open-data/'>open data</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/" data-via="pezholio" data-counturl="http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/04/lost-the-source-to-my-octopress-blog-ooops/" title="Previous Post: Lost the source to my Octopress blog (Ooops)">&laquo; Lost the source to my Octopress blog (Ooops)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <ul id="recent_posts">
+      <li class="post">
+      <a href="http://pezholio.github.com" alt="Home"><img src="/images/Home.png"></a>
+      <a href="http://pezholio.github.com/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
+      
+      <a href="mailto:pezholio@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
+      
+      <a href="http://pezholio.github.com/atom.xml" alt="subscribe feed"><img src="/images/rss.png"></a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/">My response to BBC Watchdog: A Chrome plugin for Just Eat</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/lost-the-source-to-my-octopress-blog-ooops/">Lost the source to my Octopress blog (Ooops)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/automated-testing-with-cucumber-and-phantom-dot-js/">Automated testing with Cucumber and Phantom.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/council-websites-time-for-a-new-approach-to-navigation/">Council Websites: Time for a New Approach to Navigation?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/twitter-kills-rss-how-to-roll-your-own-feed/">Twitter Kills RSS: How to Roll Your Own Feed With Scraperwiki</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("pezholio", , );
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/pezholio">@pezholio</a></p>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pezholio -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pezholio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/';
+        var disqus_url = 'http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

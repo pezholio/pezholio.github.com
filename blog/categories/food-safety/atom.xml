@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: food safety | Pezholio]]></title>
+  <link href="http://pezholio.github.com/blog/categories/food-safety/atom.xml" rel="self"/>
+  <link href="http://pezholio.github.com/"/>
+  <updated>2013-06-07T09:08:08+01:00</updated>
+  <id>http://pezholio.github.com/</id>
+  <author>
+    <name><![CDATA[Pezholio]]></name>
+    <email><![CDATA[pezholio@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My response to BBC Watchdog: A Chrome plugin for Just Eat]]></title>
+    <link href="http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/"/>
+    <updated>2013-06-07T08:48:00+01:00</updated>
+    <id>http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat</id>
+    <content type="html"><![CDATA[<p>A couple of nights ago, <a href="http://www.bbc.co.uk/programmes/b006mg74/features/just-eat-watchdog-investigation">the BBC's Watchdog ran an investigation into restaurants on just-eat.co.uk</a>. Their main focus seemed to be on 'fake' takeaways set up in residential premises or on industrial estates, but they also touched on how many premises listed on the site had low food safety ratings.</p>
+
+<p>This gave me a bit of an idea. I'd fiddled around with Greasemonkey scripts back when I used to use Firefox (which basically use Javascript to alter the contents of pages if you have that script enabled), and I wondered if I could do the same in Chrome to display food safety inspection ratings next to each premises on Just Eat.</p>
+
+<p>It turns out that you can (Chrome has the concept of <a href="https://developer.chrome.com/extensions/content_scripts.html">content scripts</a>), and with a few lines of Javascript, I had an extension that iterates over each premises listed on the search page of the Just Eat website and uses the <a href="http://ratings.food.gov.uk/open-data/en-GB">Food Standards Agency API</a> to search for the result of the take-away's last food safety insepction.</p>
+
+<p>It doesn't catch every single premises (mainly because the spelling on the Food Standards Agency Website and Just Eat may not match exactly), but it seems to catch most of them. Interestingly, I also found out that the restaurant I used to use on Just Eat (who used to have a 5) have just gone down to a 2. I'll be using somewhere else in future then.</p>
+
+<p>You can <a href="https://chrome.google.com/webstore/detail/just-check/gmjbhhnhbfdnkpgjedfopcljmmccakag">install the plugin via the Chrome web store</a>, if you've got any issues with it, please let me know in the comments. <a href="https://github.com/pezholio/just-check">The code is also on Github</a>, so if you've got any ideas for improvments, please fork and send a pull request. I'd love to see this extended to support other take-away delivery sites, so if you fancy having a crack, please do!</p>
+]]></content>
+  </entry>
+  
+</feed>

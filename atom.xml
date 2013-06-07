@@ -4,7 +4,7 @@
   <title><![CDATA[Pezholio]]></title>
   <link href="http://pezholio.github.com/atom.xml" rel="self"/>
   <link href="http://pezholio.github.com/"/>
-  <updated>2013-04-04T17:58:54+01:00</updated>
+  <updated>2013-06-07T09:08:08+01:00</updated>
   <id>http://pezholio.github.com/</id>
   <author>
     <name><![CDATA[Pezholio]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My response to BBC Watchdog: A Chrome plugin for Just Eat]]></title>
+    <link href="http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat/"/>
+    <updated>2013-06-07T08:48:00+01:00</updated>
+    <id>http://pezholio.github.com/2013/06/my-response-to-bbc-watchdog-a-chrome-plugin-for-just-eat</id>
+    <content type="html"><![CDATA[<p>A couple of nights ago, <a href="http://www.bbc.co.uk/programmes/b006mg74/features/just-eat-watchdog-investigation">the BBC&#8217;s Watchdog ran an investigation into restaurants on just-eat.co.uk</a>. Their main focus seemed to be on &#8216;fake&#8217; takeaways set up in residential premises or on industrial estates, but they also touched on how many premises listed on the site had low food safety ratings.</p>
+
+<p>This gave me a bit of an idea. I&#8217;d fiddled around with Greasemonkey scripts back when I used to use Firefox (which basically use Javascript to alter the contents of pages if you have that script enabled), and I wondered if I could do the same in Chrome to display food safety inspection ratings next to each premises on Just Eat.</p>
+
+<p>It turns out that you can (Chrome has the concept of <a href="https://developer.chrome.com/extensions/content_scripts.html">content scripts</a>), and with a few lines of Javascript, I had an extension that iterates over each premises listed on the search page of the Just Eat website and uses the <a href="http://ratings.food.gov.uk/open-data/en-GB">Food Standards Agency API</a> to search for the result of the take-away&#8217;s last food safety insepction.</p>
+
+<p>It doesn&#8217;t catch every single premises (mainly because the spelling on the Food Standards Agency Website and Just Eat may not match exactly), but it seems to catch most of them. Interestingly, I also found out that the restaurant I used to use on Just Eat (who used to have a 5) have just gone down to a 2. I&#8217;ll be using somewhere else in future then.</p>
+
+<p>You can <a href="https://chrome.google.com/webstore/detail/just-check/gmjbhhnhbfdnkpgjedfopcljmmccakag">install the plugin via the Chrome web store</a>, if you&#8217;ve got any issues with it, please let me know in the comments. <a href="https://github.com/pezholio/just-check">The code is also on Github</a>, so if you&#8217;ve got any ideas for improvments, please fork and send a pull request. I&#8217;d love to see this extended to support other take-away delivery sites, so if you fancy having a crack, please do!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lost the source to my Octopress blog (Ooops)]]></title>
@@ -972,37 +989,6 @@ LIMIT 1
 <p>Oooh, it&#x2019;s worth pointing out that you need a <a href="http://www.opsi.gov.uk/click-use/index.htm">PSI click-use licence </a> to publish the Data Exchange data on your own website, but it&#x2019;s a doddle to apply for and goes live instantly!</p>
 
 <p><strong>Update:</strong> I&#x2019;ve published the code on <a href="http://github.com/pezholio/Who-is-my-councillor">Github</a> in case you want to see how I did it!</p>
-</div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Royal Fail Part 3: Response Received (and It Ain't Good)]]></title>
-    <link href="http://pezholio.github.com/2010/01/royal-fail-part-3-response-received-and-it-aint-good/"/>
-    <updated>2010-01-22T13:31:27+00:00</updated>
-    <id>http://pezholio.github.com/2010/01/royal-fail-part-3-response-received-and-it-aint-good</id>
-    <content type="html"><![CDATA[<div class='post'>
-<p>Well, it&#x2019;s been an exciting few months for the open data movement, with the <a href="http://www.communities.gov.uk/publications/corporate/ordnancesurveyconsultation">future of the Ordnance Survey and geographical data going out to consultation</a> and <a href="http://data.gov.uk">data.gov.uk</a> being launched, but imagine my horror when I finally received a response to <a href="http://petitions.pm.gov.uk/Nfppostcodes">the petition I started to make postcode data free to non-profits</a>. The full text is below:</p>
-
-<blockquote>
-<p>Under the Postal Services Act 2000, Parliament set up Royal Mail as a public limited company with the Government as its only shareholder. Under this framework, the Government established an arm&#x2019;s length relationship with the company so that the company had more commercial freedom and could run its operations without interference from the shareholder.</p>
-
-<p>The Postcode Address File (PAF) dataset was designed and engineered by Royal Mail and is owned and managed by the company as a commercial asset of the business (containing around 29 million addresses in the UK). Royal Mail developed the PAF with the primary purpose to aid the efficient delivery of mail, though over the years the PAF has come to be used for a number of purposes other than the postal purpose for which it is designed and was established. Indeed, many organisations, including new postal operators, banks, insurance companies and others offering to deliver goods to your door, use the information held on the database. The PAF is also used in other business processes, including mailing list &#x201C;cleaning&#x201D;, anti-fraud activities and various customer services.</p>
-
-<p>Royal Mail invests significantly in collating and maintaining the Postcode Address File (PAF) and this cost is recovered through an independently regulated licensing arrangement. It would of course be very time-consuming and costly for anyone to try to replicate the list, so Royal Mail licenses PAF data, for a fee, allowing others to use it. Under Section 116 of the Postal Services Act 2000, Royal Mail must maintain the PAF and make it available to any person who wishes to use it on &#x201C;such terms as are reasonable&#x201D;.</p>
-
-<p>This requirement is replicated as a condition of Royal Mail&#x2019;s licence issued by the postal regulator, Postcomm. Provision exists for Royal Mail to recover a reasonable charge for the supply of PAF and it must not impose any term or condition other than reasonable restrictions to safeguard its intellectual property rights (IPR), and to ensure that the PAF and its updates are used to support effective addressing.</p>
-
-<p>As access to the PAF is governed under a condition of licence, Postcomm monitors its practice. Royal Mail&#x2019;s licence obliges the company to make access to the PAF available on reasonable terms. Postcomm allows the company to make a reasonable specified profit margin and monitors its accounts.</p>
-
-<p>Postcomm has previously undertaken a public consultation reviewing how the PAF was managed. The consultation started in 2006 and finished in 2007. Postcomm took all the diverse uses of the PAF into account before reaching its decision in 2007, announcing more safeguards for the management of the address information held in the PAF with the aim of making sure that the PAF is maintained properly and made available on fair and reasonable terms. The findings of the consultation can be found on Postcomm&#x2019;s website (<a href="http://www.psc.gov.uk">www.psc.gov.uk</a>).</p>
-
-<p>If any PAF user or stakeholder feels that Royal Mail is not complying with the terms of section 116 of the PSA 2000 or Condition 22 of its licence, they can either raise concerns direct with the company or with Postcomm. Postcomm would consider the merits of any such concerns in the light of its statutory duties.</p>
-</blockquote>
-
-<p>This is, word for word, the exact same response I got from Lord Young via my MP, Mike O&#x2019;Brien after I wrote to him in October (which is also <a href="http://www.number10.gov.uk/Page20993">exactly the same response as the Free PAF petition got earlier last year</a>). No mention of data.gov.uk, no mention of the Ordnance Survey consultation, just a flat out &#x2018;no&#x2019;, even though steps have already been put into place to free postcode data!</p>
-
-<p>I can only assume that this was written (read: copy and pasted) by someone who has little or no understanding of the issues, has seen &#x2018;postcodes&#x2019; and &#x2018;royal mail&#x2019; and just whacked a standard response on. It doesn&#x2019;t really do much for your faith in democracy and the system when you know more than the Prime Minister&#x2019;s office seems to know.</p>
 </div>
 ]]></content>
   </entry>
